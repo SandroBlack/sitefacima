@@ -1,10 +1,15 @@
-// $(document).ready(function(){
-//   	$("#btnLogin").click(function(){
-// 		 //location.href="../pages/aluno.html";
-// 		 alert("teste!");		 
-//   	}); 	
-// });
+$(document).ready(function(){
 
-document.getElementById("btnLogin").onclick = function(){
- 	location.href="../pages/aluno.html";
-};
+	$("#btnAcessar").click(function(){
+		location.href="pages/login.html";				 
+  	}); 
+
+  	$("#btnLogin").click(function(){
+		location.href="../pages/aluno.html";				 
+	});	
+	
+	$("#btnSair").click(function(){
+		location.href="../index.html";
+	});
+  		
+});
