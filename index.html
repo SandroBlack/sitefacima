@@ -7,7 +7,7 @@
 
     <!-- Bootstrap CSS, Font Awesome --> 
 	<link rel="stylesheet" href="css\bootstrap.min.css">
-	<link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">	
+	<link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">		
 	
 	<!-- Optional CSS -->
 	<link rel="stylesheet" href="css\style.css">	
@@ -19,10 +19,10 @@
 		<!-- TOPO -->
 		<div class="row mb-1 bg-light justify-content-between">
 			<div class="col-mb-6">
-				<img class="img-fluid" src="img\logoc.png" alt="logo facima">
+				<img class="img-fluid" src="img\logoc.png" alt="logo facima" title="Logo-Facima">
 			</div>			
 			<div class="col-mb-6 align-self-center mr-3">
-				<button class="btn btn-primary" type="button" id="btnAcessar"><i class="fas fa-sign-in-alt"></i>&nbspAcessar</button>
+				<button class="btn btn-dark" type="button" id="btnAcessar" title="Acessar"><i class="fas fa-sign-in-alt"></i>&nbspAcessar</button>
 			</div>
 		</div>
 		<header class="row align-items-center mb-3 topo">			
@@ -48,7 +48,7 @@
 					</ul>
 					<form class="form-inline">
 						<input class="form-control mr-2" type="search" placeholder="Buscar..." aria-label="Search">
-						<button class="btn btn-dark" type="submit"><i class="fas fa-search"></i></button>
+						<button class="btn btn-dark" type="submit" title="Buscar"><i class="fas fa-search"></i></button>
 					</form>	
 				</div>							
 			</nav>								
@@ -56,9 +56,9 @@
 		<!-- FIM TOPO -->
 		
 		<!-- SLIDE -->
-		<section class="row mb-5 bg-light slide">						
+		<section class="row mb-4 bg-light slide">						
 			<div class="col-md-8">				
-				<div id="carouselSite" class="carousel slide" data-ride="carousel">					
+				<div id="carouselSite" class="carousel slide" data-ride="carousel" data-interval="10000">					
 					<div class="carousel-inner">
 						<div class="carousel-item active">
 							<img class="d-block w-100" src="img\enem.jpg" alt="First slide">
@@ -100,41 +100,43 @@
 			<!-- FIM SLIDE -->
 			
 			<!-- SIDE BAR -->
-			<aside class="col-md-2 listgroup sidebar1">
-				<li class="list-group-item list-group-item-action active" href="#">Acesso Rápido1</li>
+			<aside class="col-md-2 list-group">
+				<li class="list-group-item sidebar"><i class="fas fa-fast-forward"></i>&nbsp;Acesso Rápido</li>
 				<a class="list-group-item list-group-item-action" href="#">Bibioteca</a>
+				<a class="list-group-item list-group-item-action" href="#">Bolsas</a>
 				<a class="list-group-item list-group-item-action" href="#">Cursos</a>
+				<a class="list-group-item list-group-item-action" href="#">Estrutura</a>
 				<a class="list-group-item list-group-item-action" href="#">Fies</a>
 				<a class="list-group-item list-group-item-action" href="#">ProUni</a>
-				<a class="list-group-item list-group-item-action" href="#">Social</a>
-				<a class="list-group-item list-group-item-action" href="#">Link1</a>
-				<a class="list-group-item list-group-item-action" href="#">Link2</a>
+				<a class="list-group-item list-group-item-action" href="#">Social</a>								
 			</aside>
-			<aside class="col-md-2 list-group sidebar2">
-				<li class="list-group-item list-group-item-action active" href="#">Acesso Rápido2</li>
-				<a class="list-group-item list-group-item-action" href="#">Bibioteca</a>
-				<a class="list-group-item list-group-item-action" href="#">Cursos</a>
-				<a class="list-group-item list-group-item-action" href="#">Fies</a>
-				<a class="list-group-item list-group-item-action" href="#">ProUni</a>
-				<a class="list-group-item list-group-item-action" href="#">Social</a>
-				<a class="list-group-item list-group-item-action" href="#">Link1</a>
-				<a class="list-group-item list-group-item-action" href="#">Link2</a>				
+			<aside class="col-md-2 list-group">
+				<li class="list-group-item sidebar"><i class="fas fa-share-square"></i>&nbsp;Redes Sociais</li>
+				<a class="list-group-item list-group-item-action" href="#"><i class="fab fa-facebook"></i>&nbsp;Facebook</a>
+				<a class="list-group-item list-group-item-action" href="#"><i class="fab fa-instagram"></i>&nbsp;Instagram</a>
+				<a class="list-group-item list-group-item-action" href="#"><i class="fab fa-linkedin"></i>&nbsp;Linkedin</a>
+				<a class="list-group-item list-group-item-action" href="#"><i class="fab fa-twitter-square"></i>&nbsp;Twiter</a>
+				<a class="list-group-item list-group-item-action" href="#">Rede Facima</a>
+				<a class="list-group-item list-group-item-action" href="#">.</a>
+				<a class="list-group-item list-group-item-action" href="#">.</a>												
 			</aside>
 		</section> 
 		<!-- FIM SIDEBAR -->
 		
 		<!-- DESTAQUES -->
-		<section class="row mb-5 bg-light destaque">
-			<div class="col-md-12 mb-1">
-				<h3>DESTAQUES</h3>
-				<hr style="border-style:dashed; border-color:#006FA7">
-			</div>			
+		<div class="row">
+			<div class="col-md-12">
+				<h5>DESTAQUES</h5>
+				<hr style="border-width: 5px; border-color:#006FA7">
+			</div>
+		</div>			
+		<section class="row mb-5 bg-light destaque">			
 			<div class="col-md-4">
 				<div class="card bg-light">
 					<img class="card-img-top" src="img\fies.jpg" alt="Card image cap">
 					<div class="card-body">
 						<h5 class="card-title">Fies 2018</h5>
-						<p class="card-text">Inscriçoes Abertas.</p>
+						<p class="card-text text-secondary">Inscriçoes Abertas.</p>
 						<a href="#" class="card-link">Saiba Mais...</a>
 					</div>
 				</div>
@@ -144,7 +146,7 @@
 					<img class="card-img-top" src="img\prouni.jpg" alt="Card image cap">
 					<div class="card-body">
 						<h5 class="card-title">ProUni 2018</h5>
-						<p class="card-text">Oportunidade de Bolsas Intregrais!.</p>
+						<p class="card-text text-secondary">Oportunidade de Bolsas Intregrais!.</p>
 						<a href="#" class="card-link">Saiba Mais...</a>
 					</div>
 				</div>
@@ -154,7 +156,7 @@
 				  <img class="card-img-top" src="img\estudar.jpg" alt="Card image cap">
 				  <div class="card-body">
 					<h5 class="card-title">Biblioteca</h5>
-					<p class="card-text">Conheça a Nossa Biblioteca Fisica e Virtual.</p>
+					<p class="card-text text-secondary">Conheça a Nossa Biblioteca.</p>
 					<a href="#" class="card-link">Saiba Mais...</a>
 				  </div>
 				</div>
@@ -162,18 +164,83 @@
 		</section>
 		<!-- FIM DESTAQUES -->
 
-		<!-- EVENTOS -->
-		<section class="row mb-5 bg-light eventos">
+		<!-- NOTÍCIAS -->
+		<div class="row">
 			<div class="col-md-12 mb-1">
-				<h3>EVENTOS</h3>
-				<hr style="border-style:dashed; border-color:#006FA7">
-			</div>			
+				<h5>NOTÍCIAS</h5>
+				<hr style="border-width: 5px; border-color:#006FA7">
+			</div>
+		</div>
+		<section class="row mb-5 bg-light noticia">			
+			<div class="col-md-3">
+				<div class="card">
+					<div class="card-header">
+						<h5 class="text-center">Notícia 01</h5>
+						<p class="card-text text-center"><small class="text-muted">01/01/2018</small></p>
+					</div>
+					<div class="card-body">						
+						<p class="card-text text-secondary">Existem muitas variações disponíveis de passagens de Lorem Ipsum,
+							mas a maioria sofreu algum tipo de alteração, seja por inserção de passagens com humor</p>
+						<a href="#" class="card-link">Saiba Mais...</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="card">
+					<div class="card-header">
+						<h5 class="text-center">Notícia 02</h5>
+						<p class="card-text text-center"><small class="text-muted">05/02/2018</small></p>
+					</div>
+					<div class="card-body">						
+						<p class="card-text text-secondary">Ao contrário do que se acredita, Lorem Ipsum não é simplesmente um texto randômico. 
+						Com mais de 2000 anos, suas raízes podem ser encontradas.</p>
+						<a href="#" class="card-link">Saiba Mais...</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="card">
+						<div class="card-header">
+							<h5 class="text-center">Notícia 03</h5>
+							<p class="card-text text-center"><small class="text-muted">14/02/2018</small></p>
+						</div>
+					<div class="card-body">						
+						<p class="card-text text-secondary">O trecho padrão original de Lorem Ipsum, usado desde o século XVI, está reproduzido abaixo
+						para os interessados, contendo passagens de Lorem Ipsum</p>
+						<a href="#" class="card-link">Saiba Mais...</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="card">
+					<div class="card-header">
+						<h5 class="text-center">Notícia 04</h5>
+						<p class="card-text text-center"><small class="text-muted">08/03/2018</small></p>
+					</div>
+					<div class="card-body">						
+						<p class="card-text text-secondary">Ele usa um dicionário com mais de 200 palavras em Latim combinado com um punhado de modelos
+						de estrutura de frases para gerar um Lorem Ipsum.</p>
+						<a href="#" class="card-link">Saiba Mais...</a>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- FIM NOTÍCIAS -->
+
+		<!-- EVENTOS -->
+		<div class="row">
+			<div class="col-md-12 mb-1">
+				<h5>EVENTOS</h5>
+				<hr style="border-width: 5px; border-color:#006FA7">
+			</div>	
+		</div>
+		<section class="row mb-5 bg-light eventos">					
 			<div class="col-md-3">
 				<div class="card bg-light">					
 					<img class="card-img-top" src="img\eventos\ev01.jpg" alt="Card image cap">					
 					<div class="card-body">
-						<h5 class="card-title">Evento 01</h5>
-						<p class="card-text">...</p>
+						<h5 class="card-title">Projeto liga mão amiga</h5>
+						<p class="card-text text-secondary">Realizado na instituição ABRIGO SÃO VICENTE DE PAULA e teve por objetivo a reforma no banheiro coletivo. A Organização  trabalha...</p>
 						<a href="#" class="card-link">Saiba Mais...</a>
 					</div>
 				</div>
@@ -182,8 +249,8 @@
 				<div class="card bg-light">
 					<img class="card-img-top" src="img\eventos\ev02.jpg" alt="Card image cap">
 					<div class="card-body">
-						<h5 class="card-title">Evento 02</h5>
-						<p class="card-text">...</p>
+						<h5 class="card-title">Projeto administração solidária</h5>
+						<p class="card-text text-secondary">O Projeto Administração Solidária teve por objetivo revitalizar o banheiro do Instituto Servir, localizado...</p>
 						<a href="#" class="card-link">Saiba Mais...</a>
 					</div>
 				</div>
@@ -192,8 +259,8 @@
 				<div class="card bg-light">
 				  <img class="card-img-top" src="img\eventos\ev03.jpg" alt="Card image cap">
 				  <div class="card-body">
-					<h5 class="card-title">Evento 03</h5>
-					<p class="card-text">...</p>
+					<h5 class="card-title">Projeto Amigos em ação na casa do idoso</h5>
+					<p class="card-text text-secondary">O Projeto Amigos em Ação foi realizado na Instituição intitulada Casa do Idoso, tiveram como objetivo...</p>
 					<a href="#" class="card-link">Saiba Mais...</a>
 				  </div>
 				</div>
@@ -202,64 +269,19 @@
 				<div class="card bg-light">
 				  <img class="card-img-top" src="img\eventos\ev04.jpg" alt="Card image cap">
 				  <div class="card-body">
-					<h5 class="card-title">Evento 04</h5>
-					<p class="card-text">...</p>
+					<h5 class="card-title">Restaurando o Lar de amparo à criança</h5>
+					<p class="card-text text-secondary">O projeto Restaurando um Lar teve por objetivo  a construção de uma escada para favorecer o acesso...</p>
 					<a href="#" class="card-link">Saiba Mais...</a>
 				  </div>
 				</div>
 			</div>					
 		</section>
-		<!-- FIM EVENTOS -->
-		
-		<!-- NOTÍCIAS -->
-		<section class="row mb-5 bg-light noticia">
-			<div class="col-md-12 mb-1">
-				<h3>NOTÍCIAS</h3>
-				<hr style="border-style:dashed; border-color:#006FA7">
-			</div>
-			<div class="col-md-3">
-				<div class="card">
-					<div class="card-header"><h5 class="text-center">Notícia 01</h5></div>
-					<div class="card-body">						
-						<p class="card-text">Conheça a Faculdade.</p>
-						<a href="#" class="card-link">Saiba Mais...</a>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="card">
-					<div class="card-header"><h5 class="text-center">Notícia 02</h5></div>
-					<div class="card-body">						
-						<p class="card-text">Conheça a Faculdade.</p>
-						<a href="#" class="card-link">Saiba Mais...</a>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="card">
-						<div class="card-header"><h5 class="text-center">Notícia 03</h5></div>
-					<div class="card-body">						
-						<p class="card-text">Conheça a Faculdade.</p>
-						<a href="#" class="card-link">Saiba Mais...</a>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="card">
-					<div class="card-header"><h5 class="text-center">Notícia 04</h5></div>
-					<div class="card-body">						
-						<p class="card-text">Conheça a Faculdade.</p>
-						<a href="#" class="card-link">Saiba Mais...</a>
-					</div>
-				</div>
-			</div>
-		</section>
-		<!-- FIM NOTÍCIAS -->
+		<!-- FIM EVENTOS -->		
 		
 		<!-- RODAPÉ -->
 		<footer class="row rodape">
 			<div class="col-md-12">
-				<p class="text-center text-light mt-2">&copy 2018 - Aquilla / Elissandro / Joseano</p>
+				<p class="text-center text-light my-2">&copy 2018 - Aquilla / Elissandro / Joseano</p>
 			</div>
 		</footer>
 	</div>

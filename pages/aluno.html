@@ -20,35 +20,123 @@
 			<header class="row align-items-center mb-1 topo">			
 				<nav class="navbar navbar-light col-md-12">
 					<a class="navbar-brand h1 text-light mb-0" href="">FACIMA - FAA - IESA</a>
-					<h3 class="text-light align-center">CENTRAL DO ALUNO</h3>	
-							<button class="btn btn-dark my-2 my-sm-0" type="submit" id="btnSair"><i class="fas fa-sign-out-alt"></i>Sair</button>							
+					<!-- <h3 class="text-light align-center">PAINEL</h3>	 -->					
+					<button class="btn btn-dark my-2 my-sm-0" type="submit" id="btnSair"><i class="fas fa-sign-out-alt"></i>Sair</button>												
 				</nav>								
 			</header>
-			<!-- FIM TOPO -->								
-			<div class="row mb-1" style="height: 85vh;">
-				<div class="col-md-2 bg-dark">					
-					<aside class="listgroup">
-						<li class="list-group-item list-group-item-action active">Acesso Rápido</li>
-						<a class="list-group-item list-group-item-action" href="#">Mensagens
-								<span class="badge badge-primary badge-pill">15</span>
+			<!-- FIM TOPO -->
+
+			<div class="row mb-1" style="height: 85vh;">								
+				<div class="list-group col-md-2 p-0 bg-light">					
+					<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+						<a class="nav-link active" id="v-pills-inicio-tab" data-toggle="pill" href="#v-pills-inicio" role="tab" aria-controls="v-pills-inicio" aria-selected="true">Inicio</a>
+						<a class="nav-link" id="v-pills-dados-tab" data-toggle="pill" href="#v-pills-dados" role="tab" aria-controls="v-pills-dados" aria-selected="true">Dados Pessoais</a>
+						<a class="nav-link" id="v-pills-mensagens-tab" data-toggle="pill" href="#v-pills-mensagens" role="tab" aria-controls="v-pills-mensagens" aria-selected="false">Mensagens
+								<span class="badge badge-dark badge-pill ml-4">03</span>
 						</a>
-						<a class="list-group-item list-group-item-action" href="#">Central do Aluno</a>
-						<a class="list-group-item list-group-item-action" href="#">Documentos</a>
-						<a class="list-group-item list-group-item-action" href="#">Matrícula</a>
-						<a class="list-group-item list-group-item-action" href="#">Dados Pessoais</a>
-						<a class="list-group-item list-group-item-action" href="#">Ajuda</a>
-						<a class="list-group-item list-group-item-action" href="#">Link1</a>
-						<a class="list-group-item list-group-item-action" href="#">Link2</a>						
-					</aside>
-				</div>													
-				
+						<a class="nav-link" id="v-pills-aluno-tab" data-toggle="pill" href="#v-pills-aluno" role="tab" aria-controls="v-pills-aluno" aria-selected="false">Central do Aluno</a>
+						<a class="nav-link" id="v-pills-servicos-tab" data-toggle="pill" href="#v-pills-servicos" role="tab" aria-controls="v-pills-servicos" aria-selected="false">Serviços</a>
+					</div>					  
+				</div>
+
 				<div class="col-md-10 bg-light">
 					<section>					
-							<h1>CONTEÚDO AQUI!</h1>
+						<div class="tab-content" id="v-pills-tabContent">
+							<div class="tab-pane fade show active" id="v-pills-inicio" role="tabpanel" aria-labelledby="v-pills-inicio-tab">
+								Conteúdo 1
+							</div>
+							<div class="tab-pane fade" id="v-pills-dados" role="tabpanel" aria-labelledby="v-pills-dados-tab">
+									<div class="bg-secondary">
+											
+									</div>								
+									<table class="table table-bordered">
+											
+											<tbody>
+											  <tr class="bg-secondary text-light">
+												<th scope="row">
+													<p>NOME: Elissandro Santos</p>
+													<p>RA: 123456789</p>
+													<p>CURSO: Ciência da Computação - 7º Período - Noite</p>	
+												</th>																							
+												<th scope="row">
+														<img src="../img/rosto.svg" alt="..." class="img-thumbnail float-right rosto">
+												</th>																							
+											  </tr>
+											  <tr>
+												<th scope="row">FONE</th>
+												<td>(82)99999-9999</td>												
+											  </tr>
+											  <tr>
+												<th scope="row">E-MAIL</th>
+												<td>email@email.com</td>												
+											  </tr>
+											  <tr>
+												<th scope="row">ENDEREÇO</th>
+												<td>Avenida Fernandes Lima, 000</td>																								
+											  </tr>
+											  <tr>
+												<th scope="row">BAIRRO</th>
+												<td>Farol</td>												
+											  </tr>
+											  <tr>
+												<th scope="row">CEP</th>
+												<td>57080-000</td>												
+											  </tr>
+											  <tr>
+												<th scope="row">CIDADE/ESTADO</th>
+												<td>Maceió/AL</td>												
+											  </tr>											  
+											</tbody>
+										  </table>
+							</div>
+							<div class="tab-pane fade" id="v-pills-mensagens" role="tabpanel" aria-labelledby="v-pills-mensagens-tab">
+								<table class="table table-hover">
+									<thead>
+										<tr>
+											<th scope="col">#</th>
+											<th scope="col">Remetente</th>
+											<th scope="col">Titulo</th>
+											<th scope="col">Recebido</th>
+											<th scope="col">Horário</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<th scope="row">3</th>
+											<td>Professor X</td>
+											<td>presença</td>
+											<td>20/02/2018</td>
+											<td>12:10</td>
+										</tr>
+										<tr>
+											<th scope="row">2</th>
+											<td>Secretaria</td>
+											<td>Atualização</td>
+											<td>15/01/2018</td>
+											<td>16:25</td>
+										</tr>
+										<tr>
+											<th scope="row">1</th>
+											<td>Diretoria</td>
+											<td>Matricula 2018</td>
+											<td>01/01/2018</td>												
+											<td>19:32</td>												
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div class="tab-pane fade" id="v-pills-aluno" role="tabpanel" aria-labelledby="v-pills-aluno-tab">
+								Conteúdo 4
+							</div>
+							<div class="tab-pane fade" id="v-pills-servicos" role="tabpanel" aria-labelledby="v-pills-servicos-tab">
+								Conteúdo 5
+							</div>
+						</div>
 
 					</section>
 				</div>			
 			</div>
+			
 			<!-- RODAPÉ -->
 			<footer class="row rodape">
 				<div class="col-md-12">
