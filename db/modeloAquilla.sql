@@ -13,9 +13,17 @@ quantidade INT NOT NULL,
 estoque INT NOT NULL
 )DEFAULT CHARSET=utf8;
 
-CREATE TABLE equipamento(
+CREATE TABLE reservar(
 id INT PRIMARY KEY AUTO_INCREMENT,
 periodo INT NOT NULL,
 curso VARCHAR(50) NOT NULL,
-sala VARCHAR(50) NOT NULL
+sala VARCHAR(50) NOT NULL,
+id_usuario INT NOT NULL,
+id_equipamento INT NOT NULL
 )DEFAULT CHARSET=utf8;
+
+ALTER TABLE reservar ADD CONSTRAINT FK_id_usuario
+FOREIGN KEY(id_usuario) REFERENCES usuario(id);
+
+ALTER TABLE reservar ADD CONSTRAINT FK_id_equipamento
+FOREIGN KEY(id_equipamento) REFERENCES equipamento(id);
