@@ -2,21 +2,22 @@ $(document).ready(function(){
 	
 	$("#v-pills-reserva-tab").click(function(){
 		
-		var funcao = "listarEquipamentos";
+		var funcao = "consultar";
+		var tabela = "equipamento";		
 		
-		$.ajax({			
-			type: 'POST',			
+		$.ajax({
+			type: 'POST',
 			url: '../db/funcoes.php',
-			data: {funcao},			
-			dataType : 'json',			
-			success: function(sucess)
-			{
-				alert(sucess);
-			},			
-			error: function(XMLHttpRequest, textStatus, errorThrown) 
-			{ 
-				alert("Status: " + textStatus + " " + "Error: " + errorThrown); 
-			}  		
+			data: {funcao, tabela},
+			dataType: 'json',					
+			success: function(retorno){				
+																
+				for(i=0;i<retorno.length;i++){
+					
+					$('#ListaEquipamento').append('<option value="'+ retorno[i].nome +'">'+ retorno[i].nome +'</option>');	
+						
+				}									
+			}
 		});
 	});
 

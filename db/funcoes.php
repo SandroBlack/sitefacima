@@ -17,10 +17,7 @@
             break;                   
         case "cadEquip":
             cadastrarEquip();
-            break;
-		case "listarEquipamentos":
-            listarEquipamento();
-            break; 	
+            break;        
         default:            
             echo "<script>console.log('Função Não Encontrada')</script>";               
     }    
@@ -188,23 +185,5 @@
             echo "Linha: " . $erro->getLine();
         }
     }
-	
-	function listarEquipamento(){
-		
-		try{
-            $pdo = conectar();
-            $sql = "SELECT `id_equipamento`, `nome`, `fabricante`, `quantidade`, `estoque` FROM `equipamento` WHERE estoque >= ?";
-            $stm = $pdo->prepare($sql);
-            $stm->execute(array(1));
-            $stm->execute();
-			$dados = $stm->fetchAll(PDO::FETCH_ASSOC);        
-			echo json_encode($dados);
-
-        } catch(PDOExeption $erro){
-            echo "Mensagem de Erro: " . $erro->getMessage() . "<br>";
-            echo "Nome do Arquivo: " . $erro->getFile() . "<br>";
-            echo "Linha: " . $erro->getLine();
-        }	
-	}
     
 ?>

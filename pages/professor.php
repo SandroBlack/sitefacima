@@ -219,7 +219,7 @@
                                         </div>
                                         <div class="form-group">
                                         <label for="equipamento">Equipamento:</label>
-                                        <select class="form-control" name="equipamento" id="equipamento">
+                                        <select class="form-control" name="ListaEquipamento" id="ListaEquipamento">
                                             <option value="">Selecione</option>
                                             <option value="">...</option>
                                         </select>
