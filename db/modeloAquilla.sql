@@ -1,6 +1,6 @@
 CREATE TABLE usuario(
 id_usuario INT PRIMARY KEY AUTO_INCREMENT,
-nome VARCHAR(30) NOT NULL,
+nomeUser VARCHAR(30) NOT NULL,
 funcao VARCHAR(50) NOT NULL,
 nivel_acesso INT NOT NULL
 )DEFAULT CHARSET=utf8;
@@ -19,12 +19,12 @@ INSERT INTO `equipamento`(`id_equipamento`, `nome`, `fabricante`, `quantidade`, 
 
 CREATE TABLE reservar(
 id_reservar INT PRIMARY KEY AUTO_INCREMENT,
-data_reserva VARCHAR(10) NOT NULL,
-hora_inicio VARCHAR(10) NOT NULL,
-hora_fim VARCHAR(10) NOT NULL,
-periodo INT NOT NULL,
-curso VARCHAR(50) NOT NULL,
-sala VARCHAR(50) NOT NULL,
+data_reserva VARCHAR(80) NOT NULL,
+hora_inicio VARCHAR(80) NOT NULL,
+hora_fim VARCHAR(80) NOT NULL,
+periodo VARCHAR(80) NOT NULL,
+curso VARCHAR(80) NOT NULL,
+sala VARCHAR(80) NOT NULL,
 fk_usuario INT NOT NULL,
 fk_equipamento INT NOT NULL,
 CONSTRAINT `fk_id_usuario` FOREIGN KEY (`fk_usuario`) REFERENCES `usuario` (`id_usuario`),

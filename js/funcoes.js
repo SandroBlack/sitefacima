@@ -95,13 +95,18 @@ $(document).ready(function(){
 	
 	$("#btn-reserva").click(function(){
 		var funcao = "reservarEquipamento";
-		var dados = $("#formReserva").serialize();
-		
-		console.log(dados);
+		var dataD = $("#data").val();
+		var horarioInicio = $('#horarioInicio').val();
+		var horarioEntrega = $('#horarioEntrega').val();
+		var listaEquipamento = $('#ListaEquipamento').val();
+		var curso = $('#curso').val();
+		var periodo = $('#periodo').val();
+		var sala = $('#sala').val();
+
 		$.ajax({
 			type: 'POST',
 			url: '../db/funcoes.php',
-			data: {funcao, dados},
+			data: {funcao, dataD, horarioInicio, horarioEntrega, listaEquipamento, curso, periodo, sala},
 			dataType: 'html',					
 			success: function(retorno){				
 				alert(retorno);									

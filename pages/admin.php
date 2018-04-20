@@ -261,17 +261,13 @@
 									<div class="tab-pane fade show active" id="nav-rel-equip" role="tabpanel" aria-labelledby="nav-rel-equip-tab">
 										<h5 class="mt-2">Relação de Equipamentos</h5>
 										<hr style="border-width: 5px; border-color:#006FA7">
-
+										<form action="../pages/relatorio.php" method="post" target="_blank">
 										<div class="input-group mb-3">
 											<div class="input-group-prepend">
 												<label class="input-group-text" for="inputGroupSelect">Filtro</label>
 											</div>
-											<select class="custom-select" id="inputGroupSelectEquipamento">
-												<option selected hidden>Selecione</option>
-												<option value="1">ID</option>
-												<option value="2">NOME</option>
-												<option value="3">FABRICANTE</option>											
-											</select>
+											 <input class="form-control" type="date" name="dataRelatorio" id="dataRelatorio">
+											 <input hidden type="text" name="funcao" value="gerarRelatorio">
 											<input type="text" class="form-control" placeholder="Digite sua pesquisa" aria-label="" aria-describedby="basic-addon1">
 											<div class="input-group-append">
 												<button class="btn btn-outline-secondary" type="button" id="pesquisa-equipamento" title="Pesquisar"><i class="fas fa-search"></i></button>
@@ -296,6 +292,7 @@
 													
 										</table>
 										<button class="btn btn-dark" id="btn-rel-equip">Gerar Relatório</button>
+										</form>
 									</div>
 									<div class="tab-pane fade" id="nav-cadastrar-equip" role="tabpanel" aria-labelledby="nav-cadastrar-equip-tab">
 										<form class="" id="formEquipamento">                                    

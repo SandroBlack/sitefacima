@@ -20,7 +20,10 @@
             break;
 		case "reservarEquipamento":
             reservarEquipamento();
-            break;		
+            break;
+		case "gerarRelatorio":
+            gerarRelatorio();
+            break;				
         default:            
             echo "<script>console.log('Função Não Encontrada')</script>";               
     }    
@@ -191,10 +194,10 @@
 	
 	/* RESERVAR EQUIPAMENTO */
 	function reservarEquipamento(){
-		$data = $_POST['data'];
+		$data = $_POST['dataD'];
 		$horarioInicio = $_POST['horarioInicio'];
 		$horarioEntrega = $_POST['horarioEntrega'];
-		$ListaEquipamento = $_POST['ListaEquipamento'];
+		$ListaEquipamento = $_POST['listaEquipamento'];
 		$curso = $_POST['curso'];
 		$periodo = $_POST['periodo'];
 		$sala = $_POST['sala'];
@@ -207,12 +210,12 @@
             $stm = $pdo->prepare($sql);
             $stm->bindValue(":id",0);
             $stm->bindValue(":data_reserva",$data);
-            $stm->bindValue(":hora_inicio",$horarioInicio);
-            $stm->bindValue(":hora_fim",$horarioEntrega);
-            $stm->bindValue(":periodo",$periodo);           
+            $stm->bindValue(":hora_inicio",$horarioInicio . " ° Aula");
+            $stm->bindValue(":hora_fim",$horarioEntrega . " ° Aula");
+            $stm->bindValue(":periodo",$periodo . " °");           
             $stm->bindValue(":curso",$curso);           
-            $stm->bindValue(":sala",$sala);           
-            $stm->bindValue(":fk_usuario", $_SESSION["idUsuario"]);           
+            $stm->bindValue(":sala","Sala n° " . $sala);           
+            $stm->bindValue(":fk_usuario", 1);           
             $stm->bindValue(":fk_equipamento",$ListaEquipamento);           
             $stm->execute();
             $response = "1";
@@ -223,6 +226,35 @@
             echo "Nome do Arquivo: " . $erro->getFile() . "<br>";
             echo "Linha: " . $erro->getLine();
         }
+	}
+	
+	/* GERAR RELATORIO */
+	function gerarRelatorio(){
+		
+		$dataRelatorio = $_POST['dataRelatorio'];
+		
+		try{
+		
+		    $pdo = conectar();
+            $sql = "SELECT *
+					FROM
+					reservar r                    
+					INNER JOIN usuario u ON r.fk_usuario = u.id_usuario                    
+					INNER JOIN equipamento e ON r.fk_equipamento = e.id_equipamento
+					Where data_reserva = '{$dataRelatorio}'";
+            $stm = $pdo->prepare($sql);     
+            $stm->execute();
+			$dados = $stm->fetchAll(PDO::FETCH_ASSOC);		
+			
+var_dump($dados);			
+
+        } catch(PDOExeption $erro){
+            echo "Mensagem de Erro: " . $erro->getMessage() . "<br>";
+            echo "Nome do Arquivo: " . $erro->getFile() . "<br>";
+            echo "Linha: " . $erro->getLine();
+        }
+		
+		
 	}
     
 ?>
