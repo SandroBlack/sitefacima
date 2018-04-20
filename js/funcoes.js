@@ -1,4 +1,24 @@
 $(document).ready(function(){
+	
+	$("#v-pills-reserva-tab").click(function(){
+		
+		var funcao = "listarEquipamentos";
+		
+		$.ajax({			
+			type: 'POST',			
+			url: '../db/funcoes.php',
+			data: {funcao},			
+			dataType : 'json',			
+			success: function(sucess)
+			{
+				alert(sucess);
+			},			
+			error: function(XMLHttpRequest, textStatus, errorThrown) 
+			{ 
+				alert("Status: " + textStatus + " " + "Error: " + errorThrown); 
+			}  		
+		});
+	});
 
 	$("#btnAcessar").click(function(){
 		location.href="pages/login.html";				 

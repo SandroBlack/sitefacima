@@ -31,10 +31,3 @@ CONSTRAINT `fk_id_equipamento` FOREIGN KEY (`fk_equipamento`) REFERENCES `equipa
 
 INSERT INTO `reservar`(`id_reservar`, `data_reserva`, `periodo`, `curso`, `sala`, `fk_usuario`, `fk_equipamento`) VALUES (0,'20/04/2018',7,'Ciência Da Computação',9,1,1);  
 
-/*
-ALTER TABLE `reservar`
-  ADD CONSTRAINT `fk_id_usuario` FOREIGN KEY (`fk_usuario`) REFERENCES `usuario` (`id_usuario`);
-  
-ALTER TABLE `reservar`
-  ADD CONSTRAINT `fk_id_equipamento` FOREIGN KEY (`fk_equipamento`) REFERENCES `equipamento` (`id_equipamento`); 
- */
