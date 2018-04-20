@@ -189,13 +189,13 @@
 									</tr>
 								</table>
 
-                                <form class="" id="formReserva">                                    
+                                <form class="" id="formReserva" name="formReserva" onsubmit="return false;">                                    
                                         <h5>Reserva de Equipamentos</h5>
                                         <hr style="border-width: 5px; border-color:#006FA7">
 
                                         <div class="form-group">
                                             <label for="data">Data:</label>
-                                            <input class="form-control" type="date">
+                                            <input class="form-control" type="date" name="data" id="data">
                                         </div>
                                         <div class="form-group">
                                             <label for="horario">Horário:</label>
@@ -221,36 +221,49 @@
                                         <label for="equipamento">Equipamento:</label>
                                         <select class="form-control" name="ListaEquipamento" id="ListaEquipamento">
                                             <option value="">Selecione</option>
-                                            <option value="">...</option>
                                         </select>
                                         </div>
 										<div class="form-group">
                                         <label for="sala">Curso:</label>
-                                        <select class="form-control" name="" id="">
+                                        <select class="form-control" name="curso" id="curso">
                                             <option value="">Selecione</option>
-                                            <option value="">Ciência da Computação</option>
-											 <option value="">Administração</option>
-											 <option value="">Direito</option>
-											 <option value="">Enfermagem</option>
+                                            <option value="Ciência da Computação">Ciência da Computação</option>
+											 <option value="Administração">Administração</option>
+											 <option value="Direito">Direito</option>
+											 <option value="Enfermagem">Enfermagem</option>
+                                        </select>
+                                        </div>
+										<div class="form-group">
+                                        <label for="sala">Periodo:</label>
+                                        <select class="form-control" name="periodo" id="periodo">
+                                            <option value="">Selecione</option>
+                                            <option value="1">1°</option>
+											 <option value="2">2°</option>
+											 <option value="3">3°</option>
+											 <option value="4">4°</option>
+											 <option value="5">5°</option>
+											 <option value="6">6°</option>
+											 <option value="7">7°</option>
+											 <option value="8">8°</option>
                                         </select>
                                         </div>
                                         <div class="form-group">
                                         <label for="sala">Sala:</label>
-                                        <select class="form-control" name="" id="">
+                                        <select class="form-control" name="sala" id="sala">
                                             <option value="">Selecione</option>
-                                            <option value="">Sala 1</option>
-											 <option value="">Sala 2</option>
-											 <option value="">Sala 3</option>
-											 <option value="">Sala 4</option>
-											 <option value="">Sala 5</option>
-											 <option value="">Sala 6</option>
-											 <option value="">Sala 7</option>
-											 <option value="">Sala 8</option>
-											 <option value="">Sala 9</option>
-											 <option value="">Sala 10</option>
+                                            <option value="1">Sala 1</option>
+											 <option value="2">Sala 2</option>
+											 <option value="3">Sala 3</option>
+											 <option value="4">Sala 4</option>
+											 <option value="5">Sala 5</option>
+											 <option value="6">Sala 6</option>
+											 <option value="7">Sala 7</option>
+											 <option value="8">Sala 8</option>
+											 <option value="9">Sala 9</option>
+											 <option value="10">Sala 10</option>
                                         </select>
                                         </div>
-                                        <button class="btn btn-dark" id="btn-reserva">Reservar</button>                                    
+                                        <button class="btn btn-dark" id="btn-reserva" name="btn-reserva">Reservar</button>                                    
                                 </form>
 							</div>
                             <!-- FIM RESERVA DE EQUIPAMENTO -->

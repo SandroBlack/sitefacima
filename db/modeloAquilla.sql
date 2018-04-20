@@ -20,6 +20,8 @@ INSERT INTO `equipamento`(`id_equipamento`, `nome`, `fabricante`, `quantidade`, 
 CREATE TABLE reservar(
 id_reservar INT PRIMARY KEY AUTO_INCREMENT,
 data_reserva VARCHAR(10) NOT NULL,
+hora_inicio VARCHAR(10) NOT NULL,
+hora_fim VARCHAR(10) NOT NULL,
 periodo INT NOT NULL,
 curso VARCHAR(50) NOT NULL,
 sala VARCHAR(50) NOT NULL,
@@ -29,5 +31,5 @@ CONSTRAINT `fk_id_usuario` FOREIGN KEY (`fk_usuario`) REFERENCES `usuario` (`id_
 CONSTRAINT `fk_id_equipamento` FOREIGN KEY (`fk_equipamento`) REFERENCES `equipamento` (`id_equipamento`)
 )DEFAULT CHARSET=utf8;
 
-INSERT INTO `reservar`(`id_reservar`, `data_reserva`, `periodo`, `curso`, `sala`, `fk_usuario`, `fk_equipamento`) VALUES (0,'20/04/2018',7,'Ciência Da Computação',9,1,1);  
+INSERT INTO `reservar`(`id_reservar`, `data_reserva`, `hora_inicio`, `hora_fim`, `periodo`, `curso`, `sala`, `fk_usuario`, `fk_equipamento`) VALUES (0,'20/04/2018', '18:00','18:40',7,'Ciência Da Computação',9,1,1);  
 

@@ -17,7 +17,10 @@
             break;                   
         case "cadEquip":
             cadastrarEquip();
-            break;        
+            break;
+		case "reservarEquipamento":
+            reservarEquipamento();
+            break;		
         default:            
             echo "<script>console.log('Função Não Encontrada')</script>";               
     }    
@@ -185,5 +188,41 @@
             echo "Linha: " . $erro->getLine();
         }
     }
+	
+	/* RESERVAR EQUIPAMENTO */
+	function reservarEquipamento(){
+		$data = $_POST['data'];
+		$horarioInicio = $_POST['horarioInicio'];
+		$horarioEntrega = $_POST['horarioEntrega'];
+		$ListaEquipamento = $_POST['ListaEquipamento'];
+		$curso = $_POST['curso'];
+		$periodo = $_POST['periodo'];
+		$sala = $_POST['sala'];
+		
+		try{
+		
+		    $pdo = conectar();
+            $sql = "INSERT INTO `reservar`(`id_reservar`, `data_reserva`, `hora_inicio`, `hora_fim`, `periodo`, `curso`, `sala`, `fk_usuario`, `fk_equipamento`) VALUES (:id, :data_reserva, :hora_inicio, 
+					:hora_fim, :periodo, :curso, :sala, :fk_usuario, :fk_equipamento)";
+            $stm = $pdo->prepare($sql);
+            $stm->bindValue(":id",0);
+            $stm->bindValue(":data_reserva",$data);
+            $stm->bindValue(":hora_inicio",$horarioInicio);
+            $stm->bindValue(":hora_fim",$horarioEntrega);
+            $stm->bindValue(":periodo",$periodo);           
+            $stm->bindValue(":curso",$curso);           
+            $stm->bindValue(":sala",$sala);           
+            $stm->bindValue(":fk_usuario", $_SESSION["idUsuario"]);           
+            $stm->bindValue(":fk_equipamento",$ListaEquipamento);           
+            $stm->execute();
+            $response = "1";
+            echo $response;
+
+        } catch(PDOExeption $erro){
+            echo "Mensagem de Erro: " . $erro->getMessage() . "<br>";
+            echo "Nome do Arquivo: " . $erro->getFile() . "<br>";
+            echo "Linha: " . $erro->getLine();
+        }
+	}
     
 ?>

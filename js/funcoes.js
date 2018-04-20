@@ -1,24 +1,21 @@
 $(document).ready(function(){
 	
-	$("#v-pills-reserva-tab").click(function(){
+	var funcao = "consultar";
+	var tabela = "equipamento";		
 		
-		var funcao = "consultar";
-		var tabela = "equipamento";		
-		
-		$.ajax({
-			type: 'POST',
-			url: '../db/funcoes.php',
-			data: {funcao, tabela},
-			dataType: 'json',					
-			success: function(retorno){				
-																
-				for(i=0;i<retorno.length;i++){
+	$.ajax({
+		type: 'POST',
+		url: '../db/funcoes.php',
+		data: {funcao, tabela},
+		dataType: 'json',					
+		success: function(retorno){				
+															
+			for(i=0;i<retorno.length;i++){
+				
+				$('#ListaEquipamento').append('<option value="'+ retorno[i].id_equipamento +'">'+ retorno[i].nome +'</option>');	
 					
-					$('#ListaEquipamento').append('<option value="'+ retorno[i].nome +'">'+ retorno[i].nome +'</option>');	
-						
-				}									
-			}
-		});
+			}									
+		}
 	});
 
 	$("#btnAcessar").click(function(){
@@ -93,6 +90,24 @@ $(document).ready(function(){
 			}
 		});
 	});
+	
+	/* RESERVAR EQUIPAMENTO */
+	
+	$("#btn-reserva").click(function(){
+		var funcao = "reservarEquipamento";
+		var dados = $("#formReserva").serialize();
+		
+		console.log(dados);
+		$.ajax({
+			type: 'POST',
+			url: '../db/funcoes.php',
+			data: {funcao, dados},
+			dataType: 'html',					
+			success: function(retorno){				
+				alert(retorno);									
+			}
+		});
+	});		
 
 	/* PESQUISA RESERVA DE EQUIPAMENTOS */
 	$("#pesquisa-reserva-equip").click(function(){
@@ -175,7 +190,6 @@ $(document).ready(function(){
 	/* CADASTRO DE ALUNOS */
 	$("#btn-cad-aluno").click(function(){		
 		var dados = $("#formAluno").serialize(); 
-
 		$.ajax({
 			type: 'POST',
 			url: '../db/funcoes.php',
