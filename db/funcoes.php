@@ -1,6 +1,7 @@
 <?php    
     include_once("dbConexao.php"); 
-    $funcao = $_POST["funcao"];   
+    $funcao = $_POST["funcao"];  
+	session_start();
     
     switch($funcao){
         case "logar":
@@ -77,21 +78,10 @@
         $login = $_POST["login"];
         $senha  = $_POST["senha"];
         $perfil = $_POST["perfil"];
-        
-        if($perfil == "Administracao"){
-            $sql = "SELECT * FROM administracao WHERE idadmin=? AND rg=?";
-            $response = "1";
-        } else if($perfil == "Aluno"){
-            $sql = "SELECT * FROM aluno WHERE ra=? AND rg=?";
-            $response = "2";
-        } else if($perfil == "Professor"){
-            $sql = "SELECT * FROM professor WHERE idprofessor=? AND rg=?";
-            $response = "3";
-        }
 
         try{
             $pdo = conectar();
-            //$sql = "SELECT * FROM {$perfil} WHERE ra=? AND rg=?";
+            $sql = "SELECT * FROM usuario WHERE id_usuario=? AND senha=?";
             $stm = $pdo->prepare($sql);            
             $stm->execute(array($login, $senha));
             $dados = $stm->fetch(PDO::FETCH_NUM);
@@ -215,7 +205,7 @@
             $stm->bindValue(":periodo",$periodo . " °");           
             $stm->bindValue(":curso",$curso);           
             $stm->bindValue(":sala","Sala n° " . $sala);           
-            $stm->bindValue(":fk_usuario", 1);           
+            $stm->bindValue(":fk_usuario", $_SESSION["idUsuario"]);           
             $stm->bindValue(":fk_equipamento",$ListaEquipamento);           
             $stm->execute();
             $response = "1";

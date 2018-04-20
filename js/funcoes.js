@@ -38,7 +38,7 @@ $(document).ready(function(){
 			$("#alerta2").css("display","block");			
 			return false;
 		} else{			
-			var dados = {funcao, perfil, login, senha}
+			var dados = {funcao, perfil, login, senha};
 			$.ajax({			
 				type: 'POST',
 				url:'../db/funcoes.php',
@@ -48,15 +48,9 @@ $(document).ready(function(){
 					if(retorno == "0"){
 						$("#alerta2").css("display","none");
 						$("#alerta1").css("display","block");						
-					} else if(retorno == "1"){
-						location.href="../pages/admin.php";					
-					} else if(retorno == "2"){
-						location.href="../pages/aluno.php";					
-					} else if(retorno == "3"){
-						location.href="../pages/professor.php";
-					} else{						
-						console.log(retorno);
-					}								
+					} else{
+						location.href="../pages/professor.php";							
+					}	
 				},				
 			});			
 		}
