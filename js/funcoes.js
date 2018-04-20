@@ -103,7 +103,8 @@ $(document).ready(function(){
 			data: {funcao, dataD, horarioInicio, horarioEntrega, listaEquipamento, curso, periodo, sala},
 			dataType: 'html',					
 			success: function(retorno){				
-				alert(retorno);									
+				alert("Equipamento Reservado com Sucesso");
+				location.href="../pages/professor.php";								
 			}
 		});
 	});		
