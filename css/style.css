@@ -1,0 +1,35 @@
+/* INDEX */
+.topo{
+	background-color: #006FA7;	
+}
+
+.sidebar{
+	background-color: #006FA7;
+	color: #fff;
+}
+
+.rodape{
+	background-color: #006FA7;
+}
+
+/* PAGE ALUNO */
+.rosto{
+	width: 120px;
+	height: 120px;
+}
+
+/* PAGE PROFESSOR */
+.reserva{    
+    border: 1px solid #333;
+}
+
+/* PAGE LOGIN */
+.centralizado {
+	margin-top: 10%;
+}
+.alertaLogin{
+	display: none;
+}
+/* PAGE CURSOS */
+
+
