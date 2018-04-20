@@ -199,23 +199,55 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="horario">Horário:</label>
-                                            <select class="form-control" name="" id="">
+                                            <select class="form-control" name="horarioInicio" id="horarioInicio">
                                                 <option value="">Selecione</option>
-                                                <option value="">...</option>
+                                                <option value="1">1° Aula</option>
+												<option value="2">2° Aula</option>
+												<option value="3">3° Aula</option>
+												<option value="4">4° Aula</option>
+                                            </select>
+                                        </div>
+										<div class="form-group">
+                                            <label for="horario">Horário De Entrega:</label>
+                                            <select class="form-control" name="horarioEntrega" id="horarioEntrega">
+                                                <option value="">Selecione</option>
+                                                <option value="1">1° Aula</option>
+												<option value="2">2° Aula</option>
+												<option value="3">3° Aula</option>
+												<option value="4">4° Aula</option>
                                             </select>
                                         </div>
                                         <div class="form-group">
                                         <label for="equipamento">Equipamento:</label>
-                                        <select class="form-control" name="" id="">
+                                        <select class="form-control" name="equipamento" id="equipamento">
                                             <option value="">Selecione</option>
                                             <option value="">...</option>
+                                        </select>
+                                        </div>
+										<div class="form-group">
+                                        <label for="sala">Curso:</label>
+                                        <select class="form-control" name="" id="">
+                                            <option value="">Selecione</option>
+                                            <option value="">Ciência da Computação</option>
+											 <option value="">Administração</option>
+											 <option value="">Direito</option>
+											 <option value="">Enfermagem</option>
                                         </select>
                                         </div>
                                         <div class="form-group">
                                         <label for="sala">Sala:</label>
                                         <select class="form-control" name="" id="">
                                             <option value="">Selecione</option>
-                                            <option value="">...</option>
+                                            <option value="">Sala 1</option>
+											 <option value="">Sala 2</option>
+											 <option value="">Sala 3</option>
+											 <option value="">Sala 4</option>
+											 <option value="">Sala 5</option>
+											 <option value="">Sala 6</option>
+											 <option value="">Sala 7</option>
+											 <option value="">Sala 8</option>
+											 <option value="">Sala 9</option>
+											 <option value="">Sala 10</option>
                                         </select>
                                         </div>
                                         <button class="btn btn-dark" id="btn-reserva">Reservar</button>                                    
