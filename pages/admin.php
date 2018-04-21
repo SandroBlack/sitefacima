@@ -116,7 +116,7 @@
 										</form>
 									</div>
 									<div class="tab-pane fade" id="nav-cadastrar-equip" role="tabpanel" aria-labelledby="nav-cadastrar-equip-tab">
-										<form class="" id="formEquipamento">                                    
+										<form class="" id="formEquipamento" onsubmit="return false;">                                    
 											<h5 class="mt-2">Cadastro de Equipamentos</h5>
 											<hr style="border-width: 5px; border-color:#006FA7">	
 											<div class="form-group">
@@ -129,11 +129,11 @@
 											</div>
 											<div class="form-group">
 												<label for="fabricante">Quantidade de equipamento(s)</label>
-												<input class="form-control" type="text" name="quantidade" id="quantidade" required/>
+												<input class="form-control" type="number" name="quantidade" id="quantidade" required/>
 											</div>                                        
 											<div class="form-group">
 												<label for="fabricante">Patrimonio do equipamento:</label>
-												<input class="form-control" type="text" name="patrimonio" id="patrimonio" required/>
+												<input class="form-control" type="number" name="patrimonio" id="patrimonio" required/>
 											</div>                                        
 											<button class="btn btn-dark" id="btn-cad-equip">Cadastrar</button>                                    
 										</form>		
@@ -240,7 +240,7 @@
 											</div>
 											<div class="form-group">
 												<label for="nome">E-mail:</label>
-												<input class="form-control" type="text" name="email" id="email"/>
+												<input class="form-control" type="email" name="email" id="email"/>
 											</div>											
 											<div class="form-group">
 												<label for="nome">Cargo:</label>

@@ -140,20 +140,19 @@ $(document).ready(function(){
 	/* CADASTRO DE EQUIPAMENTOS */
 	$("#btn-cad-equip").click(function(){
 		var funcao = "cadEquip";
-		var nome = $('#').val();
-		var fabricante = $('#').val();
-		var quantidade = $('#').val();
-		var patrimonio = $('#').val();
+		var nome = $('#nome').val();
+		var fabricante = $('#fabricante').val();
+		var quantidade = $('#quantidade').val();
+		var patrimonio = $('#patrimonio').val();
 		$.ajax({
 			type: 'POST',
 			url: '../db/funcoes.php',
 			data: {funcao,nome,fabricante,quantidade,patrimonio},
 			dataType: 'html',
 			success: function(retorno){
-				if(response == "1"){
+				if(retorno == "1"){
 					alert("Equipamento Cadastrado com Sucesso!");
-				} else{
-					console.log(retorno);
+					location.href="../pages/admin.php";
 				}
 			}
 		});		
@@ -174,11 +173,10 @@ $(document).ready(function(){
 			success: function(retorno){
 				if(retorno == "1"){
 					alert("Usuario Cadastrado com Sucesso!");
+					location.href="../pages/admin.php";
 				}
 				if(retorno == "0"){
 					alert("Usuario já Cadastrado!");
-				} else{
-					console.log(retorno);
 				}
 			}
 		});

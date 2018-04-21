@@ -17,7 +17,7 @@
             cadastrarUsuario();
             break;                   
         case "cadEquip":
-            cadastrarEquip();
+            cadastrarEquipamento();
             break;
 		case "reservarEquipamento":
             reservarEquipamento();
@@ -140,19 +140,20 @@
     }
     /* CADASTRO DE EQUIPAMENTOS */
     function cadastrarEquipamento(){
-        $nome = $_POST["nome"];
-        $modelo = $_POST["modelo"];
-        $fabricante = $_POST["fabricante"];
-        $estoque = $_POST["quantidade"];
+        $nome_equipamento = $_POST["nome"];;
+        $fabricante_equipamento = $_POST["fabricante"];
+		$quantidade_equipamento = $_POST["quantidade"];
+        $patrimonio_equipamento = $_POST["patrimonio"];
 
         try{
             $pdo = conectar();
-            $sql = "INSERT INTO equipamento(nome,modelo,fabricante,estoque) VALUES(:nome,:modelo,:fabricante,:estoque)";
+            $sql = "INSERT INTO `equipamento`(`id_equipamento`, `nome_equipamento`, `fabricante_equipamento`, `quantidade_equipamento`, `patrimonio_equipamento`) VALUES (:id_equipamento, :nome_equipamento, :fabricante_equipamento, :quantidade_equipamento, :patrimonio_equipamento)";
             $stm = $pdo->prepare($sql);
-            $stm->bindValue(":nome",$nome);
-            $stm->bindValue("modelo",$modelo);
-            $stm->bindValue(":fabricante",$fabricante);
-            $stm->bindValue(":estoque",$estoque);
+            $stm->bindValue(":id_equipamento",0);
+            $stm->bindValue(":nome_equipamento",$nome_equipamento);
+            $stm->bindValue("fabricante_equipamento",$fabricante_equipamento);
+            $stm->bindValue(":quantidade_equipamento",$quantidade_equipamento);
+            $stm->bindValue(":patrimonio_equipamento",$patrimonio_equipamento);
             $stm->execute();
             $response = "1";
             echo $response;
