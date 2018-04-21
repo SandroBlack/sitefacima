@@ -1,10 +1,11 @@
 <?php
 	include_once("../db/dbConexao.php"); 
+	include_once("../db/funcoes.php");
 	/* Usar o Dompdf com Namespaces e corrigir o conflito de nomes */
     use Dompdf\Dompdf;
     include_once("../pdf/dompdf/autoload.inc.php");
 	
-	$dataRelatorio = $_POST['dataRelatorio'];
+	$dataRelatorio = inverteData($_POST['dataRelatorio']);
 		
 		try{
 		

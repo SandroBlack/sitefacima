@@ -36,5 +36,5 @@ CONSTRAINT `fk_id_usuario` FOREIGN KEY (`fk_usuario`) REFERENCES `usuario` (`id_
 CONSTRAINT `fk_id_equipamento` FOREIGN KEY (`fk_equipamento`) REFERENCES `equipamento` (`id_equipamento`)
 );
 
-INSERT INTO `reservar`(`id_reservar`, `data_reserva`, `hora_inicio`, `hora_fim`, `semestre`, `curso`, `sala`, `periodo`, `fk_usuario`, `fk_equipamento`) VALUES (1,'2018-04-20', '1° Aula','2° Aula',7,'Ciência Da Computação',9,'Noturno',1,1);
+INSERT INTO `reservar`(`id_reservar`, `data_reserva`, `hora_inicio`, `hora_fim`, `semestre`, `curso`, `sala`, `periodo`, `fk_usuario`, `fk_equipamento`) VALUES (1,'23/04/2018', '1° Aula','2° Aula',7,'Ciência Da Computação',9,'Noturno',1,1);
 

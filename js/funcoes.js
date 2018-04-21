@@ -1,28 +1,21 @@
-$(document).ready(function(){
-	
-	var funcao = "consultarEquipamento";		
-		
-	$.ajax({
-		type: 'POST',
-		url: '../db/funcoes.php',
-		data: {funcao},
-		dataType: 'json',					
-		success: function(retorno){				
-															
-			for(i=0;i<retorno.length;i++){
-				
-				$('#ListaEquipamento').append('<option value="'+ retorno[i].id_equipamento +'">'+ retorno[i].nome_equipamento +'</option>');	
-					
-			}									
-		}
-	});
+$(document).ready(function(){	
 
 	$("#btnAcessar").click(function(){
 		location.href="pages/login.html";				 
   	}); 		
 	
-	$("#btnSair").click(function(){		
-		location.href="../index.html";		
+	$("#btnSair").click(function(){
+		var funcao = "destruirSessao";
+		$.ajax({
+			type: 'POST',
+			url: '../db/funcoes.php',
+			data: {funcao},
+			dataType: 'html',					
+			success: function(retorno){				
+				location.href="../index.html";									
+			}
+		});
+				
 	});	
 
 	/* Função de Login */
@@ -94,15 +87,24 @@ $(document).ready(function(){
 		var curso = $('#curso').val();
 		var periodo = $('#periodo').val();
 		var sala = $('#sala').val();
+		var semestre = $('#semestre').val();
 
 		$.ajax({
 			type: 'POST',
 			url: '../db/funcoes.php',
-			data: {funcao, dataD, horarioInicio, horarioEntrega, listaEquipamento, curso, periodo, sala},
+			data: {funcao, dataD, horarioInicio, horarioEntrega, listaEquipamento, curso, periodo, sala,semestre},
 			dataType: 'html',					
-			success: function(retorno){				
-				alert("Equipamento Reservado com Sucesso");
-				location.href="../pages/professor.php";								
+			success: function(retorno){
+				if(retorno == "1")
+				{		
+					alert("Equipamento Reservado com Sucesso");
+					location.href="../pages/professor.php";								
+				}
+				if(retorno == "11")
+				{		
+					alert("Todos equipamentos em estoque reservados para o dia selecionado");								
+				}
+				console.log(retorno);
 			}
 		});
 	});		
@@ -161,7 +163,8 @@ $(document).ready(function(){
 	/* CADASTRO DE USUARIOS */
 	$("#btn-cad-professor").click(function(){
 		var funcao = 'cadastrarUsuario';
-		var nome = $('#nome').val();
+		var nome = $('#nomeUsuario').val();
+		alert(nome);
 		var email = $('#email').val();
 		var cargo = $('#cargo').val();
 		var tipoUsuario = $('#tipoUsuario').val();

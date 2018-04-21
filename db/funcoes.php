@@ -21,10 +21,22 @@
             break;
 		case "reservarEquipamento":
             reservarEquipamento();
-            break;			
+            break;
+		case "consultarReservaUsuario":
+            consultarReservaUsuario();
+            break;
+		case "cancelaReserva":
+            cancelaReserva();
+            break;
+		case "destruirSessao":
+            destruirSessao();
+            break;	
+		case "consultarUsuarioCadastrado":
+            consultarUsuarioCadastrado();
+            break;		
         default:            
             echo "<script>console.log('Função Não Encontrada')</script>";               
-    }
+    }		
 	
     /* FUNÇÃO DE LOGIN */ 
     function logar(){
@@ -46,7 +58,8 @@
                 $response = '0';
                 echo $response;
                 return 0;
-            } else{              
+            } else{
+				
                 $_SESSION['id_usuario'] = $dados[0];                
                 $_SESSION['nome_usuario'] = $dados[1];                
                 $_SESSION['email_usuario'] = $dados[2];                
@@ -121,12 +134,44 @@
             echo "Linha: " . $erro->getLine();
         }  
     }
+	/* CONSULTAR RESERVA DE USUARIOS */
+	function consultarReservaUsuario(){
+		try{
+            $pdo = conectar();
+            $sql = "SELECT nome_equipamento, sala, data_reserva,id_reservar FROM reservar r INNER JOIN equipamento e ON r.fk_equipamento = e.id_equipamento WHERE fk_usuario = :id_usuario;";
+            $stm = $pdo->prepare($sql);
+			$stm->bindValue(":id_usuario",$_SESSION["idUsuario"]);	
+            $stm->execute();
+            $dados = $stm->fetchAll(PDO::FETCH_ASSOC);                                    
+            echo json_encode($dados);             
+            
+        } catch(PDOExeption $erro){
+            echo "Mensagem de Erro: " . $erro->getMessage() . "<br>";
+            echo "Nome do Arquivo: " . $erro->getFile() . "<br>";
+            echo "Linha: " . $erro->getLine();
+        }
+	}
+	/* CONSULTAR USUARIOS CADASTRADOS */
+	function consultarUsuarioCadastrado(){
+		try{
+            $pdo = conectar();
+            $sql = "SELECT `id_usuario`, `nome_usuario`, `email_usuario`,`cargo_usuario` FROM `usuario`";
+            $stm = $pdo->prepare($sql);
+            $stm->execute();
+            $dados = $stm->fetchAll(PDO::FETCH_ASSOC);                                    
+            echo json_encode($dados);             
+            
+        } catch(PDOExeption $erro){
+            echo "Mensagem de Erro: " . $erro->getMessage() . "<br>";
+            echo "Nome do Arquivo: " . $erro->getFile() . "<br>";
+            echo "Linha: " . $erro->getLine();
+        }
+	}
 	/* CONSULTAR EQUIPAMENTOS */
     function consultarEquipamento(){
-
         try{
             $pdo = conectar();
-            $sql = "SELECT id_equipamento, nome_equipamento FROM equipamento";
+            $sql = "SELECT id_equipamento, nome_equipamento, quantidade_equipamento FROM equipamento";
             $stm = $pdo->prepare($sql);            
             $stm->execute();
             $dados = $stm->fetchAll(PDO::FETCH_ASSOC);                                    
@@ -166,37 +211,89 @@
     }	
 	/* RESERVAR EQUIPAMENTO */
 	function reservarEquipamento(){
-		$data = $_POST['dataD'];
-		$horarioInicio = $_POST['horarioInicio'];
-		$horarioEntrega = $_POST['horarioEntrega'];
-		$ListaEquipamento = $_POST['listaEquipamento'];
+		$data_reserva = inverteData($_POST['dataD']);
+		$hora_inicio = $_POST['horarioInicio'];
+		$hora_fim = $_POST['horarioEntrega'];
+		$semestre = $_POST["semestre"];
 		$curso = $_POST['curso'];
-		$periodo = $_POST['periodo'];
 		$sala = $_POST['sala'];
+		$periodo = $_POST['periodo'];
+		$ListaEquipamento = $_POST['listaEquipamento'];
 		
 		try{
-		
-		    $pdo = conectar();
-            $sql = "INSERT INTO `reservar`(`id_reservar`, `data_reserva`, `hora_inicio`, `hora_fim`, `periodo`, `curso`, `sala`, `fk_usuario`, `fk_equipamento`) VALUES (:id, :data_reserva, :hora_inicio, 
-					:hora_fim, :periodo, :curso, :sala, :fk_usuario, :fk_equipamento)";
+			$pdo = conectar();
+            $sql = "SELECT count(data_reserva) as 'qnt_Reservados',quantidade_equipamento
+					FROM
+					reservar r                                     
+					INNER JOIN equipamento e ON r.fk_equipamento = e.id_equipamento
+					Where data_reserva = :data_reserva AND id_equipamento = :id_equipamento";
             $stm = $pdo->prepare($sql);
-            $stm->bindValue(":id",0);
-            $stm->bindValue(":data_reserva",$data);
-            $stm->bindValue(":hora_inicio",$horarioInicio . " ° Aula");
-            $stm->bindValue(":hora_fim",$horarioEntrega . " ° Aula");
-            $stm->bindValue(":periodo",$periodo . " °");           
-            $stm->bindValue(":curso",$curso);           
-            $stm->bindValue(":sala","Sala n° " . $sala);           
-            $stm->bindValue(":fk_usuario", $_SESSION["idUsuario"]);           
-            $stm->bindValue(":fk_equipamento",$ListaEquipamento);           
+			$stm->bindValue(":data_reserva",$data_reserva);
+			$stm->bindValue(":id_equipamento",$ListaEquipamento);                
             $stm->execute();
-            $response = "1";
-            echo $response;
-
-        } catch(PDOExeption $erro){
-            echo "Mensagem de Erro: " . $erro->getMessage() . "<br>";
-            echo "Nome do Arquivo: " . $erro->getFile() . "<br>";
-            echo "Linha: " . $erro->getLine();
-        }
+			$dados = $stm->fetch(PDO::FETCH_ASSOC);
+			if(intval($dados['qnt_Reservados']) >= intval($dados['quantidade_equipamento']))
+			{
+				$response = "11";
+				echo $response;
+				return 0;
+			} else{				
+					try{
+			
+						$pdo = conectar();
+						$sql = "INSERT INTO `reservar`(`id_reservar`, `data_reserva`, `hora_inicio`, `hora_fim`, `semestre`, `curso`, `sala`, `periodo`, `fk_usuario`, `fk_equipamento`) VALUES (:id_reservar, :data_reserva, :hora_inicio, :hora_fim, :semestre, :curso, :sala, :periodo, :fk_usuario, :fk_equipamento)";
+						$stm = $pdo->prepare($sql);
+						$stm->bindValue(":id_reservar",0);
+						$stm->bindValue(":data_reserva",$data_reserva);
+						$stm->bindValue(":hora_inicio",$hora_inicio);
+						$stm->bindValue(":hora_fim",$hora_fim);
+						$stm->bindValue(":semestre",$semestre);           
+						$stm->bindValue(":curso",$curso);           
+						$stm->bindValue(":sala",$sala);           
+						$stm->bindValue(":periodo",$periodo);           
+						$stm->bindValue(":fk_usuario", $_SESSION["idUsuario"]);           
+						$stm->bindValue(":fk_equipamento",$ListaEquipamento);           
+						$stm->execute();
+						$response = "1";
+						echo $response;
+					} catch(PDOExeption $erro){
+						echo "Mensagem de Erro: " . $erro->getMessage() . "<br>";
+						echo "Nome do Arquivo: " . $erro->getFile() . "<br>";
+						echo "Linha: " . $erro->getLine();
+					}				
+				}	
+			} catch(PDOExeption $erro){
+				echo "Mensagem de Erro: " . $erro->getMessage() . "<br>";
+				echo "Nome do Arquivo: " . $erro->getFile() . "<br>";
+				echo "Linha: " . $erro->getLine();
+			}	
+	}
+	/* CANCELAR RESEVA DE EQUIPAMENTO */
+	function cancelaReserva(){
+		$id_reservar = $_POST['x'];		
+		try{
+			
+			$pdo = conectar();
+			$sql = "DELETE FROM `reservar` WHERE id_reservar = :id_reservar";
+			$stm = $pdo->prepare($sql);
+			$stm->bindValue(":id_reservar",$id_reservar);        
+			$stm->execute();
+			$response = "1";
+			echo $response;
+		} catch(PDOExeption $erro){
+			echo "Mensagem de Erro: " . $erro->getMessage() . "<br>";
+			echo "Nome do Arquivo: " . $erro->getFile() . "<br>";
+			echo "Linha: " . $erro->getLine();
+		}				
+	}
+	/* FUNÇÃO PARA INVERTER A DATA PARA ESTILO BRASILEIRO */
+	function inverteData($data){    
+	   $parteData = explode("-", $data);    
+	   $dataInvertida = $parteData[2] . "/" . $parteData[1] . "/" . $parteData[0];
+	   return $dataInvertida;			
+	}
+	/* DESTROIR SESSÃO */
+	function destruirSessao(){
+		session_destroy();
 	}
 ?>

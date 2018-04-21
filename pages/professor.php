@@ -1,4 +1,15 @@
-<?php session_start();?>
+<?php 
+session_start();
+
+if (!isset($_SESSION['nome_usuario']) OR ($_SESSION['nivel_acesso'] != 1)) {
+	// Destrói a sessão por segurança
+	session_destroy();
+	// Redireciona o visitante de volta pro login
+	header("Location: ../index.html");
+	exit;
+}
+
+?>
 
 <!doctype html>
 <html lang="pt-br">
@@ -12,7 +23,7 @@
 
     <!-- Bootstrap CSS, Font Awesome --> 
 	<link rel="stylesheet" href="../css/bootstrap.min.css">
-	<link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
 	
 	<!-- Optional CSS -->
 	<link rel="stylesheet" href="../css/style.css">
@@ -56,7 +67,6 @@
 				<div class="list-group col-md-2 p-0 bg-white border">					
 					<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">					
 						<a class="nav-link active border-bottom" id="v-pills-reserva-tab" data-toggle="pill" href="#v-pills-reserva" role="tab" aria-controls="v-pills-reserva" aria-selected="true">Reservar Equip.</a>
-						<a class="nav-link border-bottom" id="v-pills-servicos-tab" data-toggle="pill" href="#v-pills-servicos" role="tab" aria-controls="v-pills-servicos" aria-selected="false">Serviços</a>
 					</div>					  
 				</div>
 
@@ -68,18 +78,15 @@
 							<div class="tab-pane fade show active" id="v-pills-reserva" role="tabpanel" aria-labelledby="v-pills-reserva-tab">
 								<h5>Equipamentos Reservados</h5>
                                 <hr style="border-width: 5px; border-color:#006FA7">
-								<table class="table table-hover mb-5">
+								<table class="table table-hover mb-5" id="reservaUsuario">
 									<tr>
 										<thead>
 											<th scope="col">Equipamento</th>
 											<th scope="col">Sala</th>
 											<th scope="col">Data</th>
-											<th scope="col">Hora</th>
+											<th scope="col">Cancelar</th>
 										</thead>										
-									</tr>
-									<tr class="bg-light">
-										<td class="text-secondary"></td>										
-									</tr>
+									</tr>									
 								</table>
 
                                 <form class="" id="formReserva" name="formReserva" onsubmit="return false;">                                    
@@ -158,7 +165,7 @@
                                         </div>
 										<div class="form-group">
 											<label for="periodo">Periodo do dia para entrega do equipamento:</label>
-											<select class="form-control" name="Periodo" id="Periodo">
+											<select class="form-control" name="periodo" id="periodo">
 												<option value="">Selecione</option>
 												<option value="Matutino">Matutino</option>
 												<option value="Vespertino">Vespertino</option>
@@ -168,15 +175,7 @@
                                         <button class="btn btn-dark" id="btn-reserva" name="btn-reserva">Reservar</button>                                    
                                 </form>
 							</div>
-                            <!-- FIM RESERVA DE EQUIPAMENTO -->
-                            
-							<!-- SERVIÇOS -->
-							<div class="tab-pane fade" id="v-pills-servicos" role="tabpanel" aria-labelledby="v-pills-servicos-tab">
-								<h5>Serviços</h5>
-				                <hr style="border-width: 5px; border-color:#006FA7">
-							</div>
-							<!-- FIM SERVIÇOS -->
-
+                            <!-- FIM RESERVA DE EQUIPAMENTO -->                       
 						</div>
 					</section>
 				</div>			
@@ -195,7 +194,8 @@
 			
 		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 		<script src="../js/jquery-3.3.1.min.js"></script>
-		<script src="../js/funcoes.js"></script>			
+		<script src="../js/professor.js"></script>
+		<script src="../js/funcoes.js"></script>					
 		<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>	 -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 		<script src="../js/bootstrap.min.js"></script>

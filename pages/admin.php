@@ -1,6 +1,15 @@
 <?php
 	include_once("../db/dbConexao.php"); 
 	session_start();
+
+if (!isset($_SESSION['nome_usuario']) OR ($_SESSION['nivel_acesso'] != 3)) {
+	// Destrói a sessão por segurança
+	session_destroy();
+	// Redireciona o visitante de volta pro login
+	header("Location: ../index.html");
+	exit;
+}
+
 ?>
 
 <!doctype html>
@@ -81,39 +90,18 @@
 								<div class="tab-content" id="nav-tabContent-equip">
 									<div class="tab-pane fade show active" id="nav-rel-equip" role="tabpanel" aria-labelledby="nav-rel-equip-tab">
 										<h5 class="mt-2">Relação de Equipamentos</h5>
-										<hr style="border-width: 5px; border-color:#006FA7">
-										<form action="../pages/relatorio.php" method="post" target="_blank">
-										<div class="input-group mb-3">
-											<div class="input-group-prepend">
-												<label class="input-group-text" for="inputGroupSelect">Filtro</label>
-											</div>
-											 <input class="form-control" type="date" name="dataRelatorio" id="dataRelatorio">
-											 <input hidden type="text" name="funcao" value="gerarRelatorio">
-											<input type="text" class="form-control" placeholder="Digite sua pesquisa" aria-label="" aria-describedby="basic-addon1">
-											<div class="input-group-append">
-												<button class="btn btn-outline-secondary" type="button" id="pesquisa-equipamento" title="Pesquisar"><i class="fas fa-search"></i></button>
-											</div>
-										</div>
-											
-										<table class="table table-bordered bg-white text-center">
+										<hr style="border-width: 5px; border-color:#006FA7">										
+										<table class="table table-bordered bg-white text-center" id="equipamentosCadastrados">
 											<thead class="thead-light">
 												<tr>
-													<th scope="col">ID</th>
-													<th scope="col">NOME</th>													
-													<th scope="col">FABRICANTE</th>
-													<th scope="col">ESTOQUE</th>
-													<th scope="col">EDITAR</th>
-													<th scope="col">EXCLUIR</th>
+													<th scope="col">Nome</th>													
+													<th scope="col">Fabricante</th>
+													<th scope="col">Quantidade</th>
+													<th scope="col">Editar</th>
+													<th scope="col">Excluir</th>
 												</tr>
-											</thead>	
-												
-											<tbody class="dadosEquipamentos">
-												
-											</tbody>
-													
+											</thead>													
 										</table>
-										<button class="btn btn-dark" id="btn-rel-equip">Gerar Relatório</button>
-										</form>
 									</div>
 									<div class="tab-pane fade" id="nav-cadastrar-equip" role="tabpanel" aria-labelledby="nav-cadastrar-equip-tab">
 										<form class="" id="formEquipamento" onsubmit="return false;">                                    
@@ -138,43 +126,19 @@
 											<button class="btn btn-dark" id="btn-cad-equip">Cadastrar</button>                                    
 										</form>		
 									</div>
+									<!-- EQUIPAMENTOS RESERVADOS -->
 									<div class="tab-pane fade" id="nav-reservados-equip" role="tabpanel" aria-labelledby="nav-reservados-equip-tab">
 										<h5 class="mt-2">Equipamentos Reservados</h5>
 										<hr style="border-width: 5px; border-color:#006FA7">
-
+										<form action="../pages/relatorio.php" method="post" target="_blank">
 										<div class="input-group mb-3">
 											<div class="input-group-prepend">
 												<label class="input-group-text" for="inputGroupSelect">Filtro</label>
 											</div>
-											<select class="custom-select" id="inputGroupSelectEquipamento">
-												<option selected hidden>Selecione</option>
-												<option value="3">EQUIPAMENTO</option>											
-												<option value="1">PROFESSOR</option>
-												<option value="2">SALA</option>
-											</select>
-											<input type="text" class="form-control" placeholder="Digite sua pesquisa" aria-label="" aria-describedby="basic-addon1">
-											<div class="input-group-append">
-												<button class="btn btn-outline-secondary" type="button" id="pesquisa-equipamento" title="Pesquisar"><i class="fas fa-search"></i></button>
-											</div>
-										</div>				
-
-										<table class="table table-bordered bg-white text-center">
-											<thead class="thead-light">
-												<tr>
-													<th scope="col">ID</th>
-													<th scope="col">PROFESSOR</th>
-													<th scope="col">EQUIPAMENTO</th>
-													<th scope="col">SALA</th>
-													<th scope="col">DATA</th>														
-												</tr>
-											</thead>	
-											
-												<tbody class="dadosReserva">
-													
-												</tbody>
-														
-										</table>
-										<button class="btn btn-dark" id="btn-res-equip">Gerar Relatório</button>
+											<input class="form-control" type="date" name="data" id="data">
+											<button class="btn btn-dark" id="btn-res-equip">Gerar Relatório</button>											
+										</div>	
+										</form>										
 									</div>
 
 								</div>
@@ -192,43 +156,18 @@
 								<div class="tab-content" id="nav-tabContent-professor">
 									<div class="tab-pane fade show active" id="nav-rel-professor" role="tabpanel" aria-labelledby="nav-rel-professor-tab">
 										<h5 class="mt-2">Relação de Usuarios</h5>
-										<hr style="border-width: 5px; border-color:#006FA7">
-										<div class="input-group mb-3">
-											<div class="input-group-prepend">
-												<label class="input-group-text" for="inputGroupSelect01">Filtro</label>
-											</div>
-											<select class="custom-select" id="inputGroupSelectProfessor">
-												<option selected hidden>Selecione</option>
-												<option value="1">RG</option>
-												<option value="2">NOME</option>
-												<option value="3">CURSO</option>
-												<option value="4">TITULAÇÃO</option>
-											</select>
-											<input type="text" class="form-control" placeholder="Digite sua pesquisa" aria-label="" aria-describedby="basic-addon1">
-											<div class="input-group-append">
-												<button class="btn btn-outline-secondary" type="button" id="pesquisa-professor" title="Pesquisar"><i class="fas fa-search"></i></button>
-											</div>
-										</div>
-											
-										<table class="table table-bordered bg-white text-center">
+										<hr style="border-width: 5px; border-color:#006FA7">										
+										<table class="table table-bordered bg-white text-center" id="usuariosCadastrados">
 											<thead class="thead-light">
 												<tr>
-													<th scope="col">ID</th>
-													<th scope="col">RG</th>
-													<th scope="col">NOME</th>
-													<th scope="col">SEXO</th>
-													<th scope="col">TITULAÇÃO</th>
-													<th scope="col">EDITAR</th>
-													<th scope="col">EXCLUIR</th>													
+													<th scope="col">Nome</th>
+													<th scope="col">Cargo</th>
+													<th scope="col">Editar</th>
+													<th scope="col">Desbloquear</th>													
+													<th scope="col">Bloquear</th>
 												</tr>
-											</thead>	
-												
-												<tbody class="dadosProfessores">
-													
-												</tbody>
-														
-										</table>
-										<button class="btn btn-dark" id="btn-rel-professor">Gerar Relatório</button>
+											</thead>		
+										</table>										
 									</div>
 									<div class="tab-pane fade" id="nav-cadastrar-professor" role="tabpanel" aria-labelledby="nav-cadastrar-professor-tab">
 										<form class="" id="formUsuario" onsubmit="return false;">                                    
@@ -236,7 +175,7 @@
 											<hr style="border-width: 5px; border-color:#006FA7">	
 											<div class="form-group">
 												<label for="nome">Nome:</label>
-												<input class="form-control" type="text" name="nome" id="nome"/>
+												<input class="form-control" type="text" name="nomeUsuario" id="nomeUsuario"/>
 											</div>
 											<div class="form-group">
 												<label for="nome">E-mail:</label>
@@ -259,13 +198,6 @@
 									</div> 
 							</div>
                             <!-- FIM CADASTRO DE PROFESSORES -->
-
-							<!-- GERENCIAR NOTÍCIAS -->
-							<div class="tab-pane fade" id="v-pills-noticias" role="tabpanel" aria-labelledby="v-pills-noticias-tab">
-								<h5>Gerenciar Notícias</h5>
-				                <hr style="border-width: 5px; border-color:#006FA7">
-							</div>
-							<!-- FIM GERENCIAR NOTÍCIAS -->
 						</div>	
 					</section>
 				</div>
@@ -286,6 +218,7 @@
 		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 		<script src="../js/jquery-3.3.1.min.js"></script>
 		<script src="../js/funcoes.js"></script>			
+		<script src="../js/admin.js"></script>			
 		<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>	 -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 		<script src="../js/bootstrap.min.js"></script>
