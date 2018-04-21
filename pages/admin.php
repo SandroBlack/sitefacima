@@ -97,6 +97,7 @@ if (!isset($_SESSION['nome_usuario']) OR ($_SESSION['nivel_acesso'] != 3)) {
 													<th scope="col">Nome</th>													
 													<th scope="col">Fabricante</th>
 													<th scope="col">Quantidade</th>
+													<th scope="col">Patrimonio</th>
 													<th scope="col">Editar</th>
 													<th scope="col">Excluir</th>
 												</tr>

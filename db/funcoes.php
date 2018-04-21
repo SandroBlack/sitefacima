@@ -171,7 +171,7 @@
     function consultarEquipamento(){
         try{
             $pdo = conectar();
-            $sql = "SELECT id_equipamento, nome_equipamento, quantidade_equipamento FROM equipamento";
+            $sql = "SELECT id_equipamento, nome_equipamento, quantidade_equipamento, fabricante_equipamento, patrimonio_equipamento FROM equipamento";
             $stm = $pdo->prepare($sql);            
             $stm->execute();
             $dados = $stm->fetchAll(PDO::FETCH_ASSOC);                                    
