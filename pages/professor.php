@@ -54,125 +54,18 @@
 
 			<div class="row mb-1" style="height: 85vh;">								
 				<div class="list-group col-md-2 p-0 bg-white border">					
-					<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-						<a class="nav-link active border-bottom" id="v-pills-inicio-tab" data-toggle="pill" href="#v-pills-inicio" role="tab" aria-controls="v-pills-inicio" aria-selected="true">Inicio</a>
-						<a class="nav-link border-bottom" id="v-pills-dados-tab" data-toggle="pill" href="#v-pills-dados" role="tab" aria-controls="v-pills-dados" aria-selected="true">Dados Pessoais</a>
-						<a class="nav-link border-bottom" id="v-pills-mensagens-tab" data-toggle="pill" href="#v-pills-mensagens" role="tab" aria-controls="v-pills-mensagens" aria-selected="false">Mensagens
-								<span class="badge badge-dark badge-pill ml-4">02</span>
-						</a>						
-						<a class="nav-link border-bottom" id="v-pills-reserva-tab" data-toggle="pill" href="#v-pills-reserva" role="tab" aria-controls="v-pills-reserva" aria-selected="false">Reservar Equip.</a>
+					<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">					
+						<a class="nav-link active border-bottom" id="v-pills-reserva-tab" data-toggle="pill" href="#v-pills-reserva" role="tab" aria-controls="v-pills-reserva" aria-selected="true">Reservar Equip.</a>
 						<a class="nav-link border-bottom" id="v-pills-servicos-tab" data-toggle="pill" href="#v-pills-servicos" role="tab" aria-controls="v-pills-servicos" aria-selected="false">Serviços</a>
 					</div>					  
 				</div>
 
 				<div class="col-md-10 bg-light">
 					<section>						
-						<div class="tab-content" id="v-pills-tabContent">
-
-							<!-- INICIO	 -->
-							<div class="tab-pane fade show active" id="v-pills-inicio" role="tabpanel" aria-labelledby="v-pills-inicio-tab">
-                            <h5>Bem Vindo Professor!</h5>
-				            <hr style="border-width: 5px; border-color:#006FA7">
-							</div>
-							<!-- FIM INICIO -->
-
-							<!-- DADOS PESSOAIS -->
-							<div class="tab-pane fade" id="v-pills-dados" role="tabpanel" aria-labelledby="v-pills-dados-tab">
-                                    <h5>Dados Pessoais</h5>
-                                    <hr style="border-width: 5px; border-color:#006FA7">
-									<div class="bg-secondary">
-											
-									</div>								
-									<table class="table table-bordered bg-white ">
-											
-											<tbody>
-											  <tr class="text-dark">
-													<th scope="row">
-														<p class="mb-0" style="font-weight: normal">NOME: <span class="text-secondary"><?=$_SESSION["nomeUsuario"]?></span>
-														<br>RA: <span class="text-secondary"><?=$_SESSION["idUsuario"]?></span>
-														
-													</th>																							
-													<th scope="row" colspan="1">
-															<img src="../img/rosto.svg" alt="Foto Aluno" class="img-thumbnail float-right rosto">
-													</th>																							
-											  </tr>
-											  <tr>
-													<th scope="row">RG:</th>
-													<td class="text-secondary">200.200.12345</td> 																																																												
-											  </tr>
-											  <tr>
-													<th scope="row">CPF:</th>
-													<td class="text-secondary">121.456.789-00</td> 																																																												
-											  </tr>
-											  <tr>
-													<th scope="row">FONE:</th>
-													<td class="text-secondary">(82)99999-9999</td> 																																																												
-											  </tr>
-											  <tr>
-													<th scope="row">E-MAIL:</th>
-													<td class="text-secondary">email@email.com</td>												
-											  </tr>
-											  <tr>
-													<th scope="row">ENDEREÇO:</th>
-													<td class="text-secondary">Avenida Fernandes Lima, 000</td>																								
-											  </tr>
-											  <tr>
-													<th scope="row">BAIRRO:</th>
-													<td class="text-secondary">Farol</td>												
-											  </tr>
-											  <tr>
-													<th scope="row">CEP:</th>
-													<td class="text-secondary">57080-000</td>												
-											  </tr>
-											  <tr>
-													<th scope="row">CIDADE:</th>
-													<td class="text-secondary">Maceió</td>												
-											  </tr>											  
-											  <tr>
-													<th scope="row">ESTADO:</th>
-													<td class="text-secondary">Alagoas</td>												
-											  </tr>											  
-											</tbody>
-										</table>
-							</div>
-							<!-- FIM DADOS PESSOAIS -->
-
-							<!-- MENSAGENS -->
-							<div class="tab-pane fade" id="v-pills-mensagens" role="tabpanel" aria-labelledby="v-pills-mensagens-tab">
-                                <h5>Mensagens</h5>
-                                <hr style="border-width: 5px; border-color:#006FA7">
-								<table class="table table-hover table-light">
-									<thead>
-										<tr class="bg-secondary text-white">
-											<th scope="col">Nº</th>
-											<th scope="col">Remetente</th>
-											<th scope="col">Titulo</th>
-											<th scope="col">Recebido</th>
-											<th scope="col">Horário</th>
-										</tr>
-									</thead>
-									<tbody>										
-										<tr>
-											<th scope="row">2</th>
-											<td class="text-secondary">Secretaria</td>
-											<td class="text-secondary">Atualização</td>
-											<td class="text-secondary">15/01/2018</td>
-											<td class="text-secondary">16:25</td>
-										</tr>
-										<tr>
-											<th scope="row">1</th>
-											<td class="text-secondary">Diretoria</td>
-											<td class="text-secondary">Matricula 2018</td>
-											<td class="text-secondary">01/01/2018</td>												
-											<td class="text-secondary">19:32</td>												
-										</tr>
-									</tbody>
-								</table>
-							</div>
-							<!-- FIM MENSAGENS -->							
+						<div class="tab-content" id="v-pills-tabContent">						
 
 							<!-- RESERVA DE EQUIPAMENTO -->
-							<div class="tab-pane fade" id="v-pills-reserva" role="tabpanel" aria-labelledby="v-pills-reserva-tab">
+							<div class="tab-pane fade show active" id="v-pills-reserva" role="tabpanel" aria-labelledby="v-pills-reserva-tab">
 								<h5>Equipamentos Reservados</h5>
                                 <hr style="border-width: 5px; border-color:#006FA7">
 								<table class="table table-hover mb-5">
@@ -194,74 +87,83 @@
                                         <hr style="border-width: 5px; border-color:#006FA7">
 
                                         <div class="form-group">
-                                            <label for="data">Data:</label>
+                                            <label for="data">Data da reserva:</label>
                                             <input class="form-control" type="date" name="data" id="data">
                                         </div>
                                         <div class="form-group">
-                                            <label for="horario">Horário:</label>
-                                            <select class="form-control" name="horarioInicio" id="horarioInicio">
-                                                <option value="">Selecione</option>
-                                                <option value="1">1° Aula</option>
+											<label for="horario">Aula para entrega do equipamento:</label>
+											<select class="form-control" name="horarioInicio" id="horarioInicio">
+												<option value="">Selecione</option>
+												<option value="1">1° Aula</option>
 												<option value="2">2° Aula</option>
 												<option value="3">3° Aula</option>
 												<option value="4">4° Aula</option>
-                                            </select>
+											</select>
                                         </div>
 										<div class="form-group">
-                                            <label for="horario">Horário De Entrega:</label>
-                                            <select class="form-control" name="horarioEntrega" id="horarioEntrega">
-                                                <option value="">Selecione</option>
-                                                <option value="1">1° Aula</option>
+											<label for="horario">Aula para recolher o equipamento:</label>
+											<select class="form-control" name="horarioEntrega" id="horarioEntrega">
+												<option value="">Selecione</option>
+												<option value="1">1° Aula</option>
 												<option value="2">2° Aula</option>
 												<option value="3">3° Aula</option>
 												<option value="4">4° Aula</option>
-                                            </select>
+											</select>
                                         </div>
                                         <div class="form-group">
-                                        <label for="equipamento">Equipamento:</label>
-                                        <select class="form-control" name="ListaEquipamento" id="ListaEquipamento">
-                                            <option value="">Selecione</option>
-                                        </select>
+											<label for="equipamento">Equipamento que será reservado:</label>
+											<select class="form-control" name="ListaEquipamento" id="ListaEquipamento">
+												<option value="">Selecione</option>
+											</select>
                                         </div>
 										<div class="form-group">
-                                        <label for="sala">Curso:</label>
-                                        <select class="form-control" name="curso" id="curso">
-                                            <option value="">Selecione</option>
-                                            <option value="Ciência da Computação">Ciência da Computação</option>
-											 <option value="Administração">Administração</option>
-											 <option value="Direito">Direito</option>
-											 <option value="Enfermagem">Enfermagem</option>
-                                        </select>
+											<label for="sala">Curso:</label>
+											<select class="form-control" name="curso" id="curso">
+												<option value="">Selecione</option>
+												<option value="Ciência da Computação">Ciência da Computação</option>
+												<option value="Administração">Administração</option>
+												<option value="Direito">Direito</option>
+												<option value="Enfermagem">Enfermagem</option>
+											</select>
                                         </div>
 										<div class="form-group">
-                                        <label for="sala">Periodo:</label>
-                                        <select class="form-control" name="periodo" id="periodo">
-                                            <option value="">Selecione</option>
-                                            <option value="1">1°</option>
-											 <option value="2">2°</option>
-											 <option value="3">3°</option>
-											 <option value="4">4°</option>
-											 <option value="5">5°</option>
-											 <option value="6">6°</option>
-											 <option value="7">7°</option>
-											 <option value="8">8°</option>
-                                        </select>
+											<label for="sala">Semestre:</label>
+											<select class="form-control" name="semestre" id="semestre">
+												<option value="">Selecione</option>
+												<option value="1° semestre">1° semestre</option>
+												<option value="2° semestre">2° semestre</option>
+												<option value="3° semestre">3° semestre</option>
+												<option value="4° semestre">4° semestre</option>
+												<option value="5° semestre">5° semestre</option>
+												<option value="6° semestre">6° semestre</option>
+												<option value="7° semestre">7° semestre</option>
+												<option value="8° semestre">8° semestre</option>
+											</select>
                                         </div>
                                         <div class="form-group">
-                                        <label for="sala">Sala:</label>
-                                        <select class="form-control" name="sala" id="sala">
-                                            <option value="">Selecione</option>
-                                            <option value="1">Sala 1</option>
-											 <option value="2">Sala 2</option>
-											 <option value="3">Sala 3</option>
-											 <option value="4">Sala 4</option>
-											 <option value="5">Sala 5</option>
-											 <option value="6">Sala 6</option>
-											 <option value="7">Sala 7</option>
-											 <option value="8">Sala 8</option>
-											 <option value="9">Sala 9</option>
-											 <option value="10">Sala 10</option>
-                                        </select>
+											<label for="sala">Sala para entrega do equipamento:</label>
+											<select class="form-control" name="sala" id="sala">
+												<option value="">Selecione</option>
+												<option value="Sala 1">Sala 1</option>
+												<option value="Sala 2">Sala 2</option>
+												<option value="Sala 3">Sala 3</option>
+												<option value="Sala 4">Sala 4</option>
+												<option value="Sala 5">Sala 5</option>
+												<option value="Sala 6">Sala 6</option>
+												<option value="Sala 7">Sala 7</option>
+												<option value="Sala 8">Sala 8</option>
+												<option value="Sala 9">Sala 9</option>
+												<option value="Sala 10">Sala 10</option>
+											</select>
+                                        </div>
+										<div class="form-group">
+											<label for="periodo">Periodo do dia para entrega do equipamento:</label>
+											<select class="form-control" name="Periodo" id="Periodo">
+												<option value="">Selecione</option>
+												<option value="Matutino">Matutino</option>
+												<option value="Vespertino">Vespertino</option>
+												<option value="Noturno">Noturno</option>
+											</select>
                                         </div>
                                         <button class="btn btn-dark" id="btn-reserva" name="btn-reserva">Reservar</button>                                    
                                 </form>

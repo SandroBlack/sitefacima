@@ -1,18 +1,17 @@
 $(document).ready(function(){
 	
-	var funcao = "consultar";
-	var tabela = "equipamento";		
+	var funcao = "consultarEquipamento";		
 		
 	$.ajax({
 		type: 'POST',
 		url: '../db/funcoes.php',
-		data: {funcao, tabela},
+		data: {funcao},
 		dataType: 'json',					
 		success: function(retorno){				
 															
 			for(i=0;i<retorno.length;i++){
 				
-				$('#ListaEquipamento').append('<option value="'+ retorno[i].id_equipamento +'">'+ retorno[i].nome +'</option>');	
+				$('#ListaEquipamento').append('<option value="'+ retorno[i].id_equipamento +'">'+ retorno[i].nome_equipamento +'</option>');	
 					
 			}									
 		}
@@ -28,29 +27,28 @@ $(document).ready(function(){
 
 	/* Função de Login */
 	$("#btnLogin").click(function(){
-		var funcao = "logar";				
-		var perfil = $("#perfil").val();
+		var funcao = "logar";
 		var login = $("#login").val(); 
 		var senha = $("#senha").val();		
-
-		if(perfil == "" || login == "" || senha == ""){
+		if(login == "" || senha == ""){
 			$("#alerta1").css("display","none");
 			$("#alerta2").css("display","block");			
 			return false;
 		} else{			
-			var dados = {funcao, perfil, login, senha};
+			var dados = {funcao,login, senha};
 			$.ajax({			
 				type: 'POST',
 				url:'../db/funcoes.php',
 				data: dados,
 				dataType: 'html',
 				success: function(retorno){
+
 					if(retorno == "0"){
 						$("#alerta2").css("display","none");
 						$("#alerta1").css("display","block");						
 					} else{
-						location.href="../pages/professor.php";							
-					}	
+						location.href='../pages/' + retorno + '';							
+					}					
 				},				
 			});			
 		}
@@ -141,12 +139,15 @@ $(document).ready(function(){
 	
 	/* CADASTRO DE EQUIPAMENTOS */
 	$("#btn-cad-equip").click(function(){
-		//var funcao = "cadEquip";
-		var dados = $("#formEquipamento").serialize(); 
+		var funcao = "cadEquip";
+		var nome = $('#').val();
+		var fabricante = $('#').val();
+		var quantidade = $('#').val();
+		var patrimonio = $('#').val();
 		$.ajax({
 			type: 'POST',
 			url: '../db/funcoes.php',
-			data: dados,
+			data: {funcao,nome,fabricante,quantidade,patrimonio},
 			dataType: 'html',
 			success: function(retorno){
 				if(response == "1"){
@@ -158,116 +159,27 @@ $(document).ready(function(){
 		});		
 	});
 
-	/* PESQUISA DE ALUNOS */
-	$("#pesquisa-aluno").click(function(){
-		var funcao = "consultar";		
-		var tabela = "aluno";		
-				
-		$.ajax({
-			type: 'POST',
-			url: '../db/funcoes.php',
-			data: {funcao, tabela},
-			dataType: 'json',								
-			success: function(retorno){				
-				//$(".dadosAlunos").html(retorno);												
-				for(i=0;i<retorno.length;i++){
-					$(".dadosAlunos").append(				
-						"<tr>"+										
-							"<td>" + retorno[i].ra + "</td>"+											
-							"<td>" + retorno[i].nome + "</td>"+											
-							"<td>" + retorno[i].sexo + "</td>"+											
-							"<td>" + retorno[i].id_curso + "</td>"+											
-							
-							"<td><button class='btn btn-sm btn-primary' id='alterarAluno' title='Alterar'>E</button></td>"+
-							"<td><button class='btn btn-sm btn-dark' id='excluirAluno' title='Excluir'>X</button></td>"+							
-						"</tr>"
-					);
-				}									
-			}
-		});
-	});
-
-	/* CADASTRO DE ALUNOS */
-	$("#btn-cad-aluno").click(function(){		
-		var dados = $("#formAluno").serialize(); 
-		$.ajax({
-			type: 'POST',
-			url: '../db/funcoes.php',
-			data: dados,
-			dataType: 'html',
-			success: function(retorno){
-				if(response == "1"){
-					alert("Aluno Cadastrado com Sucesso!");
-				} else{
-					console.log(retorno);
-				}
-			}
-		});		
-	});
-
-	$(".selectCurso").click(function(){		
-		var funcao = "consultar";
-		var tabela = "curso";		
-
-		$.ajax({
-			type: 'POST',
-			url: '../db/funcoes.php',
-			data: {funcao, tabela},
-			dataType: 'json',
-			success: function(retorno){				
-				for(i=0;i<retorno.length;i++){										
-					$("#inputGroupSelectCadAluno").append(						
-						"<option>" + retorno[i].nome + "</option>"										
-					);					
-				}					
-			}
-		});		
-	});
-
-	/* CADASTRO DE PROFESSORES */
+	/* CADASTRO DE USUARIOS */
 	$("#btn-cad-professor").click(function(){
-		var dados = $("#formProfessor").serialize();
+		var funcao = 'cadastrarUsuario';
+		var nome = $('#nome').val();
+		var email = $('#email').val();
+		var cargo = $('#cargo').val();
+		var tipoUsuario = $('#tipoUsuario').val();
 		$.ajax({
 			type: 'POST',
 			url: '../db/funcoes.php',
-			data: dados,
+			data: {funcao,nome,email,cargo,tipoUsuario},
 			dataType: 'html',
 			success: function(retorno){
-				if(response == "1"){
-					alert("Aluno Cadastrado com Sucesso!");
+				if(retorno == "1"){
+					alert("Usuario Cadastrado com Sucesso!");
+				}
+				if(retorno == "0"){
+					alert("Usuario já Cadastrado!");
 				} else{
 					console.log(retorno);
 				}
-			}
-		});
-	});
-
-	/* PESQUISA DE PROFESSORES */
-	$("#pesquisa-professor").click(function(){
-		var funcao = "consultar";
-		var tabela = "professor";		
-		
-		$.ajax({
-			type: 'POST',
-			url: '../db/funcoes.php',
-			data: {funcao, tabela},
-			dataType: 'json',					
-			success: function(retorno){				
-																
-				for(i=0;i<retorno.length;i++){
-					$(".dadosProfessores").append(				
-						"<tr>"+										
-							"<td>" + retorno[i].idprofessor + "</td>"+											
-							"<td>" + retorno[i].rg + "</td>"+											
-							"<td>" + retorno[i].nome + "</td>"+											
-							"<td>" + retorno[i].sexo + "</td>"+											
-							"<td>" + retorno[i].titulacao + "</td>"+											
-							
-							"<td><button class='btn btn-sm btn-primary' id='alterarProfesor' title='Alterar'>E</button></td>"+
-							"<td><button class='btn btn-sm btn-dark' id='excluirProfessor' title='Excluir'>X</button></td>"+							
-						"</tr>"
-					);
-				}									
 			}
 		});
 	});
