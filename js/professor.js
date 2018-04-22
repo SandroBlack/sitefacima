@@ -9,7 +9,8 @@ $(document).ready(function(){
 		success: function(retorno){																	
 			for(i=0;i<retorno.length;i++){				
 				$('#ListaEquipamento').append('<option value="'+ retorno[i].id_equipamento +'">'+ retorno[i].nome_equipamento +'</option>');					
-			}								
+			}	
+
 		}	
 	});
 	
@@ -22,7 +23,8 @@ $(document).ready(function(){
 		success: function(retorno){							
 			for(i=0;i<retorno.length;i++){
 				$('#reservaUsuario').append('<tr class="bg-light"><td class="text-secondary">'+ retorno[i].nome_equipamento +'</td><td class="text-secondary">'+ retorno[i].sala +'</td><td class="text-secondary">'+ retorno[i].data_reserva +'</td><td class="text-secondary"><i class="fas fa-times-circle fa-3x" id="'+ retorno[i].id_reservar +'"></i></td></tr>');
-			}									
+			}
+console.log(retorno);			
 		}	
 	});
 	

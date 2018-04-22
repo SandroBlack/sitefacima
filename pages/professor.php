@@ -5,7 +5,7 @@ if (!isset($_SESSION['nome_usuario']) OR ($_SESSION['nivel_acesso'] != 1)) {
 	// Destrói a sessão por segurança
 	session_destroy();
 	// Redireciona o visitante de volta pro login
-	header("Location: ../index.html");
+	header("Location: ../index.php");
 	exit;
 }
 
@@ -101,20 +101,20 @@ if (!isset($_SESSION['nome_usuario']) OR ($_SESSION['nivel_acesso'] != 1)) {
 											<label for="horario">Aula para entrega do equipamento:</label>
 											<select class="form-control" name="horarioInicio" id="horarioInicio">
 												<option value="">Selecione</option>
-												<option value="1">1° Aula</option>
-												<option value="2">2° Aula</option>
-												<option value="3">3° Aula</option>
-												<option value="4">4° Aula</option>
+												<option value="1° Aula">1° Aula</option>
+												<option value="2° Aula">2° Aula</option>
+												<option value="3° Aula">3° Aula</option>
+												<option value="4° Aula">4° Aula</option>
 											</select>
                                         </div>
 										<div class="form-group">
 											<label for="horario">Aula para recolher o equipamento:</label>
 											<select class="form-control" name="horarioEntrega" id="horarioEntrega">
 												<option value="">Selecione</option>
-												<option value="1">1° Aula</option>
-												<option value="2">2° Aula</option>
-												<option value="3">3° Aula</option>
-												<option value="4">4° Aula</option>
+												<option value="1° Aula">1° Aula</option>
+												<option value="2° Aula">2° Aula</option>
+												<option value="3° Aula">3° Aula</option>
+												<option value="4° Aula">4° Aula</option>
 											</select>
                                         </div>
                                         <div class="form-group">
@@ -151,16 +151,16 @@ if (!isset($_SESSION['nome_usuario']) OR ($_SESSION['nivel_acesso'] != 1)) {
 											<label for="sala">Sala para entrega do equipamento:</label>
 											<select class="form-control" name="sala" id="sala">
 												<option value="">Selecione</option>
-												<option value="Sala 1">Sala 1</option>
-												<option value="Sala 2">Sala 2</option>
-												<option value="Sala 3">Sala 3</option>
-												<option value="Sala 4">Sala 4</option>
-												<option value="Sala 5">Sala 5</option>
-												<option value="Sala 6">Sala 6</option>
-												<option value="Sala 7">Sala 7</option>
-												<option value="Sala 8">Sala 8</option>
-												<option value="Sala 9">Sala 9</option>
-												<option value="Sala 10">Sala 10</option>
+												<option value="1">Sala 1</option>
+												<option value="2">Sala 2</option>
+												<option value="3">Sala 3</option>
+												<option value="4">Sala 4</option>
+												<option value="5">Sala 5</option>
+												<option value="6">Sala 6</option>
+												<option value="7">Sala 7</option>
+												<option value="8">Sala 8</option>
+												<option value="9">Sala 9</option>
+												<option value="10">Sala 10</option>
 											</select>
                                         </div>
 										<div class="form-group">

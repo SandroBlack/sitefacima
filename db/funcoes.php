@@ -71,10 +71,13 @@
 				{
 					echo 'admin.php';
 				}
-				else
+				else if ($dados[5] == 1)
 				{
 					echo 'professor.php';
-				}	
+				} else {
+					echo '00';
+				}
+					
                 return 0;
             }
         } catch(PDOExeption $erro){
@@ -140,7 +143,7 @@
             $pdo = conectar();
             $sql = "SELECT nome_equipamento, sala, data_reserva,id_reservar FROM reservar r INNER JOIN equipamento e ON r.fk_equipamento = e.id_equipamento WHERE fk_usuario = :id_usuario;";
             $stm = $pdo->prepare($sql);
-			$stm->bindValue(":id_usuario",$_SESSION["idUsuario"]);	
+			$stm->bindValue(":id_usuario",$_SESSION["id_usuario"]);	
             $stm->execute();
             $dados = $stm->fetchAll(PDO::FETCH_ASSOC);                                    
             echo json_encode($dados);             
@@ -251,7 +254,7 @@
 						$stm->bindValue(":curso",$curso);           
 						$stm->bindValue(":sala",$sala);           
 						$stm->bindValue(":periodo",$periodo);           
-						$stm->bindValue(":fk_usuario", $_SESSION["idUsuario"]);           
+						$stm->bindValue(":fk_usuario", $_SESSION["id_usuario"]);           
 						$stm->bindValue(":fk_equipamento",$ListaEquipamento);           
 						$stm->execute();
 						$response = "1";

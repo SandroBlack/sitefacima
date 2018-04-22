@@ -10,7 +10,7 @@
 		try{
 		
 		    $pdo = conectar();
-            $sql = "SELECT *
+            $sql = "SELECT nome_usuario, curso, semestre, periodo, sala, data_reserva, hora_inicio, hora_fim, nome_equipamento
 					FROM
 					reservar r                    
 					INNER JOIN usuario u ON r.fk_usuario = u.id_usuario                    
@@ -24,14 +24,15 @@
 			while($dados = $stm->fetch(PDO::FETCH_ASSOC))
 			{
 				$x .= "	<tr>
-						<td>{$dados['nomeUser']}</td>
+						<td>{$dados['nome_usuario']}</td>
 						<td>{$dados['curso']}</td>
+						<td>{$dados['semestre']}</td>
 						<td>{$dados['periodo']}</td>
 						<td>{$dados['sala']}</td>
 						<td>{$dados['data_reserva']}</td>
 						<td>{$dados['hora_inicio']}</td>
 						<td>{$dados['hora_fim']}</td>
-						<td>{$dados['nome']}</td>
+						<td>{$dados['nome_equipamento']}</td>
 						</tr>
 						";
 						
@@ -50,25 +51,43 @@
 
     /* Nome do Aquivo Pdf */
     $nomeArquivo = "Relatório_de_Equipamentos_Reservados.pdf";
-    $conteudo = "<h1 style='text-align:center;text-decoration:underline;'>Relatório de Equipamentos Reservados</h1>
-        <table style='margin: 0 auto;text-align:center;' border='1'>
-            <tr>
-                <th>Professor</th>
-                <th>Curso</th>
-                <th>Período</th>
-                <th>Sala</th>
-                <th>Data Reserva</th>
-                <th>Horário do Pedido</th>
-                <th>Horário da Entrega</th>
-                <th>Equipamento</th>
-            </tr>
-			{$x}
-        </table>
-    ";
-
+    $conteudo = "<head>
+				  <link rel='icon' href='../img/favicon-16x16.png'>
+				  <!-- Bootstrap CSS, Font Awesome -->
+				  <link rel='stylesheet' href='../css/bootstrap.min.css'>
+				  <!-- Optional CSS -->
+				  <link rel='stylesheet' href='../css/style.css'>
+				</head><body><br><br><br>
+				<div class='container'>				
+				  <h3 class='page-header'>Relatório de equipamentos reservados no dia {$dataRelatorio}</h3>
+				  <div class='table-responsive'>
+					<table class='table table-striped table-bordered table-condensed'>
+					  <thead>
+						<tr>
+						  <th>Professor</th>
+						  <th>Curso</th>
+						  <th>Semestre</th>
+						  <th>Período</th>
+						  <th>Sala</th>
+						  <th>Data Reserva</th>
+						  <th>Horário do Pedido</th>
+						  <th>Horário da Entrega</th>
+						  <th>Equipamento</th>
+						</tr>
+					  </thead>
+					  <tbody>
+						{$x}
+					  </tbody>
+					</table>
+				  </div>
+				</div></body>
+				";
     /* Gera a Página com o Conteúdo */
     $dompdf->load_html($conteudo);
-
+	
+	/* Coloca pagina A4 e em modo paisagem */
+	$dompdf->set_paper('A4','landscape');
+	
     /* Renderizando o Pdf */
     $dompdf->render();
 

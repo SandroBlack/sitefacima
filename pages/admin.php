@@ -6,7 +6,7 @@ if (!isset($_SESSION['nome_usuario']) OR ($_SESSION['nivel_acesso'] != 3)) {
 	// Destrói a sessão por segurança
 	session_destroy();
 	// Redireciona o visitante de volta pro login
-	header("Location: ../index.html");
+	header("Location: ../index.php");
 	exit;
 }
 
@@ -136,7 +136,8 @@ if (!isset($_SESSION['nome_usuario']) OR ($_SESSION['nivel_acesso'] != 3)) {
 											<div class="input-group-prepend">
 												<label class="input-group-text" for="inputGroupSelect">Filtro</label>
 											</div>
-											<input class="form-control" type="date" name="data" id="data">
+											<input class="form-control" type="date" name="dataRelatorio" id="dataRelatorio">
+											<input hidden name="funcao" id="funcao" value="txt">
 											<button class="btn btn-dark" id="btn-res-equip">Gerar Relatório</button>											
 										</div>	
 										</form>										

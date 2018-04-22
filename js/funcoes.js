@@ -1,9 +1,5 @@
 $(document).ready(function(){	
 
-	$("#btnAcessar").click(function(){
-		location.href="pages/login.html";				 
-  	}); 		
-	
 	$("#btnSair").click(function(){
 		var funcao = "destruirSessao";
 		$.ajax({
@@ -12,7 +8,7 @@ $(document).ready(function(){
 			data: {funcao},
 			dataType: 'html',					
 			success: function(retorno){				
-				location.href="../index.html";									
+				location.href="../index.php";									
 			}
 		});
 				
@@ -31,7 +27,7 @@ $(document).ready(function(){
 			var dados = {funcao,login, senha};
 			$.ajax({			
 				type: 'POST',
-				url:'../db/funcoes.php',
+				url:'db/funcoes.php',
 				data: dados,
 				dataType: 'html',
 				success: function(retorno){
@@ -39,8 +35,10 @@ $(document).ready(function(){
 					if(retorno == "0"){
 						$("#alerta2").css("display","none");
 						$("#alerta1").css("display","block");						
-					} else{
-						location.href='../pages/' + retorno + '';							
+					} else if (retorno == "00"){
+						alert('Usuario Inativo, Entre em contato com o administrador');							
+					} else {
+						location.href='pages/' + retorno + '';
 					}					
 				},				
 			});			
