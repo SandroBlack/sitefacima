@@ -30,3 +30,5 @@ CONSTRAINT `fk_id_usuario` FOREIGN KEY (`fk_usuario`) REFERENCES `usuario` (`id_
 CONSTRAINT `fk_id_equipamento` FOREIGN KEY (`fk_equipamento`) REFERENCES `equipamento` (`id_equipamento`)
 );
 
+INSERT INTO `usuario` (`id_usuario`, `nome_usuario`, `email_usuario`, `senha_usuario`, `cargo_usuario`, `nivel_acesso`) VALUES (1, 'Aquilla Silva Leite', 'aquilla11@hotmail.com', '71eea47ff018db4456aa926d911ceba6f33f4f3d', 'Administrador do Sistema', 3);
+
