@@ -3,6 +3,7 @@
 	/* Usar o Dompdf com Namespaces e corrigir o conflito de nomes */
     use Dompdf\Dompdf;
     include_once("../pdf/dompdf/autoload.inc.php");
+	session_start();
 	
 	$dataRelatorio = inverteData($_POST['dataRelatorio']);
 		
@@ -77,7 +78,7 @@
 						{$x}
 					  </tbody>
 					</table>
-				  </div></body>
+				  </div>Gerador por: {$_SESSION['nome_usuario']}</body>
 				";
     /* Gera a Página com o Conteúdo */
     $dompdf->load_html($conteudo);

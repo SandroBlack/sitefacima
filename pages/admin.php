@@ -99,7 +99,6 @@ if (!isset($_SESSION['nome_usuario']) OR ($_SESSION['nivel_acesso'] != 3)) {
 													<th scope="col">Quantidade</th>
 													<th scope="col">Patrimonio</th>
 													<th scope="col">Editar</th>
-													<th scope="col">Excluir</th>
 												</tr>
 											</thead>													
 										</table>
@@ -165,8 +164,6 @@ if (!isset($_SESSION['nome_usuario']) OR ($_SESSION['nivel_acesso'] != 3)) {
 													<th scope="col">Nome</th>
 													<th scope="col">Cargo</th>
 													<th scope="col">Editar</th>
-													<th scope="col">Desbloquear</th>													
-													<th scope="col">Bloquear</th>
 												</tr>
 											</thead>		
 										</table>										
@@ -182,6 +179,10 @@ if (!isset($_SESSION['nome_usuario']) OR ($_SESSION['nivel_acesso'] != 3)) {
 											<div class="form-group">
 												<label for="nome">E-mail:</label>
 												<input class="form-control" type="email" name="email" id="email"/>
+											</div>
+											<div class="form-group">
+												<label for="nome">Cpf: (sem ponto e sem traço)</label>
+												<input class="form-control" type="number" name="cpfUsuario" id="cpfUsuario"/>
 											</div>											
 											<div class="form-group">
 												<label for="nome">Cargo:</label>

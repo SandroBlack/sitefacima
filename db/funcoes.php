@@ -41,7 +41,8 @@
     /* FUNÇÃO DE LOGIN */ 
     function logar(){
         $login = $_POST["login"];
-        $senha  = $_POST["senha"];
+        $senha = sha1(md5($_POST['senha']));
+        //$senha = $_POST["senha"];
 
         try{
             $pdo = conectar();
@@ -90,7 +91,7 @@
     function cadastrarUsuario(){
         $nome_usuario = $_POST['nome'];
         $email_usuario = $_POST['email'];
-        $senha_usuario = '29529dewc2q92cd';
+        $senha_usuario = sha1(md5($_POST['cpf']));
         $cargo_usuario = $_POST['cargo'];
 		$nivel_acesso = $_POST['tipoUsuario'];
 		if($nivel_acesso == "Professor"){

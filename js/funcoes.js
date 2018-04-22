@@ -162,14 +162,14 @@ $(document).ready(function(){
 	$("#btn-cad-professor").click(function(){
 		var funcao = 'cadastrarUsuario';
 		var nome = $('#nomeUsuario').val();
-		alert(nome);
 		var email = $('#email').val();
 		var cargo = $('#cargo').val();
+		var cpf = $('#cpfUsuario').val();
 		var tipoUsuario = $('#tipoUsuario').val();
 		$.ajax({
 			type: 'POST',
 			url: '../db/funcoes.php',
-			data: {funcao,nome,email,cargo,tipoUsuario},
+			data: {funcao,nome,email,cargo,tipoUsuario,cpf},
 			dataType: 'html',
 			success: function(retorno){
 				if(retorno == "1"){

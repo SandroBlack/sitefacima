@@ -37,7 +37,7 @@ if($_SESSION['nivel_acesso'] == 1)
         <div class="col-md-4 bg-light border">                          
           <form>
             <div class="text-center mt-3">
-              <a href="index.html"><img class="" src="img/Logo_Loginb.png" alt="Logo Facima"></a>              
+              <a href="#"><img class="" src="img/Logo_Loginb.png" alt="Logo Facima"></a>              
               <hr style="border-width: 5px; border-color:#006FA7">
               <h5 class="text-dark">Central de Autenticação</h5>
             </div>
@@ -55,7 +55,7 @@ if($_SESSION['nivel_acesso'] == 1)
 
             <div class="form-group">  
               <!--<label for="SenhaA">Senha</label>-->
-              <input class="form-control" type="password" id="senha" placeholder="Senha" required>
+              <input class="form-control" type="password" name="senha" id="senha" placeholder="Senha" required>
             </div>
 
             <button class="btn btn-dark btn-block" id="btnLogin" type="button"><i class="fas fa-sign-in-alt"></i>&nbsp;Entrar</button>
