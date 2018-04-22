@@ -41,8 +41,8 @@
     /* FUNÇÃO DE LOGIN */ 
     function logar(){
         $login = $_POST["login"];
-        $senha = sha1(md5($_POST['senha']));
-        //$senha = $_POST["senha"];
+        //$senha = sha1(md5($_POST['senha']));
+        $senha = $_POST["senha"];
 
         try{
             $pdo = conectar();
@@ -142,7 +142,7 @@
 	function consultarReservaUsuario(){
 		try{
             $pdo = conectar();
-            $sql = "SELECT nome_equipamento, sala, data_reserva,id_reservar FROM reservar r INNER JOIN equipamento e ON r.fk_equipamento = e.id_equipamento WHERE fk_usuario = :id_usuario;";
+            $sql = "SELECT nome_equipamento, sala, data_reserva,id_reservar, hora_inicio, hora_fim FROM reservar r INNER JOIN equipamento e ON r.fk_equipamento = e.id_equipamento WHERE fk_usuario = :id_usuario;";
             $stm = $pdo->prepare($sql);
 			$stm->bindValue(":id_usuario",$_SESSION["id_usuario"]);	
             $stm->execute();

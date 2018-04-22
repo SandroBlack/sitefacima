@@ -66,7 +66,7 @@ if (!isset($_SESSION['nome_usuario']) OR ($_SESSION['nivel_acesso'] != 3)) {
 			<!-- Fim Modal -->
 
             <!-- Menu Lateral -->
-			<div class="row mb-1" style="height: 85vh;">								
+			<div class="row mb-1" style="min-height: 85vh;">								
 				<div class="list-group col-md-2 p-0 bg-white border">					
 					<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
 												
@@ -126,6 +126,48 @@ if (!isset($_SESSION['nome_usuario']) OR ($_SESSION['nivel_acesso'] != 3)) {
 											<button class="btn btn-dark" id="btn-cad-equip">Cadastrar</button>                                    
 										</form>		
 									</div>
+
+									<!-- Modal Equipamentos-->
+									<div class="modal fade" id="modalEquipamentos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+										<div class="modal-dialog" role="document">
+											<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="exampleModalLabel">Editar Equipamento</h5>
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+												</button>
+											</div>
+
+											<div class="modal-body">
+												<form class="" id="formEquipamento" onsubmit="return false;">												
+													<div class="form-group">
+														<label for="nome">Nome do equipamento:</label>
+														<input class="form-control" type="text" name="nome" id="nome" required/>
+													</div>
+													<div class="form-group">
+														<label for="modelo">Fabricante do equipamento:</label>
+														<input class="form-control" type="text" name="fabricante" id="fabricante" required/>
+													</div>
+													<div class="form-group">
+														<label for="fabricante">Quantidade de equipamento(s)</label>
+														<input class="form-control" type="number" name="quantidade" id="quantidade" required/>
+													</div>                                        
+													<div class="form-group">
+														<label for="fabricante">Patrimonio do equipamento:</label>
+														<input class="form-control" type="number" name="patrimonio" id="patrimonio" required/>
+													</div>       										
+												</form>		
+											</div>
+
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+												<button type="button" class="btn btn-primary" id="btnSair">Atualizar</button>
+											</div>
+											</div>
+										</div>
+									</div>
+									<!-- Fim Modal -->
+
 									<!-- EQUIPAMENTOS RESERVADOS -->
 									<div class="tab-pane fade" id="nav-reservados-equip" role="tabpanel" aria-labelledby="nav-reservados-equip-tab">
 										<h5 class="mt-2">Equipamentos Reservados</h5>
@@ -154,6 +196,7 @@ if (!isset($_SESSION['nome_usuario']) OR ($_SESSION['nivel_acesso'] != 3)) {
 										<a class="nav-item nav-link" id="nav-cadastrar-professor-tab" data-toggle="tab" href="#nav-cadastrar-professor" role="tab" aria-controls="nav-cadastrar-professor" aria-selected="false">Cadastrar</a>
 									</div>
 								</nav>
+
 								<div class="tab-content" id="nav-tabContent-professor">
 									<div class="tab-pane fade show active" id="nav-rel-professor" role="tabpanel" aria-labelledby="nav-rel-professor-tab">
 										<h5 class="mt-2">Relação de Usuarios</h5>
@@ -168,6 +211,56 @@ if (!isset($_SESSION['nome_usuario']) OR ($_SESSION['nivel_acesso'] != 3)) {
 											</thead>		
 										</table>										
 									</div>
+
+									<!-- Modal Usuários -->
+									<div class="modal fade" id="modalUsuarios" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+										<div class="modal-dialog" role="document">
+											<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="exampleModalLabel">Editar Usuário</h5>
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+												</button>
+											</div>
+
+											<div class="modal-body">
+												<form class="" id="formUsuario" onsubmit="return false;">                         
+													<div class="form-group">
+														<label for="nome">Nome:</label>
+														<input class="form-control" type="text" name="nomeUsuario" id="nomeUsuario"/>
+													</div>
+													<div class="form-group">
+														<label for="nome">E-mail:</label>
+														<input class="form-control" type="email" name="email" id="email"/>
+													</div>
+													<div class="form-group">
+														<label for="nome">Cpf: (sem ponto e sem traço)</label>
+														<input class="form-control" type="number" name="cpfUsuario" id="cpfUsuario"/>
+													</div>											
+													<div class="form-group">
+														<label for="nome">Cargo:</label>
+														<input class="form-control" type="text" name="cargo" id="cargo"/>
+													</div>
+													<div class="form-group mb-5">
+														<label for="tipoUsuario">Tipo de usuario:</label>
+														<select class="form-control" name="tipoUsuario" id="tipoUsuario">
+															<option value="">Selecione</option>
+															<option value="Professor">Professor</option>
+															<option value="Administrador">Administrador</option>
+														</select>
+													</div>    											      
+												</form>		
+											</div>
+											
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+												<button type="button" class="btn btn-primary" id="btnSair">Atualizar</button>
+											</div>
+											</div>
+										</div>
+									</div>
+									<!-- Fim Modal Usuários -->
+
 									<div class="tab-pane fade" id="nav-cadastrar-professor" role="tabpanel" aria-labelledby="nav-cadastrar-professor-tab">
 										<form class="" id="formUsuario" onsubmit="return false;">                                    
 											<h5 class="mt-2">Cadastro de Usuario</h5>
