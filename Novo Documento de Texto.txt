@@ -1,5 +1,0 @@
-SELECT *
-FROM
-reservar r                    
-INNER JOIN usuario u ON r.fk_usuario = u.id_usuario                    
-INNER JOIN equipamento e ON r.fk_equipamento = e.id_equipamento
