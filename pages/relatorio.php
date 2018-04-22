@@ -52,38 +52,45 @@
     /* Nome do Aquivo Pdf */
     $nomeArquivo = "Relatório_de_Equipamentos_Reservados_{$dataRelatorio}.pdf";
     $conteudo = "<head>
-				  <link rel='icon' href='../img/favicon-16x16.png'>
-				  <!-- Bootstrap CSS, Font Awesome -->
-				  <link rel='stylesheet' href='../css/bootstrap.min.css'>
-				  <!-- Optional CSS -->
-				  <link rel='stylesheet' href='../css/style.css'>
-				</head><body>			
-				  <h3 class='page-header'>Relatório de equipamentos reservados no dia {$dataRelatorio}</h3>
-				  <div class='table-responsive'>
-					<table class='table table-striped table-bordered table-condensed'>
-					  <thead>
-						<tr>
-						  <th>Professor</th>
-						  <th>Curso</th>
-						  <th>Semestre</th>
-						  <th>Período</th>
-						  <th>Sala</th>
-						  <th>Data Reserva</th>
-						  <th>Horário do Pedido</th>
-						  <th>Horário da Entrega</th>
-						  <th>Equipamento</th>
-						</tr>
-					  </thead>
-					  <tbody>
-						{$x}
-					  </tbody>
-					</table>
-				  </div>Gerador por: {$_SESSION['nome_usuario']}</body>
-				";
+									<link rel='icon' href='../img/favicon-16x16.png'>
+									<!-- Bootstrap CSS, Font Awesome -->
+									<link rel='stylesheet' href='../css/bootstrap.min.css'>
+									<!-- Optional CSS -->
+									<link rel='stylesheet' href='../css/style.css'>
+								</head>
+								<body>
+									<div>								
+										<img style='float:left; margin-right: 60px' class='mb-0' src='../img/Logo_Loginb.png' alt='Logo Facima'>
+										<h3 style='' class='page-header'>Relatório de Equipamentos Reservados - {$dataRelatorio}</h3>
+									</div>
+									<hr style='border-width: 5px; border-color:#006FA7'>			  				
+									<div class='table-responsive'>
+										<table class='table table-striped table-bordered table-condensed text-center'>
+											<thead>
+												<tr>
+													<th>Professor</th>
+													<th>Curso</th>
+													<th>Semestre</th>
+													<th>Período</th>
+													<th>Sala</th>
+													<th>Data</th>
+													<th>Retirada</th>
+													<th>Devolução</th>
+													<th>Equipamento</th>
+												</tr>
+											</thead>
+											<tbody>
+												{$x}
+											</tbody>
+										</table>
+									</div>
+								Gerador por: {$_SESSION['nome_usuario']}
+							</body>
+					";
     /* Gera a Página com o Conteúdo */
     $dompdf->load_html($conteudo);
 	
-	/* Coloca pagina A4 e em modo paisagem */
+	/* Colocar a página A4 ou em modo paisagem */
 	$dompdf->set_paper('A4','landscape');
 	
     /* Renderizando o Pdf */
