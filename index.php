@@ -58,12 +58,6 @@ if($_SESSION['nivel_acesso'] == 1)
               <input class="form-control" type="password" id="senha" placeholder="Senha" required>
             </div>
 
-            <div class="checkbox mb-3">
-              <label>
-                <input type="checkbox" value="lembrar" title="Lembrar"> Lembrar
-              </label>  
-            </div> 
-
             <button class="btn btn-dark btn-block" id="btnLogin" type="button"><i class="fas fa-sign-in-alt"></i>&nbsp;Entrar</button>
             <p class="mt-5 mb-3 text-muted text-center">&copy; 2018 - Aquilla / Elissandro / Joseano</p>               
           </form>

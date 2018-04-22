@@ -1,6 +1,5 @@
 <?php
 	include_once("../db/dbConexao.php"); 
-	include_once("../db/funcoes.php");
 	/* Usar o Dompdf com Namespaces e corrigir o conflito de nomes */
     use Dompdf\Dompdf;
     include_once("../pdf/dompdf/autoload.inc.php");
@@ -50,15 +49,14 @@
     $dompdf = new DOMPDF();
 
     /* Nome do Aquivo Pdf */
-    $nomeArquivo = "Relatório_de_Equipamentos_Reservados.pdf";
+    $nomeArquivo = "Relatório_de_Equipamentos_Reservados_{$dataRelatorio}.pdf";
     $conteudo = "<head>
 				  <link rel='icon' href='../img/favicon-16x16.png'>
 				  <!-- Bootstrap CSS, Font Awesome -->
 				  <link rel='stylesheet' href='../css/bootstrap.min.css'>
 				  <!-- Optional CSS -->
 				  <link rel='stylesheet' href='../css/style.css'>
-				</head><body><br><br><br>
-				<div class='container'>				
+				</head><body>			
 				  <h3 class='page-header'>Relatório de equipamentos reservados no dia {$dataRelatorio}</h3>
 				  <div class='table-responsive'>
 					<table class='table table-striped table-bordered table-condensed'>
@@ -79,8 +77,7 @@
 						{$x}
 					  </tbody>
 					</table>
-				  </div>
-				</div></body>
+				  </div></body>
 				";
     /* Gera a Página com o Conteúdo */
     $dompdf->load_html($conteudo);
@@ -92,6 +89,13 @@
     $dompdf->render();
 
     /* Exibe a Página e Define se o Arquivo Será Visualizado Antes de Baixar */
-    $dompdf->stream($nomeArquivo, array("Attachment" => false));    
+    $dompdf->stream($nomeArquivo, array("Attachment" => false));   
+
+/* FUNÇÃO PARA INVERTER A DATA PARA ESTILO BRASILEIRO */
+	function inverteData($data){    
+	   $parteData = explode("-", $data);    
+	   $dataInvertida = $parteData[2] . "/" . $parteData[1] . "/" . $parteData[0];
+	   return $dataInvertida;			
+	}	
 
 ?>
