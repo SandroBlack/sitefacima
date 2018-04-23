@@ -36,6 +36,9 @@
             break;
 		case "editarUsuario":
             editarUsuario();
+            break;
+		case "SalvarEdit":
+            salvarEdicaoUsuario();
             break;		
         default:            
             echo "<script>console.log('Função Não Encontrada')</script>";               
@@ -185,6 +188,45 @@
             $stm->execute();
             $dados = $stm->fetch(PDO::FETCH_ASSOC);                                    
             echo json_encode($dados);             
+            
+        } catch(PDOExeption $erro){
+            echo "Mensagem de Erro: " . $erro->getMessage() . "<br>";
+            echo "Nome do Arquivo: " . $erro->getFile() . "<br>";
+            echo "Linha: " . $erro->getLine();
+        }
+	}
+	/* SALVAR EDIÇÃO USUARIO */
+	function salvarEdicaoUsuario(){
+		$usuarioAtual = $_POST['editUsuario'];
+		$nome_usuario = $_POST['novoNome'];
+		$email_usuario = $_POST['novoEmail'];
+		$cargo_usuario = $_POST['novoCargo'];
+		$nivel_acesso = $_POST['novoAcesso'];
+		
+		if($nivel_acesso == "Bloqueado") {
+			$nivel_acesso = 0;
+		} else if ($nivel_acesso == "Professor"){
+			$nivel_acesso = 1;
+		} else if ($nivel_acesso == "Administrador"){
+			$nivel_acesso = 3;
+		} else {
+			$response = "0";
+			echo $response;
+			return 0;
+		}
+		try{
+            $pdo = conectar();
+            $sql = "UPDATE usuario SET nome_usuario = :nome_usuario, email_usuario = :email_usuario, cargo_usuario = :cargo_usuario, nivel_acesso = :nivel_acesso where nome_usuario = :usuarioAtual";
+            $stm = $pdo->prepare($sql);  				
+			$stm->bindValue(":nome_usuario",$nome_usuario);				
+			$stm->bindValue(":email_usuario",$email_usuario);				
+			$stm->bindValue(":cargo_usuario",$cargo_usuario);				
+			$stm->bindValue(":nivel_acesso",$nivel_acesso);				
+			$stm->bindValue(":usuarioAtual",$usuarioAtual);
+            $stm->execute();
+            $dados = $stm->fetch(PDO::FETCH_ASSOC);                                    
+            $response = "1";
+			echo $response;
             
         } catch(PDOExeption $erro){
             echo "Mensagem de Erro: " . $erro->getMessage() . "<br>";

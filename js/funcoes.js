@@ -39,7 +39,7 @@ $(document).ready(function(){
 						alert('Usuario Inativo, Entre em contato com o administrador');							
 					} else {
 						location.href='pages/' + retorno + '';
-					} console.log(retorno);			
+					}
 				}				
 			});			
 		}
