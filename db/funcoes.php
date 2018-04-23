@@ -177,7 +177,7 @@
             echo "Linha: " . $erro->getLine();
         }
 	}
-	/* EDITAR USUARIO */
+	/* SELECIONAR INFORMAÇÕES PARA PODER EDITAR O USUARIO */
 	function editarUsuario(){
 		$nome_usuario = $_POST['editUsuario'];
 		try{
@@ -299,7 +299,7 @@
 			$stm->bindValue(":id_equipamento",$ListaEquipamento);                
             $stm->execute();
 			$dados = $stm->fetch(PDO::FETCH_ASSOC);
-			if(intval($dados['qnt_Reservados']) >= intval($dados['quantidade_equipamento']))
+			if($dados['qnt_Reservados'] >= $dados['quantidade_equipamento'] && $dados['quantidade_equipamento'] != "")
 			{
 				$response = "11";
 				echo $response;

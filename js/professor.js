@@ -22,12 +22,12 @@ $(document).ready(function(){
 		dataType: 'json',					
 		success: function(retorno){							
 			for(i=0;i<retorno.length;i++){
-				$('#reservaUsuario').append('<tr class="bg-light"><td class="text-secondary">'+ retorno[i].data_reserva +'</td><td class="text-secondary">'+ retorno[i].nome_equipamento +'</td><td class="text-secondary">'+ retorno[i].sala +'</td><td class="text-secondary">'+ retorno[i].hora_inicio +'</td><td class="text-secondary">'+ retorno[i].hora_fim +'</td><td class="text-secondary"><button class="btn btn-secondary"><i class="fas fa-times-circle fa-1x" id="'+ retorno[i].id_reservar +'"></i></button></td></tr>');
+				$('#reservaUsuario').append('<tr class="bg-light"><td class="text-secondary">'+ retorno[i].data_reserva +'</td><td class="text-secondary">'+ retorno[i].nome_equipamento +'</td><td class="text-secondary">'+ retorno[i].sala +'</td><td class="text-secondary">'+ retorno[i].hora_inicio +'</td><td class="text-secondary">'+ retorno[i].hora_fim +'</td><td class="text-secondary"><button class="btn btn-secondary cancelar-reserva" id="'+ retorno[i].id_reservar +'"><i class="fas fa-times-circle fa-1x"></i></button></td></tr>');
 			}		
 		}	
 	});
 	
-	$(document).on('click', '.fa-times-circle', function(){
+	$(document).on('click', '.cancelar-reserva', function(){
 		var funcao = "cancelaReserva";
 		var x = this.id;
 		$.ajax({
