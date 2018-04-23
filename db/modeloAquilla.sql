@@ -4,7 +4,7 @@ nome_usuario VARCHAR(255) NOT NULL,
 email_usuario VARCHAR(255) NOT NULL,
 senha_usuario VARCHAR(255) NOT NULL,
 cargo_usuario VARCHAR(50) NOT NULL,
-nivel_acesso INT NOT NULL
+nivel_acesso VARCHAR(30) DEFAULT'Inativo' NOT NULL
 );
 
 CREATE TABLE equipamento(
@@ -30,5 +30,5 @@ CONSTRAINT `fk_id_usuario` FOREIGN KEY (`fk_usuario`) REFERENCES `usuario` (`id_
 CONSTRAINT `fk_id_equipamento` FOREIGN KEY (`fk_equipamento`) REFERENCES `equipamento` (`id_equipamento`)
 );
 
-INSERT INTO `usuario` (`id_usuario`, `nome_usuario`, `email_usuario`, `senha_usuario`, `cargo_usuario`, `nivel_acesso`) VALUES (1, 'Aquilla Silva Leite', 'aquilla11@hotmail.com', '71eea47ff018db4456aa926d911ceba6f33f4f3d', 'Administrador do Sistema', 3);
+INSERT INTO `usuario` (`id_usuario`, `nome_usuario`, `email_usuario`, `senha_usuario`, `cargo_usuario`, `nivel_acesso`) VALUES (1, 'Aquilla Silva Leite', 'aquilla11@hotmail.com', '71eea47ff018db4456aa926d911ceba6f33f4f3d', 'Administrador do Sistema', 'Administrador');
 

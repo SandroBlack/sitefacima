@@ -10,7 +10,7 @@ $(document).ready(function(){
 			
 			for(i=0;i<retorno.length;i++){
 
-				$('#usuariosCadastrados').append('<tr class="bg-light"><td class="text-secondary">'+ retorno[i].nome_usuario +'</td><td class="text-secondary">'+ retorno[i].cargo_usuario +'</td><td class="text-secondary"><button class="btn btn-secondary modal-edit-usuario" data-toggle="modal" data-target="#modalUsuarios" id="'+ retorno[i].nome_usuario +'"><i class="fas fa-ellipsis-v fa-1x"></i></button></td></tr>');
+				$('#usuariosCadastrados').append('<tr class="bg-light"><td class="text-secondary">'+ retorno[i].nome_usuario +'</td><td class="text-secondary">'+ retorno[i].cargo_usuario +'</td><td class="text-secondary">'+ retorno[i].nivel_acesso +'</td><td class="text-secondary"><button class="btn btn-secondary modal-edit-usuario" data-toggle="modal" data-target="#modalUsuarios" id="'+ retorno[i].nome_usuario +'"><i class="fas fa-ellipsis-v fa-1x"></i></button></td></tr>');
 			}									
 		}	
 	});

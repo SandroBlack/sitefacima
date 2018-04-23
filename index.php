@@ -3,10 +3,11 @@
 
 if (isset($_SESSION['nome_usuario'])) {
 
-if($_SESSION['nivel_acesso'] == 1)
+if($_SESSION['nivel_acesso'] == "Professor")
 {
 	header("Location: pages/professor.php");
-} else{
+} 
+else if($_SESSION['nivel_acesso'] == "Administrador"){
 	header("Location: pages/admin.php");
 }	
 
@@ -41,11 +42,16 @@ if($_SESSION['nivel_acesso'] == 1)
               <hr style="border-width: 5px; border-color:#006FA7">
               <h5 class="text-dark">Central de Autenticação</h5>
             </div>
-            <div class="alert alert-danger alertaLogin" id="alerta1" role="alert">
-                Usuário ou Senha Inválido!
+
+            <!-- Alertas Login -->
+            <div class="alert alert-warning alertaLogin" id="alertaLogin1" role="alert">
+                Favor Preencher Todos os Campos.
             </div>
-            <div class="alert alert-warning alertaLogin" id="alerta2" role="alert">
-                Favor Preencher Todos os Campos!
+            <div class="alert alert-danger alertaLogin" id="alertaLogin2" role="alert">
+                Usuário ou Senha Inválido.
+            </div>            
+            <div class="alert alert-warning alertaLogin" id="alertaLogin3" role="alert">
+                Usuario inativo, entre em contato com o administrador.
             </div>
             <br>
             <div class="form-group">
@@ -58,8 +64,10 @@ if($_SESSION['nivel_acesso'] == 1)
               <input class="form-control" type="password" name="senha" id="senha" placeholder="Senha" required>
             </div>
 
-            <button class="btn btn-dark btn-block" id="btnLogin" type="button"><i class="fas fa-sign-in-alt"></i>&nbsp;Entrar</button>
-            <p class="mt-5 mb-3 text-muted text-center">&copy; 2018 - Aquilla / Elissandro / Joseano</p>               
+            <button class="btn btn-dark btn-block mb-3" id="btnLogin" type="button"><i class="fas fa-sign-in-alt"></i>&nbsp;Entrar</button>
+            <a href="pages/cadastro.usuario.php" class="link">Cadastro</a>
+            <div class="dropdown-divider mb-3"></div>
+            <p class="text-muted text-center mb-3">&copy; 2018 - Aquilla / Elissandro / Joseano</p>               
           </form>
           
         </div>        

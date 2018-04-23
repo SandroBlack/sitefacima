@@ -47,8 +47,8 @@
     /* FUNÇÃO DE LOGIN */ 
     function logar(){
         $login = $_POST["login"];
-        $senha = sha1(md5($_POST['senha']));
-        //$senha = $_POST["senha"];
+        //$senha = sha1(md5($_POST['senha']));
+        $senha = $_POST["senha"];
 
         try{
             $pdo = conectar();
@@ -74,11 +74,11 @@
                 $_SESSION['nivel_acesso'] = $dados[5];
                 //header("location:../pages/aluno.php");
 				
-				if($dados[5] == 3)
+				if($dados[5] == 'Administrador')
 				{
 					echo 'admin.php';
 				}
-				else if ($dados[5] == 1)
+				else if ($dados[5] == 'Professor')
 				{
 					echo 'professor.php';
 				} else {
@@ -165,7 +165,7 @@
 	function consultarUsuarioCadastrado(){
 		try{
             $pdo = conectar();
-            $sql = "SELECT `id_usuario`, `nome_usuario`, `email_usuario`,`cargo_usuario` FROM `usuario`";
+            $sql = "SELECT `id_usuario`, `nome_usuario`, `email_usuario`,`cargo_usuario`,`nivel_acesso` FROM `usuario`";
             $stm = $pdo->prepare($sql);
             $stm->execute();
             $dados = $stm->fetchAll(PDO::FETCH_ASSOC);                                    

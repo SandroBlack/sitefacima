@@ -163,6 +163,7 @@ if (!isset($_SESSION['nome_usuario']) OR ($_SESSION['nivel_acesso'] != 3)) {
 												<tr>
 													<th scope="col">Nome</th>
 													<th scope="col">Cargo</th>
+													<th scope="col">Nível de Acesso</th>
 													<th scope="col">Editar</th>
 												</tr>
 											</thead>		

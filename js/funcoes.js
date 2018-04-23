@@ -20,8 +20,9 @@ $(document).ready(function(){
 		var login = $("#login").val(); 
 		var senha = $("#senha").val();		
 		if(login == "" || senha == ""){
-			$("#alerta1").css("display","none");
-			$("#alerta2").css("display","block");			
+			$("#alertaLogin2").css("display","none");
+			$("#alertaLogin3").css("display","none");
+			$("#alertaLogin1").css("display","block");			
 			return false;
 		} else{			
 			var dados = {funcao,login, senha};
@@ -33,12 +34,15 @@ $(document).ready(function(){
 				success: function(retorno){
 
 					if(retorno == "0"){
-						$("#alerta2").css("display","none");
-						$("#alerta1").css("display","block");						
-					} else if (retorno == "00"){
-						alert('Usuario Inativo, Entre em contato com o administrador');							
+						$("#alertaLogin1").css("display","none");
+						$("#alertaLogin2").css("display","none");
+						$("#alertaLogin2").css("display","block");						
+					} else if (retorno == "00"){						
+						$("#alertaLogin1").css("display","none");
+						$("#alertaLogin2").css("display","none");
+						$("#alertaLogin3").css("display","block");							
 					} else {
-						location.href='pages/' + retorno + '';
+						location.href='pages/' + retorno + '';						
 					}
 				}				
 			});			
