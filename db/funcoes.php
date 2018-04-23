@@ -39,6 +39,12 @@
             break;
 		case "SalvarEdit":
             salvarEdicaoUsuario();
+            break;
+		case "editarEquipamento":
+            editarEquipamento();
+            break;
+		case "salvarEditEquip":
+            salvarEdicaoEquipamento();
             break;		
         default:            
             echo "<script>console.log('Função Não Encontrada')</script>";               
@@ -177,7 +183,7 @@
             echo "Linha: " . $erro->getLine();
         }
 	}
-	/* EDITAR USUARIO */
+	/* SELECIONAR INFORMAÇÕES PARA PODER EDITAR O USUARIO */
 	function editarUsuario(){
 		$nome_usuario = $_POST['editUsuario'];
 		try{
@@ -299,7 +305,7 @@
 			$stm->bindValue(":id_equipamento",$ListaEquipamento);                
             $stm->execute();
 			$dados = $stm->fetch(PDO::FETCH_ASSOC);
-			if(intval($dados['qnt_Reservados']) >= intval($dados['quantidade_equipamento']))
+			if($dados['qnt_Reservados'] >= $dados['quantidade_equipamento'] && $dados['quantidade_equipamento'] != "")
 			{
 				$response = "11";
 				echo $response;
@@ -352,6 +358,52 @@
 			echo "Nome do Arquivo: " . $erro->getFile() . "<br>";
 			echo "Linha: " . $erro->getLine();
 		}				
+	}
+	/* PEGAR INFORMAÇÕES PARA EDITAR O EQUIPAMENTO */
+	function editarEquipamento(){
+		$nome_equipamento = $_POST['editEquipamento'];
+		try{
+            $pdo = conectar();
+            $sql = "SELECT * FROM equipamento where nome_equipamento = :nome_equipamento";
+            $stm = $pdo->prepare($sql);  
+			$stm->bindValue(":nome_equipamento",$nome_equipamento);				
+            $stm->execute();
+            $dados = $stm->fetch(PDO::FETCH_ASSOC);                                    
+            echo json_encode($dados);             
+            
+        } catch(PDOExeption $erro){
+            echo "Mensagem de Erro: " . $erro->getMessage() . "<br>";
+            echo "Nome do Arquivo: " . $erro->getFile() . "<br>";
+            echo "Linha: " . $erro->getLine();
+        }
+	}
+	/* SALVAR EDIÇÃO DO EQUIPAMENTO */
+	function salvarEdicaoEquipamento(){
+		$editEquipamento = $_POST['editEquipamento'];
+		$nome_equipamento = $_POST['novoNome'];
+		$fabricante_equipamento = $_POST['novoFabricante'];
+		$quantidade_equipamento = $_POST['novoQuantidade'];
+		$patrimonio_equipamento = $_POST['novoPatrimonio'];
+
+		try{
+            $pdo = conectar();
+            $sql = "UPDATE `equipamento` SET `nome_equipamento`= :nome_equipamento,`fabricante_equipamento`= :fabricante_equipamento,`quantidade_equipamento`= :quantidade_equipamento,`patrimonio_equipamento`= :patrimonio_equipamento WHERE nome_equipamento = :editEquipamento";
+            $stm = $pdo->prepare($sql);  				
+			$stm->bindValue(":nome_equipamento",$nome_equipamento);				
+			$stm->bindValue(":fabricante_equipamento",$fabricante_equipamento);				
+			$stm->bindValue(":quantidade_equipamento",$quantidade_equipamento);				
+			$stm->bindValue(":patrimonio_equipamento",$patrimonio_equipamento);				
+			$stm->bindValue(":editEquipamento",$editEquipamento);
+            $stm->execute();
+            $dados = $stm->fetch(PDO::FETCH_ASSOC);                                    
+            $response = "1";
+			echo $response;
+            
+        } catch(PDOExeption $erro){
+            echo "Mensagem de Erro: " . $erro->getMessage() . "<br>";
+            echo "Nome do Arquivo: " . $erro->getFile() . "<br>";
+            echo "Linha: " . $erro->getLine();
+		}
 	}
 	/* FUNÇÃO PARA INVERTER A DATA PARA ESTILO BRASILEIRO */
 	function inverteData($data){    

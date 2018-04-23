@@ -1,5 +1,6 @@
 $(document).ready(function(){
 	var editUsuario;
+	var editEquipamento;
 	var funcao = "consultarUsuarioCadastrado";	
 	$.ajax({
 		type: 'POST',
@@ -25,7 +26,7 @@ $(document).ready(function(){
 			
 			for(i=0;i<retorno.length;i++){
 
-				$('#equipamentosCadastrados').append('<tr class="bg-light"><td class="text-secondary">'+ retorno[i].nome_equipamento +'</td><td class="text-secondary">'+ retorno[i].fabricante_equipamento +'</td><td class="text-secondary">'+ retorno[i].quantidade_equipamento +'</td><td class="text-secondary">'+ retorno[i].patrimonio_equipamento +'</td><td class="text-secondary"><button class="btn btn-secondary" data-toggle="modal" data-target="#modalEquipamentos"><i class="fas fa-ellipsis-v fa-1x" id="'+ retorno[i].id_equipamento +'"></i></button></td></tr>');
+				$('#equipamentosCadastrados').append('<tr class="bg-light"><td class="text-secondary">'+ retorno[i].nome_equipamento +'</td><td class="text-secondary">'+ retorno[i].fabricante_equipamento +'</td><td class="text-secondary">'+ retorno[i].quantidade_equipamento +'</td><td class="text-secondary">'+ retorno[i].patrimonio_equipamento +'</td><td class="text-secondary"><button class="btn btn-secondary modal-edit-equipamento" data-toggle="modal" data-target="#modalEquipamentos" id="'+ retorno[i].nome_equipamento +'"><i class="fas fa-ellipsis-v fa-1x"></i></button></td></tr>');
 			}									
 		}	
 	});
@@ -68,6 +69,44 @@ $(document).ready(function(){
 					location.href='admin.php';
 				} else if (retorno == "0"){
 					alert('Informações inseridas invalidas');
+				}
+			}										
+		});	
+	});
+	
+	$(document).on('click', '.modal-edit-equipamento', function(){
+		var funcao = "editarEquipamento";
+		editEquipamento = this.id;
+		$.ajax({
+			type: 'POST',
+			url: '../db/funcoes.php',
+			data: {funcao,editEquipamento},
+			dataType: 'json',					
+			success: function(retorno){			
+				$('#atualizarNomeEquipamento').val(retorno.nome_equipamento);
+				$('#atualizarFabricanteEquipamento').val(retorno.fabricante_equipamento);
+				$('#atualizarQuantidadeEquipamento').val(retorno.quantidade_equipamento);
+				$('#atualizarPatrimonioEquipamento').val(retorno.patrimonio_equipamento);
+			}										
+		});	
+	});
+	
+	$(document).on('click', '#btnAtualizarEquipamento', function(){
+		var funcao = "salvarEditEquip";
+		var novoNome = $('#atualizarNomeEquipamento').val();
+		var novoFabricante = $('#atualizarFabricanteEquipamento').val();
+		var novoQuantidade = $('#atualizarQuantidadeEquipamento').val();
+		var novoPatrimonio = $('#atualizarPatrimonioEquipamento').val();
+
+		$.ajax({
+			type: 'POST',
+			url: '../db/funcoes.php',
+			data: {funcao, editEquipamento, novoNome, novoFabricante, novoQuantidade, novoPatrimonio},
+			dataType: 'html',					
+			success: function(retorno){
+				if (retorno == "1"){
+					alert('Equipamento alterado com sucesso');
+					location.href='admin.php';
 				}
 			}										
 		});	

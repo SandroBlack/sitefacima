@@ -234,26 +234,26 @@ if (!isset($_SESSION['nome_usuario']) OR ($_SESSION['nivel_acesso'] != 3)) {
 												<form class="" id="formEquipamento" onsubmit="return false;">												
 													<div class="form-group">
 														<label for="nome">Nome do equipamento:</label>
-														<input class="form-control" type="text" name="nome" id="nome" required/>
+														<input class="form-control" type="text" name="atualizarNomeEquipamento" id="atualizarNomeEquipamento" required/>
 													</div>
 													<div class="form-group">
 														<label for="modelo">Fabricante do equipamento:</label>
-														<input class="form-control" type="text" name="fabricante" id="fabricante" required/>
+														<input class="form-control" type="text" name="atualizarFabricanteEquipamento" id="atualizarFabricanteEquipamento" required/>
 													</div>
 													<div class="form-group">
 														<label for="fabricante">Quantidade de equipamento(s)</label>
-														<input class="form-control" type="number" name="quantidade" id="quantidade" required/>
+														<input class="form-control" type="number" name="atualizarQuantidadeEquipamento" id="atualizarQuantidadeEquipamento" required/>
 													</div>                                        
 													<div class="form-group">
 														<label for="fabricante">Patrimonio do equipamento:</label>
-														<input class="form-control" type="number" name="patrimonio" id="patrimonio" required/>
+														<input class="form-control" type="number" name="atualizarPatrimonioEquipamento" id="atualizarPatrimonioEquipamento" required/>
 													</div>       										
 												</form>		
 											</div>
 
 											<div class="modal-footer">
 												<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-												<button type="button" class="btn btn-primary" id="btnSair">Atualizar</button>
+												<button type="button" class="btn btn-primary" id="btnAtualizarEquipamento">Atualizar</button>
 											</div>
 											</div>
 										</div>

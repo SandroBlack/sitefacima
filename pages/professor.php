@@ -80,7 +80,7 @@ if (!isset($_SESSION['nome_usuario']) OR ($_SESSION['nivel_acesso'] != 1)) {
 								<nav>
 									<div class="nav nav-tabs" id="nav-tab" role="tablist">
 										<a class="nav-item nav-link active" id="nav-equip-reservado-tab" data-toggle="tab" href="#nav-equip-reservado" role="tab" aria-controls="nav-equip-reservado" aria-selected="true">Minhas Reservas</a>
-										<a class="nav-item nav-link" id="nav-reservar-equip-tab" data-toggle="tab" href="#nav-reservar-equip" role="tab" aria-controls="nav-reservar-equip" aria-selected="false">Nova</a>
+										<a class="nav-item nav-link" id="nav-reservar-equip-tab" data-toggle="tab" href="#nav-reservar-equip" role="tab" aria-controls="nav-reservar-equip" aria-selected="false">Nova Reserva</a>
 									</div>
 								</nav>
 
@@ -100,7 +100,7 @@ if (!isset($_SESSION['nome_usuario']) OR ($_SESSION['nivel_acesso'] != 1)) {
 									</table>
 								</div>
 
-								<div class="tab-pane fade" id="nav-reservar-equip" role="tabpanel" aria-labelledby="nav-reservar-equip-tab">
+								<div class="tab-pane fade" id="nav-reservar-equip" role="tabpanel" aria-labelledby="nav-reservar-equip-tab"><br>
 									<form class="" id="formReserva" name="formReserva" onsubmit="return false;">               
 											<div class="form-group">
 												<label for="data">Data da reserva:</label>

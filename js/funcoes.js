@@ -104,7 +104,7 @@ $(document).ready(function(){
 				}
 				if(retorno == "11")
 				{		
-					alert("Todos equipamentos em estoque reservados para o dia selecionado");								
+					alert("Todos equipamentos reservados para a data selecionada");								
 				}
 				console.log(retorno);
 			}
