@@ -56,6 +56,7 @@ $(document).ready(function(){
 		if(novoAcesso == ""){
 			alert('Selecione o nivel de acesso'); return 0;
 		}
+
 		$.ajax({
 			type: 'POST',
 			url: '../db/funcoes.php',
