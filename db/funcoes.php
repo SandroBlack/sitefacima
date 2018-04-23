@@ -39,6 +39,9 @@
             break;
 		case "SalvarEdit":
             salvarEdicaoUsuario();
+            break;
+		case "editarEquipamento":
+            editarEquipamento();
             break;		
         default:            
             echo "<script>console.log('Função Não Encontrada')</script>";               
@@ -352,6 +355,24 @@
 			echo "Nome do Arquivo: " . $erro->getFile() . "<br>";
 			echo "Linha: " . $erro->getLine();
 		}				
+	}
+	/* PEGAR INFORMAÇÕES PARA EDITAR O EQUIPAMENTO */
+	function editarEquipamento(){
+		$nome_equipamento = $_POST['editEquipamento'];
+		try{
+            $pdo = conectar();
+            $sql = "SELECT * FROM equipamento where nome_equipamento = :nome_equipamento";
+            $stm = $pdo->prepare($sql);  
+			$stm->bindValue(":nome_equipamento",$nome_equipamento);				
+            $stm->execute();
+            $dados = $stm->fetch(PDO::FETCH_ASSOC);                                    
+            echo json_encode($dados);             
+            
+        } catch(PDOExeption $erro){
+            echo "Mensagem de Erro: " . $erro->getMessage() . "<br>";
+            echo "Nome do Arquivo: " . $erro->getFile() . "<br>";
+            echo "Linha: " . $erro->getLine();
+        }
 	}
 	/* FUNÇÃO PARA INVERTER A DATA PARA ESTILO BRASILEIRO */
 	function inverteData($data){    
