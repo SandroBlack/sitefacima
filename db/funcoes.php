@@ -53,8 +53,8 @@
     /* FUNÇÃO DE LOGIN */ 
     function logar(){
         $login = $_POST["login"];
-        //$senha = sha1(md5($_POST['senha']));
-        $senha = $_POST["senha"];
+        $senha = sha1(md5($_POST['senha']));
+        //$senha = $_POST["senha"];
 
         try{
             $pdo = conectar();
@@ -80,11 +80,11 @@
                 $_SESSION['nivel_acesso'] = $dados[5];
                 //header("location:../pages/aluno.php");
 				
-				if($dados[5] == 'Administrador')
+				if($dados[5] == 3)
 				{
 					echo 'admin.php';
 				}
-				else if ($dados[5] == 'Professor')
+				else if ($dados[5] == 1)
 				{
 					echo 'professor.php';
 				} else {
@@ -105,12 +105,7 @@
         $email_usuario = $_POST['email'];
         $senha_usuario = sha1(md5($_POST['cpf']));
         $cargo_usuario = $_POST['cargo'];
-		$nivel_acesso = $_POST['tipoUsuario'];
-		if($nivel_acesso == "Professor"){
-			$nivel_acesso = 1;
-		} else{
-			$nivel_acesso = 3;
-		}		
+		$nivel_acesso = 0;	
 		try{
 			$pdo = conectar();
             $sql = "SELECT `nome_usuario`, `email_usuario` FROM `usuario` WHERE `email_usuario` = :email_usuario";
