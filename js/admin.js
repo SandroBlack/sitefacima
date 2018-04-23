@@ -92,27 +92,21 @@ $(document).ready(function(){
 	});
 	
 	$(document).on('click', '#btnAtualizarEquipamento', function(){
-		var funcao = "SalvarEdit";
-		var novoNome = $('#atualizarNomeUsuario').val();
-		var novoEmail = $('#atualizaEmailUsuario').val();
-		var novoCargo = $('#atualizarCargoUsuario').val();
-		var novoAcesso = $('#atualizarAcessoUsuario').val();
-
-		if(novoAcesso == ""){
-			alert('Selecione o nivel de acesso'); return 0;
-		}
+		var funcao = "salvarEditEquip";
+		var novoNome = $('#atualizarNomeEquipamento').val();
+		var novoFabricante = $('#atualizarFabricanteEquipamento').val();
+		var novoQuantidade = $('#atualizarQuantidadeEquipamento').val();
+		var novoPatrimonio = $('#atualizarPatrimonioEquipamento').val();
 
 		$.ajax({
 			type: 'POST',
 			url: '../db/funcoes.php',
-			data: {funcao, editUsuario, novoNome, novoEmail, novoCargo, novoAcesso},
+			data: {funcao, editEquipamento, novoNome, novoFabricante, novoQuantidade, novoPatrimonio},
 			dataType: 'html',					
 			success: function(retorno){
 				if (retorno == "1"){
-					alert('Usuario alterado com sucesso');
+					alert('Equipamento alterado com sucesso');
 					location.href='admin.php';
-				} else if (retorno == "0"){
-					alert('Informações inseridas invalidas');
 				}
 			}										
 		});	
