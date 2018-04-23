@@ -168,12 +168,11 @@ $(document).ready(function(){
 		var nome = $('#nomeUsuario').val();
 		var email = $('#email').val();
 		var cargo = $('#cargo').val();
-		var cpf = $('#cpfUsuario').val();
-		var tipoUsuario = $('#tipoUsuario').val();
+		var cpf = $('#senha').val();
 		$.ajax({
 			type: 'POST',
 			url: '../db/funcoes.php',
-			data: {funcao,nome,email,cargo,tipoUsuario,cpf},
+			data: {funcao,nome,email,cargo,senha},
 			dataType: 'html',
 			success: function(retorno){
 				if(retorno == "1"){

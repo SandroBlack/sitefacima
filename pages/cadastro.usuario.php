@@ -32,15 +32,14 @@
             <div class="alert alert-warning alertaLogin" id="alertaCad2" role="alert">
                 Favor Preencher Todos os Campos!
             </div>
+			<div class="alert alert-warning alertaLogin" id="alertaCad3" role="alert">
+                Senhas não conferem!
+            </div>
             <br>
             <div class="form-group">
               <label for="Nome">Nome</label>
               <input class="form-control" type="text" id="nome" placeholder="Nome" required>
-            </div>
-            <div class="form-group">
-                <label for="CPF">CPF: (sem ponto e sem traço)</label>
-                <input class="form-control" type="number" name="cpfUsuario" id="cpfUsuario" placeholder="CPF" required>
-            </div>
+            </div>    
             <div class="form-group">
               <label for="Cargo">Cargo</label>
               <input class="form-control" type="text" id="cargo" placeholder="Cargo" required>
