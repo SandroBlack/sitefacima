@@ -20,7 +20,7 @@
           
       <div class="row justify-content-center mt-3">
         <div class="col-md-4 bg-light border">                          
-          <form>
+          <form onsubmit="return false;">
             <div class="text-center mt-3">
               <a href="../index.php"><img class="" src="../img/Logo_Loginb.png" alt="Logo Facima"></a>              
               <hr style="border-width: 5px; border-color:#006FA7">
@@ -56,7 +56,7 @@
               <label for="Senha">Confirmar Senha</label>
               <input class="form-control" type="password" name="confSenha" id="confSenha" placeholder="Digite novamente sua senha" required>
             </div>
-            <button class="btn btn-primary btn-block mb-5" id="btnCadUsuario" type="button"><i class="fas fa-plus-square"></i>&nbsp;Cadastrar</button>
+            <button class="btn btn-primary btn-block mb-5" id="btn-cad-usuario" type="button"><i class="fas fa-plus-square"></i>&nbsp;Cadastrar</button>
             <div class="dropdown-divider"></div>
             <p class="text-muted text-center mb-3">&copy; 2018 - Aquilla / Elissandro / Joseano</p>               
           </form>

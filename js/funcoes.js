@@ -106,7 +106,6 @@ $(document).ready(function(){
 				{		
 					alert("Todos equipamentos reservados para a data selecionada");								
 				}
-				console.log(retorno);
 			}
 		});
 	});		
@@ -163,12 +162,24 @@ $(document).ready(function(){
 	});
 
 	/* CADASTRO DE USUARIOS */
-	$("#btn-cad-professor").click(function(){
+	$("#btn-cad-usuario").click(function(){
 		var funcao = 'cadastrarUsuario';
-		var nome = $('#nomeUsuario').val();
+		var nome = $('#nome').val();
 		var email = $('#email').val();
 		var cargo = $('#cargo').val();
-		var cpf = $('#senha').val();
+		var senha = $('#senha').val();
+		var confSenha = $('#confSenha').val();
+		if(senha != confSenha){
+			$("#alertaCad1").css("display","none");
+			$("#alertaCad2").css("display","none");
+			$("#alertaCad3").css("display","block");
+			return 0;
+		} else if(funcao == '' || nome == '' || email == '' || cargo == '' || senha == '' || confSenha == ''){
+			$("#alertaCad1").css("display","none");
+			$("#alertaCad2").css("display","block");
+			$("#alertaCad3").css("display","none");
+			return 0;
+		}
 		$.ajax({
 			type: 'POST',
 			url: '../db/funcoes.php',
@@ -177,10 +188,12 @@ $(document).ready(function(){
 			success: function(retorno){
 				if(retorno == "1"){
 					alert("Usuario Cadastrado com Sucesso!");
-					location.href="../pages/admin.php";
+					location.href="../index.php";
 				}
 				if(retorno == "0"){
-					alert("Usuario já Cadastrado!");
+					$("#alertaCad1").css("display","block");
+					$("#alertaCad2").css("display","none");
+					$("#alertaCad3").css("display","none");
 				}
 			}
 		});

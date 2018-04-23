@@ -103,7 +103,7 @@
     function cadastrarUsuario(){
         $nome_usuario = $_POST['nome'];
         $email_usuario = $_POST['email'];
-        $senha_usuario = sha1(md5($_POST['cpf']));
+        $senha_usuario = sha1(md5($_POST['senha']));
         $cargo_usuario = $_POST['cargo'];
 		$nivel_acesso = 0;	
 		try{

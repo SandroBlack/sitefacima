@@ -50,7 +50,7 @@
     $dompdf = new DOMPDF();
 
     /* Nome do Aquivo Pdf */
-    $nomeArquivo = "Relatório_de_Equipamentos_Reservados_{$dataRelatorio}.pdf";
+    $nomeArquivo = "Relatório_de_Equipamentos_Reservados.pdf";
     $conteudo = "<head>
 									<link rel='icon' href='../img/favicon-16x16.png'>
 									<!-- Bootstrap CSS, Font Awesome -->
