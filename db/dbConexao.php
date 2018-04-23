@@ -1,9 +1,10 @@
 <?php 
     function conectar(){
-        $host = "mysql:host=localhost; dbname=sitefacima";
+        //$host = "mysql:host=159.203.174.27; port=3306; dbname=sitefacima";
+        $host = "mysql:host=localhost; port=3306; dbname=sitefacima";
         $usuario = "root";
+        //$senha = "bkj5180";
         $senha = "";
-        
         try{
             $pdo = new PDO($host, $usuario, $senha);
             $pdo->exec("SET names utf8");                            
@@ -11,7 +12,7 @@
             echo "Mensagem de Erro: " . $erro->getMessage() . "<br>";
             echo "Nome do Arquivo: " . $erro->getFile() . "<br>";
             echo "Linha: " . $erro->getLine();
-           
+			return 0;
         }
         return $pdo;
     }

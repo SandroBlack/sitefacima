@@ -125,8 +125,99 @@ if (!isset($_SESSION['nome_usuario']) OR ($_SESSION['nivel_acesso'] != 3)) {
 											</div>                                        
 											<button class="btn btn-dark" id="btn-cad-equip">Cadastrar</button>                                    
 										</form>		
+									</div>		
+									<!-- EQUIPAMENTOS RESERVADOS -->
+									<div class="tab-pane fade" id="nav-reservados-equip" role="tabpanel" aria-labelledby="nav-reservados-equip-tab">
+										<h5 class="mt-2">Equipamentos Reservados</h5>
+										<hr style="border-width: 5px; border-color:#006FA7">
+										<form action="../pages/relatorio.php" method="post" target="_blank">
+										<div class="input-group mb-3">
+											<div class="input-group-prepend">
+												<label class="input-group-text" for="inputGroupSelect">Filtro</label>
+											</div>
+											<input class="form-control" type="date" name="dataRelatorio" id="dataRelatorio">
+											<input hidden name="funcao" id="funcao" value="txt">
+											<button class="btn btn-dark" id="btn-res-equip">Gerar Relatório</button>											
+										</div>	
+										</form>										
 									</div>
 
+								</div>
+							</div>    
+                            <!-- FIM CADASTRO DE EQUIPAMENTOS -->
+
+                            <!-- CADASTRO DE PROFESSORES -->
+							<div class="tab-pane fade" id="v-pills-professores" role="tabpanel" aria-labelledby="v-pills-professores-tab">
+								<nav>
+									<div class="nav nav-tabs" id="nav-tab" role="tablist">
+										<a class="nav-item nav-link active" id="nav-rel-professor-tab" data-toggle="tab" href="#nav-rel-professor" role="tab" aria-controls="nav-rel-professor" aria-selected="true">Relação</a>
+									</div>
+								</nav>
+
+								<div class="tab-content" id="nav-tabContent-professor">
+									<div class="tab-pane fade show active" id="nav-rel-professor" role="tabpanel" aria-labelledby="nav-rel-professor-tab">
+										<h5 class="mt-2">Relação de Usuarios</h5>
+										<hr style="border-width: 5px; border-color:#006FA7">										
+										<table class="table table-bordered bg-white text-center" id="usuariosCadastrados">
+											<thead class="thead-light">
+												<tr>
+													<th scope="col">Nome</th>
+													<th scope="col">Cargo</th>
+													<th scope="col">Editar</th>
+												</tr>
+											</thead>		
+										</table>										
+									</div>
+							</div>
+                            <!-- FIM CADASTRO DE PROFESSORES -->
+						</div>	
+						
+						<!-- Modal Usuários -->
+									<div class="modal fade" id="modalUsuarios" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+										<div class="modal-dialog" role="document">
+											<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="exampleModalLabel">Editar Usuário</h5>
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+												</button>
+											</div>
+
+											<div class="modal-body">
+												<form class="" id="formUsuario" onsubmit="return false;">                         
+													<div class="form-group">
+														<label for="nome">Nome:</label>
+														<input class="form-control" type="text" name="atualizarNomeUsuario" id="atualizarNomeUsuario"/>
+													</div>
+													<div class="form-group">
+														<label for="nome">E-mail:</label>
+														<input class="form-control" type="email" name="atualizaEmailUsuario" id="atualizaEmailUsuario"/>
+													</div>													
+													<div class="form-group">
+														<label for="nome">Cargo:</label>
+														<input class="form-control" type="text" name="atualizarCargoUsuario" id="atualizarCargoUsuario"/>
+													</div>
+													<div class="form-group mb-5">
+														<label for="tipoUsuario">Acesso:</label>
+														<select class="form-control" name="atualizarAcessoUsuario" id="atualizarAcessoUsuario">
+															<option value="">Selecione</option>
+															<option value="Bloqueado">Bloqueado</option>
+															<option value="Professor">Professor</option>
+															<option value="Administrador">Administrador</option>
+														</select>
+													</div>    											      
+												</form>		
+											</div>
+											
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+												<button type="button" class="btn btn-primary" id="btnAtualizarUsuario">Atualizar</button>
+											</div>
+											</div>
+										</div>
+									</div>
+									<!-- Fim Modal Usuários -->
+									
 									<!-- Modal Equipamentos-->
 									<div class="modal fade" id="modalEquipamentos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 										<div class="modal-dialog" role="document">
@@ -167,134 +258,7 @@ if (!isset($_SESSION['nome_usuario']) OR ($_SESSION['nivel_acesso'] != 3)) {
 										</div>
 									</div>
 									<!-- Fim Modal -->
-
-									<!-- EQUIPAMENTOS RESERVADOS -->
-									<div class="tab-pane fade" id="nav-reservados-equip" role="tabpanel" aria-labelledby="nav-reservados-equip-tab">
-										<h5 class="mt-2">Equipamentos Reservados</h5>
-										<hr style="border-width: 5px; border-color:#006FA7">
-										<form action="../pages/relatorio.php" method="post" target="_blank">
-										<div class="input-group mb-3">
-											<div class="input-group-prepend">
-												<label class="input-group-text" for="inputGroupSelect">Filtro</label>
-											</div>
-											<input class="form-control" type="date" name="dataRelatorio" id="dataRelatorio">
-											<input hidden name="funcao" id="funcao" value="txt">
-											<button class="btn btn-dark" id="btn-res-equip">Gerar Relatório</button>											
-										</div>	
-										</form>										
-									</div>
-
-								</div>
-							</div>    
-                            <!-- FIM CADASTRO DE EQUIPAMENTOS -->
-
-                            <!-- CADASTRO DE PROFESSORES -->
-							<div class="tab-pane fade" id="v-pills-professores" role="tabpanel" aria-labelledby="v-pills-professores-tab">
-								<nav>
-									<div class="nav nav-tabs" id="nav-tab" role="tablist">
-										<a class="nav-item nav-link active" id="nav-rel-professor-tab" data-toggle="tab" href="#nav-rel-professor" role="tab" aria-controls="nav-rel-professor" aria-selected="true">Relação</a>
-										<a class="nav-item nav-link" id="nav-cadastrar-professor-tab" data-toggle="tab" href="#nav-cadastrar-professor" role="tab" aria-controls="nav-cadastrar-professor" aria-selected="false">Cadastrar</a>
-									</div>
-								</nav>
-
-								<div class="tab-content" id="nav-tabContent-professor">
-									<div class="tab-pane fade show active" id="nav-rel-professor" role="tabpanel" aria-labelledby="nav-rel-professor-tab">
-										<h5 class="mt-2">Relação de Usuarios</h5>
-										<hr style="border-width: 5px; border-color:#006FA7">										
-										<table class="table table-bordered bg-white text-center" id="usuariosCadastrados">
-											<thead class="thead-light">
-												<tr>
-													<th scope="col">Nome</th>
-													<th scope="col">Cargo</th>
-													<th scope="col">Editar</th>
-												</tr>
-											</thead>		
-										</table>										
-									</div>
-
-									<!-- Modal Usuários -->
-									<div class="modal fade" id="modalUsuarios" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-										<div class="modal-dialog" role="document">
-											<div class="modal-content">
-											<div class="modal-header">
-												<h5 class="modal-title" id="exampleModalLabel">Editar Usuário</h5>
-												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-												<span aria-hidden="true">&times;</span>
-												</button>
-											</div>
-
-											<div class="modal-body">
-												<form class="" id="formUsuario" onsubmit="return false;">                         
-													<div class="form-group">
-														<label for="nome">Nome:</label>
-														<input class="form-control" type="text" name="nomeUsuario" id="nomeUsuario"/>
-													</div>
-													<div class="form-group">
-														<label for="nome">E-mail:</label>
-														<input class="form-control" type="email" name="email" id="email"/>
-													</div>
-													<div class="form-group">
-														<label for="nome">Cpf: (sem ponto e sem traço)</label>
-														<input class="form-control" type="number" name="cpfUsuario" id="cpfUsuario"/>
-													</div>											
-													<div class="form-group">
-														<label for="nome">Cargo:</label>
-														<input class="form-control" type="text" name="cargo" id="cargo"/>
-													</div>
-													<div class="form-group mb-5">
-														<label for="tipoUsuario">Tipo de usuario:</label>
-														<select class="form-control" name="tipoUsuario" id="tipoUsuario">
-															<option value="">Selecione</option>
-															<option value="Professor">Professor</option>
-															<option value="Administrador">Administrador</option>
-														</select>
-													</div>    											      
-												</form>		
-											</div>
-											
-											<div class="modal-footer">
-												<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-												<button type="button" class="btn btn-primary" id="btnSair">Atualizar</button>
-											</div>
-											</div>
-										</div>
-									</div>
-									<!-- Fim Modal Usuários -->
-
-									<div class="tab-pane fade" id="nav-cadastrar-professor" role="tabpanel" aria-labelledby="nav-cadastrar-professor-tab">
-										<form class="" id="formUsuario" onsubmit="return false;">                                    
-											<h5 class="mt-2">Cadastro de Usuario</h5>
-											<hr style="border-width: 5px; border-color:#006FA7">	
-											<div class="form-group">
-												<label for="nome">Nome:</label>
-												<input class="form-control" type="text" name="nomeUsuario" id="nomeUsuario"/>
-											</div>
-											<div class="form-group">
-												<label for="nome">E-mail:</label>
-												<input class="form-control" type="email" name="email" id="email"/>
-											</div>
-											<div class="form-group">
-												<label for="nome">Cpf: (sem ponto e sem traço)</label>
-												<input class="form-control" type="number" name="cpfUsuario" id="cpfUsuario"/>
-											</div>											
-											<div class="form-group">
-												<label for="nome">Cargo:</label>
-												<input class="form-control" type="text" name="cargo" id="cargo"/>
-											</div>
-											<div class="form-group mb-5">
-												<label for="tipoUsuario">Tipo de usuario:</label>
-												<select class="form-control" name="tipoUsuario" id="tipoUsuario">
-													<option value="">Selecione</option>
-													<option value="Professor">Professor</option>
-													<option value="Administrador">Administrador</option>
-												</select>
-											</div>                                        
-											<button class="btn btn-dark" id="btn-cad-professor">Cadastrar</button>                                    
-										</form>		
-									</div> 
-							</div>
-                            <!-- FIM CADASTRO DE PROFESSORES -->
-						</div>	
+									
 					</section>
 				</div>
 					

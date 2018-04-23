@@ -33,6 +33,9 @@
             break;	
 		case "consultarUsuarioCadastrado":
             consultarUsuarioCadastrado();
+            break;
+		case "editarUsuario":
+            editarUsuario();
             break;		
         default:            
             echo "<script>console.log('Função Não Encontrada')</script>";               
@@ -41,8 +44,8 @@
     /* FUNÇÃO DE LOGIN */ 
     function logar(){
         $login = $_POST["login"];
-        //$senha = sha1(md5($_POST['senha']));
-        $senha = $_POST["senha"];
+        $senha = sha1(md5($_POST['senha']));
+        //$senha = $_POST["senha"];
 
         try{
             $pdo = conectar();
@@ -171,6 +174,24 @@
             echo "Linha: " . $erro->getLine();
         }
 	}
+	/* EDITAR USUARIO */
+	function editarUsuario(){
+		$nome_usuario = $_POST['editUsuario'];
+		try{
+            $pdo = conectar();
+            $sql = "SELECT nome_usuario, email_usuario, cargo_usuario FROM usuario where nome_usuario = :nome_usuario";
+            $stm = $pdo->prepare($sql);  
+			$stm->bindValue(":nome_usuario",$nome_usuario);				
+            $stm->execute();
+            $dados = $stm->fetch(PDO::FETCH_ASSOC);                                    
+            echo json_encode($dados);             
+            
+        } catch(PDOExeption $erro){
+            echo "Mensagem de Erro: " . $erro->getMessage() . "<br>";
+            echo "Nome do Arquivo: " . $erro->getFile() . "<br>";
+            echo "Linha: " . $erro->getLine();
+        }
+	}
 	/* CONSULTAR EQUIPAMENTOS */
     function consultarEquipamento(){
         try{
@@ -200,7 +221,7 @@
             $stm = $pdo->prepare($sql);
             $stm->bindValue(":id_equipamento",0);
             $stm->bindValue(":nome_equipamento",$nome_equipamento);
-            $stm->bindValue("fabricante_equipamento",$fabricante_equipamento);
+            $stm->bindValue(":fabricante_equipamento",$fabricante_equipamento);
             $stm->bindValue(":quantidade_equipamento",$quantidade_equipamento);
             $stm->bindValue(":patrimonio_equipamento",$patrimonio_equipamento);
             $stm->execute();

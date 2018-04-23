@@ -23,8 +23,7 @@ $(document).ready(function(){
 		success: function(retorno){							
 			for(i=0;i<retorno.length;i++){
 				$('#reservaUsuario').append('<tr class="bg-light"><td class="text-secondary">'+ retorno[i].data_reserva +'</td><td class="text-secondary">'+ retorno[i].nome_equipamento +'</td><td class="text-secondary">'+ retorno[i].sala +'</td><td class="text-secondary">'+ retorno[i].hora_inicio +'</td><td class="text-secondary">'+ retorno[i].hora_fim +'</td><td class="text-secondary"><button class="btn btn-secondary"><i class="fas fa-times-circle fa-1x" id="'+ retorno[i].id_reservar +'"></i></button></td></tr>');
-			}
-			console.log(retorno);			
+			}		
 		}	
 	});
 	
