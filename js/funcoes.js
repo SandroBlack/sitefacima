@@ -180,6 +180,12 @@ $(document).ready(function(){
 			$("#alertaCad3").css("display","none");
 			return 0;
 		}
+		
+		var xx = validaEmail(email);
+		if(xx == false){
+			$("#alertaCad2").css("display","block");
+			return 0;
+		}
 		$.ajax({
 			type: 'POST',
 			url: '../db/funcoes.php',
@@ -198,4 +204,11 @@ $(document).ready(function(){
 			}
 		});
 	});
+
 });
+
+function validaEmail(email) {
+  var regex = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+  return regex.test(email);
+}
+

@@ -105,7 +105,7 @@
         $email_usuario = $_POST['email'];
         $senha_usuario = sha1(md5($_POST['senha']));
         $cargo_usuario = $_POST['cargo'];
-		$nivel_acesso = 0;	
+		$nivel_acesso = 1;	
 		try{
 			$pdo = conectar();
             $sql = "SELECT `nome_usuario`, `email_usuario` FROM `usuario` WHERE `email_usuario` = :email_usuario";
@@ -166,7 +166,7 @@
 	function consultarUsuarioCadastrado(){
 		try{
             $pdo = conectar();
-            $sql = "SELECT `id_usuario`, `nome_usuario`, `email_usuario`,`cargo_usuario`,`nivel_acesso` FROM `usuario`";
+            $sql = "SELECT `id_usuario`, `nome_usuario`, `email_usuario`,`cargo_usuario` FROM `usuario`";
             $stm = $pdo->prepare($sql);
             $stm->execute();
             $dados = $stm->fetchAll(PDO::FETCH_ASSOC);                                    

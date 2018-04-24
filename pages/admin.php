@@ -88,8 +88,8 @@ if (!isset($_SESSION['nome_usuario']) OR ($_SESSION['nivel_acesso'] != 3)) {
 									</div>
 								</nav>
 								<div class="tab-content" id="nav-tabContent-equip">
-									<div class="tab-pane fade show active" id="nav-rel-equip" role="tabpanel" aria-labelledby="nav-rel-equip-tab">
-										<h5 class="mt-2">Relação de Equipamentos</h5>
+								<h5 class="mt-2">Relação de Equipamentos</h5>
+									<div class="tab-pane fade show active table-responsive" id="nav-rel-equip" role="tabpanel" aria-labelledby="nav-rel-equip-tab">										
 										<hr style="border-width: 5px; border-color:#006FA7">										
 										<table class="table table-bordered bg-white text-center" id="equipamentosCadastrados">
 											<thead class="thead-light">
@@ -155,15 +155,14 @@ if (!isset($_SESSION['nome_usuario']) OR ($_SESSION['nivel_acesso'] != 3)) {
 								</nav>
 
 								<div class="tab-content" id="nav-tabContent-professor">
-									<div class="tab-pane fade show active" id="nav-rel-professor" role="tabpanel" aria-labelledby="nav-rel-professor-tab">
-										<h5 class="mt-2">Relação de Usuarios</h5>
+								<h5 class="mt-2">Relação de Usuarios</h5>
+									<div class="tab-pane fade show active table-responsive" id="nav-rel-professor" role="tabpanel" aria-labelledby="nav-rel-professor-tab">										
 										<hr style="border-width: 5px; border-color:#006FA7">										
 										<table class="table table-bordered bg-white text-center" id="usuariosCadastrados">
 											<thead class="thead-light">
 												<tr>
 													<th scope="col">Nome</th>
-													<th scope="col">Cargo</th>
-													<th scope="col">Nível de Acesso</th>
+													<th scope="col">Cargo</th>													
 													<th scope="col">Editar</th>
 												</tr>
 											</thead>		

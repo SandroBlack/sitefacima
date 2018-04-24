@@ -1,7 +1,7 @@
 <?php 
 session_start();
 
-if (!isset($_SESSION['nome_usuario']) OR ($_SESSION['nivel_acesso'] != 1)) {
+if (!isset($_SESSION['nome_usuario']) OR ($_SESSION['nivel_acesso'] != 1 && $_SESSION['nivel_acesso'] != 3)) {
 	// Destrói a sessão por segurança
 	session_destroy();
 	// Redireciona o visitante de volta pro login
@@ -85,7 +85,7 @@ if (!isset($_SESSION['nome_usuario']) OR ($_SESSION['nivel_acesso'] != 1)) {
 								</nav>
 
 								<div class="tab-content" id="nav-tabContent-equip">
-								<div class="tab-pane fade show active" id="nav-equip-reservado" role="tabpanel" aria-labelledby="nav-equip-reservado-tab">
+								<div class="tab-pane fade show active table-responsive" id="nav-equip-reservado" role="tabpanel" aria-labelledby="nav-equip-reservado-tab">
 									<table class="table table-hover" id="reservaUsuario">
 										<tr>
 											<thead>

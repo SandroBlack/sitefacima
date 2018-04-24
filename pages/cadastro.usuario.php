@@ -10,6 +10,8 @@
     <!-- Bootstrap CSS, Font Awesome-->    
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+	<script src='https://www.google.com/recaptcha/api.js'></script>
+
     	
 	  <!-- Optional CSS -->
 	  <link rel="stylesheet" href="../css/style.css">
@@ -30,7 +32,7 @@
                 Existe outro Cadastro com Esse E-mail!
             </div>
             <div class="alert alert-warning alertaLogin" id="alertaCad2" role="alert">
-                Favor Preencher Todos os Campos!
+                Favor Preencher Todos os Campos Corretamente!
             </div>
 			<div class="alert alert-warning alertaLogin" id="alertaCad3" role="alert">
                 Senhas não conferem!
