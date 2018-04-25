@@ -1,9 +1,10 @@
 <?php 
     function conectar(){
         //$host = "mysql:host=159.203.174.27; port=3306; dbname=sitefacima";
-        $host = "mysql:host=localhost; port=3306; dbname=sitefacima";
+        $host = "mysql:host=localhost; dbname=sitefacima";
         $usuario = "root";
-        $senha = "bkj5180";
+        $senha = "";
+        //$senha = "bkj5180";
         try{
             $pdo = new PDO($host, $usuario, $senha);
             $pdo->exec("SET names utf8");                            
