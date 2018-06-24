@@ -34,8 +34,11 @@
             <div class="alert alert-warning alertaLogin" id="alertaCad2" role="alert">
                 Favor Preencher Todos os Campos Corretamente!
             </div>
-			<div class="alert alert-warning alertaLogin" id="alertaCad3" role="alert">
+			      <div class="alert alert-warning alertaLogin" id="alertaCad3" role="alert">
                 Senhas não conferem!
+            </div>
+			      <div class="alert alert-success alertaLogin" id="alertaCad4" role="alert">
+                Cadastro Realizado com Sucesso!
             </div>
             <br>
             <div class="form-group">

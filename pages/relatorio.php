@@ -1,23 +1,31 @@
-<?php
+<?php	
 	include_once("../db/dbConexao.php"); 
+	
 	/* Usar o Dompdf com Namespaces e corrigir o conflito de nomes */
     use Dompdf\Dompdf;
     include_once("../pdf/dompdf/autoload.inc.php");
 	session_start();
 	
-	$dataRelatorio = inverteData($_POST['dataRelatorio']);
-		
-		try{
-		
-		    $pdo = conectar();
-            $sql = "SELECT nome_usuario, curso, semestre, periodo, sala, data_reserva, hora_inicio, hora_fim, nome_equipamento
-					FROM
-					reservar r                    
-					INNER JOIN usuario u ON r.fk_usuario = u.id_usuario                    
+	$dataRelatorio = date('d/m/Y', strtotime($_POST["dataRelatorio"]));	
+	
+		if($dataRelatorio == "01/01/1970"){
+			$dataRelatorio = "Geral";
+			$sql = "SELECT * FROM reservar r
+					INNER JOIN usuario u ON r.fk_usuario = u.id_usuario
 					INNER JOIN equipamento e ON r.fk_equipamento = e.id_equipamento
-					Where data_reserva = '{$dataRelatorio}'";
-            $stm = $pdo->prepare($sql);     
-            $stm->execute();
+					ORDER BY ordem ASC";
+		} else{
+			$sql = "SELECT nome_usuario, curso, semestre, periodo, sala, data_reserva, hora_inicio, hora_fim, nome_equipamento
+						FROM
+						reservar r                    
+						INNER JOIN usuario u ON r.fk_usuario = u.id_usuario                    
+						INNER JOIN equipamento e ON r.fk_equipamento = e.id_equipamento
+						Where data_reserva = '{$dataRelatorio}'";
+		}			
+		try{			
+			$pdo = conectar();							
+			$stm = $pdo->prepare($sql);     
+			$stm->execute();
 			//$dados = $stm->fetchAll(PDO::FETCH_ASSOC);		
 			
 			$x = "";
@@ -32,18 +40,17 @@
 						<td>{$dados['data_reserva']}</td>
 						<td>{$dados['hora_inicio']}</td>
 						<td>{$dados['hora_fim']}</td>
-						<td>{$dados['nome_equipamento']}</td>
+						<td>{$dados['nome_equipamento']} - {$dados['patrimonio_equipamento']}</td>
 						</tr>
 						";
 						
 			}		
 
-        } catch(PDOExeption $erro){
-            echo "Mensagem de Erro: " . $erro->getMessage() . "<br>";
-            echo "Nome do Arquivo: " . $erro->getFile() . "<br>";
-            echo "Linha: " . $erro->getLine();
-        }
-		
+		} catch(PDOExeption $erro){
+			echo "Mensagem de Erro: " . $erro->getMessage() . "<br>";
+			echo "Nome do Arquivo: " . $erro->getFile() . "<br>";
+			echo "Linha: " . $erro->getLine();
+		}	
     
 
     /* Cria uma Stancia do Dompdf */
@@ -106,4 +113,5 @@
 	   return $dataInvertida;			
 	}	
 
+?>
 ?>

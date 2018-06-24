@@ -14,7 +14,7 @@ $(document).ready(function(){
 				
 	});	
 
-	/* Função de Login */
+	/* FUNÇÃO DE LOGIN */
 	$("#btnLogin").click(function(){
 		var funcao = "logar";
 		var login = $("#login").val(); 
@@ -47,6 +47,12 @@ $(document).ready(function(){
 				}				
 			});			
 		}
+		$(document).keypress(function(e) {
+			if(e.which == 13) {
+				$("#btnLogin").click();
+			}
+		});
+		
 	});
 
 	/* PESQUISA DE EQUIPAMENTOS */
@@ -193,16 +199,24 @@ $(document).ready(function(){
 			dataType: 'html',
 			success: function(retorno){
 				if(retorno == "1"){
-					alert("Usuario Cadastrado com Sucesso!");
-					location.href="../index.php";
+					$("#alertaCad1").css("display","none");
+					$("#alertaCad2").css("display","none");
+					$("#alertaCad3").css("display","none");
+					$("#alertaCad4").css("display","block");
+					setTimeout(redirecionarPagina, 2000);
+					//location.href="../index.php";
 				}
 				if(retorno == "0"){
 					$("#alertaCad1").css("display","block");
 					$("#alertaCad2").css("display","none");
 					$("#alertaCad3").css("display","none");
+					$("#alertaCad4").css("display","none");
 				}
 			}
 		});
+		function redirecionarPagina(){
+			location.href="../index.php";
+		}
 	});
 
 });

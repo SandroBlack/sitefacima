@@ -36,9 +36,15 @@ if (!isset($_SESSION['nome_usuario']) OR ($_SESSION['nivel_acesso'] != 3)) {
 			<!-- TOPO -->
 			<header class="row align-items-center mb-1 bg-dark">			
 				<nav class="navbar navbar-light col-md-12">
-					<a class="navbar-brand h1 text-light mb-0" href="">PAINEL ADMINISTRATIVO</a>
-					<!-- <h3 class="text-light align-center">PAINEL</h3>	 -->					
-					<button class="btn btn-light my-2 my-sm-0" type="submit" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-sign-out-alt"></i>Sair</button>												
+					<a class="navbar-brand h1 text-light mb-0" href=""><i class="fas fa-cogs"></i>&nbsp;PAINEL ADMINISTRATIVO</a>
+					<div class="dropdown">
+						<h5 class="text-light mr-2 mt-1 float-left nomeUser"><?=$_SESSION["nome_usuario"]?></h5>								
+						<button class="btn btn-dark my-2 my-sm-0 dropdown-toggle" type="submit" data-toggle="dropdown" data-target="#xampleModal"><i class="fas fa-user-circle fa-lg"></i></button>						
+						<div class="dropdown-menu">
+							<!-- <a class="dropdown-item" href=""><i class="fas fa-address-card"></i>&nbsp;Perfil</a>								 -->
+							<button type="button" class="dropdown-item" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-sign-out-alt"></i>&nbsp;Sair</button>						
+						</div>
+					</div>												
 				</nav>								
 			</header>
 			<!-- FIM TOPO -->
@@ -70,14 +76,15 @@ if (!isset($_SESSION['nome_usuario']) OR ($_SESSION['nivel_acesso'] != 3)) {
 				<div class="list-group col-md-2 p-0 bg-white border">					
 					<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
 												
-						<a class="nav-link active border-bottom" id="v-pills-equipamentos-tab" data-toggle="pill" href="#v-pills-equipamentos" role="tab" aria-controls="v-pills-equipamentos" aria-selected="false">Equipamentos</a>
-						<a class="nav-link border-bottom" id="v-pills-professores-tab" data-toggle="pill" href="#v-pills-professores" role="tab" aria-controls="v-pills-professores" aria-selected="false">Usuarios</a>					
+						<a class="nav-link active border-bottom" id="v-pills-equipamentos-tab" data-toggle="pill" href="#v-pills-equipamentos" role="tab" aria-controls="v-pills-equipamentos" aria-selected="false"><i class="fas fa-laptop"></i>&nbsp;Equipamentos</a>
+						<a class="nav-link border-bottom" id="v-pills-professores-tab" data-toggle="pill" href="#v-pills-professores" role="tab" aria-controls="v-pills-professores" aria-selected="false"><i class="fas fa-users"></i>&nbsp;Usuarios</a>					
 					</div>					  
 				</div>
 
 				<div class="col-md-10 bg-light">
 					<section>						
-						<div class="tab-content" id="v-pills-tabContent">	
+						<div class="tab-content" id="v-pills-tabContent">
+
                             <!-- CADASTRO DE EQUIPAMENTOS -->
 							<div class="tab-pane fade show active" id="v-pills-equipamentos" role="tabpanel" aria-labelledby="v-pills-equipamentos-tab">
 								<nav>
@@ -87,9 +94,9 @@ if (!isset($_SESSION['nome_usuario']) OR ($_SESSION['nivel_acesso'] != 3)) {
 										<a class="nav-item nav-link" id="nav-reservados-equip-tab" data-toggle="tab" href="#nav-reservados-equip" role="tab" aria-controls="nav-reservados-equip" aria-selected="false">Reservados</a>
 									</div>
 								</nav>
-								<div class="tab-content" id="nav-tabContent-equip">
-								<h5 class="mt-2">Relação de Equipamentos</h5>
-									<div class="tab-pane fade show active table-responsive" id="nav-rel-equip" role="tabpanel" aria-labelledby="nav-rel-equip-tab">										
+								<div class="tab-content" id="nav-tabContent-equip">								
+									<div class="tab-pane fade show active table-responsive" id="nav-rel-equip" role="tabpanel" aria-labelledby="nav-rel-equip-tab">
+									<h5 class="mt-2">Relação de Equipamentos</h5>										
 										<hr style="border-width: 5px; border-color:#006FA7">										
 										<table class="table table-bordered bg-white text-center" id="equipamentosCadastrados">
 											<thead class="thead-light">
@@ -125,20 +132,21 @@ if (!isset($_SESSION['nome_usuario']) OR ($_SESSION['nivel_acesso'] != 3)) {
 											</div>                                        
 											<button class="btn btn-dark" id="btn-cad-equip">Cadastrar</button>                                    
 										</form>		
-									</div>		
+									</div>
+
 									<!-- EQUIPAMENTOS RESERVADOS -->
 									<div class="tab-pane fade" id="nav-reservados-equip" role="tabpanel" aria-labelledby="nav-reservados-equip-tab">
 										<h5 class="mt-2">Equipamentos Reservados</h5>
 										<hr style="border-width: 5px; border-color:#006FA7">
 										<form action="../pages/relatorio.php" method="post" target="_blank">
-										<div class="input-group mb-3">
-											<div class="input-group-prepend">
-												<label class="input-group-text" for="inputGroupSelect">Filtro</label>
-											</div>
-											<input class="form-control" type="date" name="dataRelatorio" id="dataRelatorio">
-											<input hidden name="funcao" id="funcao" value="txt">
-											<button class="btn btn-dark" id="btn-res-equip">Gerar Relatório</button>											
-										</div>	
+											<div class="input-group mb-3">
+												<div class="input-group-prepend">
+													<label class="input-group-text" for="inputGroupSelect">Filtro</label>
+												</div>
+												<input class="form-control" type="date" name="dataRelatorio" id="dataRelatorio">
+												<input hidden name="funcao" id="funcao" value="txt">
+												<button class="btn btn-dark" id="btn-res-equip">Gerar Relatório</button>						
+											</div>	
 										</form>										
 									</div>
 
@@ -146,7 +154,7 @@ if (!isset($_SESSION['nome_usuario']) OR ($_SESSION['nivel_acesso'] != 3)) {
 							</div>    
                             <!-- FIM CADASTRO DE EQUIPAMENTOS -->
 
-                            <!-- CADASTRO DE PROFESSORES -->
+                            <!-- CADASTRO DE USUÁRIOS -->
 							<div class="tab-pane fade" id="v-pills-professores" role="tabpanel" aria-labelledby="v-pills-professores-tab">
 								<nav>
 									<div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -169,7 +177,7 @@ if (!isset($_SESSION['nome_usuario']) OR ($_SESSION['nivel_acesso'] != 3)) {
 										</table>										
 									</div>
 							</div>
-                            <!-- FIM CADASTRO DE PROFESSORES -->
+                            <!-- FIM CADASTRO DE USUÁRIOS -->
 						</div>	
 						
 						<!-- Modal Usuários -->

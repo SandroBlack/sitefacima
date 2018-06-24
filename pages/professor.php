@@ -35,8 +35,14 @@ if (!isset($_SESSION['nome_usuario']) OR ($_SESSION['nivel_acesso'] != 1 && $_SE
 			<header class="row align-items-center mb-1 bg-secondary">			
 				<nav class="navbar navbar-light col-md-12">
 					<a class="navbar-brand h1 text-light mb-0" href="">CENTRAL DO PROFESSOR</a>
-					<!-- <h3 class="text-light align-center">PAINEL</h3>	 -->					
-					<button class="btn btn-dark my-2 my-sm-0" type="submit" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-sign-out-alt"></i>Sair</button>												
+					<div class="dropdown">
+						<h5 class="text-light mr-2 mt-1 float-left nomeUser"><?=$_SESSION["nome_usuario"]?></h5>								
+						<button class="btn btn-dark my-2 my-sm-0 dropdown-toggle" type="submit" data-toggle="dropdown" data-target="#xampleModal"><i class="fas fa-user-circle fa-lg"></i></button>						
+						<div class="dropdown-menu">
+							<!-- <a class="dropdown-item" href=""><i class="fas fa-address-card"></i>&nbsp;Perfil</a>								 -->
+							<button type="button" class="dropdown-item" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-sign-out-alt"></i>&nbsp;Sair</button>						
+						</div>
+					</div>														
 				</nav>								
 			</header>
 			<!-- FIM TOPO -->

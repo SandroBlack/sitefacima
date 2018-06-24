@@ -14,6 +14,7 @@ else if($_SESSION['nivel_acesso'] == "Administrador"){
 }
 
 ?>
+
 <html lang="pt-br">
   <head>
     <!-- Required meta tags -->

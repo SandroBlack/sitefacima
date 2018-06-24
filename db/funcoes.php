@@ -286,6 +286,13 @@
 		$curso = $_POST['curso'];
 		$sala = $_POST['sala'];
 		$periodo = $_POST['periodo'];
+		if($periodo == "Matutino"){
+			$ordem = 1;
+		} else if($periodo == "Vespertino"){
+			$ordem = 2;
+		} else{
+			$ordem = 3;
+		}
 		$ListaEquipamento = $_POST['listaEquipamento'];
 		
 		try{
@@ -309,7 +316,7 @@
 					try{
 			
 						$pdo = conectar();
-						$sql = "INSERT INTO `reservar`(`id_reservar`, `data_reserva`, `hora_inicio`, `hora_fim`, `semestre`, `curso`, `sala`, `periodo`, `fk_usuario`, `fk_equipamento`) VALUES (:id_reservar, :data_reserva, :hora_inicio, :hora_fim, :semestre, :curso, :sala, :periodo, :fk_usuario, :fk_equipamento)";
+						$sql = "INSERT INTO `reservar`(`id_reservar`, `data_reserva`, `hora_inicio`, `hora_fim`, `semestre`, `curso`, `sala`, `periodo`, `ordem`, `fk_usuario`, `fk_equipamento`) VALUES (:id_reservar, :data_reserva, :hora_inicio, :hora_fim, :semestre, :curso, :sala, :periodo, :fk_usuario, :fk_equipamento)";
 						$stm = $pdo->prepare($sql);
 						$stm->bindValue(":id_reservar",0);
 						$stm->bindValue(":data_reserva",$data_reserva);
@@ -319,6 +326,7 @@
 						$stm->bindValue(":curso",$curso);           
 						$stm->bindValue(":sala",$sala);           
 						$stm->bindValue(":periodo",$periodo);           
+						$stm->bindValue(":ordem",$ordem);           
 						$stm->bindValue(":fk_usuario", $_SESSION["id_usuario"]);           
 						$stm->bindValue(":fk_equipamento",$ListaEquipamento);           
 						$stm->execute();
