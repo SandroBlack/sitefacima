@@ -6,53 +6,68 @@
     include_once("../pdf/dompdf/autoload.inc.php");
 	session_start();
 	
-	$dataRelatorio = date('d/m/Y', strtotime($_POST["dataRelatorio"]));	
+	$data = date('d/m/Y', strtotime($_POST["dataRelatorio"]));
+	$data == "01/01/1970" ? $data = "" : $data = $data;	
+	$periodo = $_POST["selectTurno"];
 	
-		if($dataRelatorio == "01/01/1970"){
-			$dataRelatorio = "Geral";
+		if(empty($data) && empty($periodo)){
+			$data = "Geral";
 			$sql = "SELECT * FROM reservar r
 					INNER JOIN usuario u ON r.fk_usuario = u.id_usuario
 					INNER JOIN equipamento e ON r.fk_equipamento = e.id_equipamento
-					ORDER BY ordem ASC";
+					ORDER BY ordem ASC, data_reserva DESC";					
+		} else if(!empty($data) && empty($periodo)){			
+			$sql = "SELECT nome_usuario, curso, semestre, periodo, sala, data_reserva, hora_inicio, hora_fim, patrimonio_equipamento, nome_equipamento
+					FROM reservar r                    
+					INNER JOIN usuario u ON r.fk_usuario = u.id_usuario                    
+					INNER JOIN equipamento e ON r.fk_equipamento = e.id_equipamento
+					WHERE data_reserva = '{$data}'
+					ORDER BY ordem ASC, data_reserva DESC";
+		} else if(empty($data) && !empty($periodo)){
+			$sql = "SELECT nome_usuario, curso, semestre, periodo, sala, data_reserva, hora_inicio, hora_fim, patrimonio_equipamento, nome_equipamento
+					FROM reservar r                    
+					INNER JOIN usuario u ON r.fk_usuario = u.id_usuario                    
+					INNER JOIN equipamento e ON r.fk_equipamento = e.id_equipamento
+					WHERE periodo = '{$periodo}'
+					ORDER BY ordem ASC, data_reserva DESC";
 		} else{
-			$sql = "SELECT nome_usuario, curso, semestre, periodo, sala, data_reserva, hora_inicio, hora_fim, nome_equipamento
-						FROM
-						reservar r                    
-						INNER JOIN usuario u ON r.fk_usuario = u.id_usuario                    
-						INNER JOIN equipamento e ON r.fk_equipamento = e.id_equipamento
-						Where data_reserva = '{$dataRelatorio}'";
-		}			
+			$sql = "SELECT nome_usuario, curso, semestre, periodo, sala, data_reserva, hora_inicio, hora_fim, patrimonio_equipamento, nome_equipamento
+					FROM reservar r                    
+					INNER JOIN usuario u ON r.fk_usuario = u.id_usuario                    
+					INNER JOIN equipamento e ON r.fk_equipamento = e.id_equipamento
+					WHERE data_reserva = '{$data}' AND periodo = '{$periodo}'
+					ORDER BY ordem ASC, data_reserva DESC";
+		}		
+
 		try{			
 			$pdo = conectar();							
 			$stm = $pdo->prepare($sql);     
 			$stm->execute();
-			//$dados = $stm->fetchAll(PDO::FETCH_ASSOC);		
-			
-			$x = "";
-			while($dados = $stm->fetch(PDO::FETCH_ASSOC))
-			{
-				$x .= "	<tr>
-						<td>{$dados['nome_usuario']}</td>
-						<td>{$dados['curso']}</td>
-						<td>{$dados['semestre']}</td>
-						<td>{$dados['periodo']}</td>
-						<td>{$dados['sala']}</td>
-						<td>{$dados['data_reserva']}</td>
-						<td>{$dados['hora_inicio']}</td>
-						<td>{$dados['hora_fim']}</td>
-						<td>{$dados['nome_equipamento']} - {$dados['patrimonio_equipamento']}</td>
-						</tr>
-						";
-						
-			}		
-
+			$dados1 = $stm->fetch(PDO::FETCH_ASSOC);
+			if(empty($dados1)){
+				$x = "<tr><p class='text-center'>Não há equipamentos reservados na data ou período selecionado(s)!</p></tr>";
+			} else{				
+				$x = "";
+				while($dados = $stm->fetch(PDO::FETCH_ASSOC)){
+					$x .= "	<tr>
+							<td class='align-middle'>{$dados['nome_usuario']}</td>
+							<td class='align-middle'>{$dados['curso']}</td>
+							<td class='align-middle'>{$dados['semestre']}</td>
+							<td class='align-middle'>{$dados['periodo']}</td>
+							<td class='align-middle'>{$dados['sala']}</td>
+							<td class='align-middle'>{$dados['data_reserva']}</td>
+							<td class='align-middle'>{$dados['hora_inicio']}</td>
+							<td class='align-middle'>{$dados['hora_fim']}</td>
+							<td class='align-middle'>{$dados['patrimonio_equipamento']} - {$dados['nome_equipamento']}</td>
+							</tr>";							
+				}		
+			}
 		} catch(PDOExeption $erro){
 			echo "Mensagem de Erro: " . $erro->getMessage() . "<br>";
 			echo "Nome do Arquivo: " . $erro->getFile() . "<br>";
 			echo "Linha: " . $erro->getLine();
 		}	
-    
-
+		
     /* Cria uma Stancia do Dompdf */
     $dompdf = new DOMPDF();
 
@@ -68,11 +83,11 @@
 								<body>
 									<div>								
 										<img style='float:left; margin-right: 60px' class='mb-0' src='../img/Logo_Loginb.png' alt='Logo Facima'>
-										<h3 style='' class='page-header'>Relatório de Equipamentos Reservados - {$dataRelatorio}</h3>
+										<h3 style='' class='page-header'>Relatório de Equipamentos Reservados - {$data}</h3>
 									</div>
 									<hr style='border-width: 5px; border-color:#006FA7'>			  				
 									<div class='table-responsive'>
-										<table class='table table-striped table-bordered table-condensed text-center'>
+										<table class='table table-striped table-bordered table-sm text-center'>
 											<thead>
 												<tr>
 													<th>Professor</th>
@@ -83,7 +98,7 @@
 													<th>Data</th>
 													<th>Retirada</th>
 													<th>Devolução</th>
-													<th>Equipamento</th>
+													<th>Patrimônio/Equip.</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -113,5 +128,4 @@
 	   return $dataInvertida;			
 	}	
 
-?>
 ?>

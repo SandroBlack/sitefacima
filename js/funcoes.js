@@ -25,7 +25,7 @@ $(document).ready(function(){
 			$("#alertaLogin1").css("display","block");			
 			return false;
 		} else{			
-			var dados = {funcao,login, senha};
+			var dados = {funcao, login, senha};
 			$.ajax({			
 				type: 'POST',
 				url:'db/funcoes.php',
@@ -70,11 +70,10 @@ $(document).ready(function(){
 				for(i=0;i<retorno.length;i++){
 					$(".dadosEquipamentos").append(				
 						"<tr>"+										
-							"<td>" + retorno[i].idequipamento + "</td>"+											
-							"<td>" + retorno[i].nome + "</td>"+											
-							"<td>" + retorno[i].fabricante + "</td>"+											
-							"<td>" + retorno[i].estoque + "</td>"+											
-							
+							"<td class='align-middle'>" + retorno[i].idequipamento + "</td>"+											
+							"<td class='align-middle'>" + retorno[i].nome + "</td>"+											
+							"<td class='align-middle'>" + retorno[i].fabricante + "</td>"+											
+							"<td class='align-middle'>" + retorno[i].estoque + "</td>"+ 							
 							"<td><button class='btn btn-sm btn-primary' id='alterarEquip' title='Alterar'>E</button></td>"+
 							"<td><button class='btn btn-sm btn-dark' id='excluirEquip' title='Excluir'>X</button></td>"+							
 						"</tr>"
@@ -84,8 +83,7 @@ $(document).ready(function(){
 		});
 	});
 	
-	/* RESERVAR EQUIPAMENTO */
-	
+	/* RESERVAR EQUIPAMENTO */	
 	$("#btn-reserva").click(function(){
 		var funcao = "reservarEquipamento";
 		var dataD = $("#data").val();
@@ -111,7 +109,7 @@ $(document).ready(function(){
 				if(retorno == "11")
 				{		
 					alert("Todos equipamentos reservados para a data selecionada");								
-				}
+				}				
 			}
 		});
 	});		
@@ -131,12 +129,11 @@ $(document).ready(function(){
 				for(i=0;i<retorno.length;i++){
 					$(".dadosReserva").append(				
 						"<tr>"+																			
-							"<td>" + retorno[i].idreserva + "</td>"+											
-							"<td>" + retorno[i].id_professor + "</td>"+											
-							"<td>" + retorno[i].id_equipamento + "</td>"+											
-							"<td>" + retorno[i].sala + "</td>"+											
-							"<td>" + retorno[i].data + "</td>"+ 																	
-							
+							"<td class='align-middle'>" + retorno[i].idreserva + "</td>"+											
+							"<td class='align-middle'>" + retorno[i].id_professor + "</td>"+											
+							"<td class='align-middle'>" + retorno[i].id_equipamento + "</td>"+											
+							"<td class='align-middle'>" + retorno[i].sala + "</td>"+											
+							"<td class='align-middle'>" + retorno[i].data + "</td>"+								
 							"<td><button class='btn btn-sm btn-primary' id='alterarReservaEquip' title='Alterar'>E</button></td>"+
 							"<td><button class='btn btn-sm btn-dark' id='excluirReservaEquip' title='Excluir'>X</button></td>"+							
 						"</tr>"
@@ -145,6 +142,44 @@ $(document).ready(function(){
 			}
 		});
 	});
+	
+	/* PESQUISA EQUIPAMENTOS RESERVADOS (ADMIN) */
+	$("#pesquisa-equip-reservados").click(function(){
+		var funcao = "consultarEquipamentoReservado";
+		var tabela = "reserva";
+		var data = $("#dataRelatorio").val();
+		var turno = $("#selectTurno").val();		
+		
+		$.ajax({
+			type: 'POST',
+			url: '../db/funcoes.php',
+			data: {funcao, tabela, data, turno},
+			dataType: 'json',					
+			success: function(retorno){
+				if(retorno == 0){
+					$(".dadosReservados").empty();
+					$(".dadosReservadosMsg").empty();
+					$(".dadosReservadosMsg").append("<p class='text-center'>Não há equipamentos reservados na data ou período selecionado(s)!</p>");
+				} else{				
+					$(".dadosReservados").empty();
+					$(".dadosReservadosMsg").empty();												
+					for(i=0;i<retorno.length;i++){
+						$(".dadosReservados").append(				
+							"<tr>"+																			
+								"<td class='align-middle'>" + retorno[i].id_reservar + "</td>"+													
+								"<td class='align-middle'>" + retorno[i].nome_usuario + "</td>"+
+								"<td class='align-middle'>" + retorno[i].patrimonio_equipamento + ' - ' + retorno[i].nome_equipamento + ' ' + retorno[i].fabricante_equipamento + "</td>"+
+								"<td class='align-middle'>" + retorno[i].periodo + "</td>"+	
+								"<td class='align-middle'>" + retorno[i].sala + "</td>"+														
+								"<td class='align-middle'>" + retorno[i].data_reserva + "</td>"+												
+								"<td><button class='btn btn-sm btn-outline-secondary' id='"+ retorno[i].id_reservar +"' title='Dar baixa'><i class='fas fa-exchange-alt'></i></button></td>"+							
+							"</tr>"
+						);
+					}
+				}																	
+			}
+		});
+	});	
 	
 	/* CADASTRO DE EQUIPAMENTOS */
 	$("#btn-cad-equip").click(function(){
@@ -175,6 +210,7 @@ $(document).ready(function(){
 		var cargo = $('#cargo').val();
 		var senha = $('#senha').val();
 		var confSenha = $('#confSenha').val();
+
 		if(senha != confSenha){
 			$("#alertaCad1").css("display","none");
 			$("#alertaCad2").css("display","none");
@@ -203,7 +239,7 @@ $(document).ready(function(){
 					$("#alertaCad2").css("display","none");
 					$("#alertaCad3").css("display","none");
 					$("#alertaCad4").css("display","block");
-					setTimeout(redirecionarPagina, 2000);
+					setTimeout(redirecionarPagina(), 2000);
 					//location.href="../index.php";
 				}
 				if(retorno == "0"){

@@ -2,7 +2,7 @@
 	include_once("../db/dbConexao.php"); 
 	session_start();
 
-if (!isset($_SESSION['nome_usuario']) OR ($_SESSION['nivel_acesso'] != 3)) {
+	if (!isset($_SESSION['nome_usuario']) OR ($_SESSION['nivel_acesso'] != "Administrador")) {
 	// Destrói a sessão por segurança
 	session_destroy();
 	// Redireciona o visitante de volta pro login
@@ -95,42 +95,49 @@ if (!isset($_SESSION['nome_usuario']) OR ($_SESSION['nivel_acesso'] != 3)) {
 									</div>
 								</nav>
 								<div class="tab-content" id="nav-tabContent-equip">								
-									<div class="tab-pane fade show active table-responsive" id="nav-rel-equip" role="tabpanel" aria-labelledby="nav-rel-equip-tab">
-									<h5 class="mt-2">Relação de Equipamentos</h5>										
+									<div class="tab-pane fade show active" id="nav-rel-equip" role="tabpanel" aria-labelledby="nav-rel-equip-tab">
+										<!-- <h5 class="mt-2">Relação de Equipamentos</h5> -->
+										<table class="table table-sm mt-2">
+											<tr>
+												<td class="align-middle"><h5 class="mt-2">Relação de Equipamentos</h5></td>						
+												<td class="align-middle float-right"><button class="btn btn-outline-dark" id="btn-rel-user" title="Relatório"><i class="fas fa-file-pdf"></i>&nbsp;Relatório</button></td>
+											</tr>
+										</table>	
+																	
 										<hr style="border-width: 5px; border-color:#006FA7">										
-										<table class="table table-bordered bg-white text-center" id="equipamentosCadastrados">
+										<table class="table table-bordered table-sm bg-white text-center text-secondary table-responsive-sm">
 											<thead class="thead-light">
 												<tr>
-													<th scope="col">Nome</th>													
-													<th scope="col">Fabricante</th>
-													<th scope="col">Quantidade</th>
 													<th scope="col">Patrimonio</th>
+													<th scope="col">Equipamento</th>													
+													<th scope="col">Fabricante</th>
+													<th scope="col">Cadastrado</th>
+													<th scope="col">Responsável</th>
 													<th scope="col">Editar</th>
 												</tr>
-											</thead>													
+											</thead>
+											<tbody id="equipamentosCadastrados">
+
+											</tbody>													
 										</table>
 									</div>
 									<div class="tab-pane fade" id="nav-cadastrar-equip" role="tabpanel" aria-labelledby="nav-cadastrar-equip-tab">
 										<form class="" id="formEquipamento" onsubmit="return false;">                                    
 											<h5 class="mt-2">Cadastro de Equipamentos</h5>
-											<hr style="border-width: 5px; border-color:#006FA7">	
+											<hr style="border-width: 5px; border-color:#006FA7">
 											<div class="form-group">
-												<label for="nome">Nome do equipamento:</label>
+												<label for="fabricante">Patrimonio:</label>
+												<input class="form-control" type="number" name="patrimonio" id="patrimonio" required/>
+											</div>	
+											<div class="form-group">
+												<label for="nome">Equipamento:</label>
 												<input class="form-control" type="text" name="nome" id="nome" required/>
 											</div>
 											<div class="form-group">
-												<label for="modelo">Fabricante do equipamento:</label>
+												<label for="modelo">Fabricante:</label>
 												<input class="form-control" type="text" name="fabricante" id="fabricante" required/>
-											</div>
-											<div class="form-group">
-												<label for="fabricante">Quantidade de equipamento(s)</label>
-												<input class="form-control" type="number" name="quantidade" id="quantidade" required/>
-											</div>                                        
-											<div class="form-group">
-												<label for="fabricante">Patrimonio do equipamento:</label>
-												<input class="form-control" type="number" name="patrimonio" id="patrimonio" required/>
-											</div>                                        
-											<button class="btn btn-dark" id="btn-cad-equip">Cadastrar</button>                                    
+											</div>										                        
+											<button class="btn btn-outline-dark" id="btn-cad-equip"><i class="fas fa-save"></i>&nbsp;Cadastrar</button>                                    
 										</form>		
 									</div>
 
@@ -141,12 +148,45 @@ if (!isset($_SESSION['nome_usuario']) OR ($_SESSION['nivel_acesso'] != 3)) {
 										<form action="../pages/relatorio.php" method="post" target="_blank">
 											<div class="input-group mb-3">
 												<div class="input-group-prepend">
-													<label class="input-group-text" for="inputGroupSelect">Filtro</label>
+													<label class="input-group-text" for="inputGroupSelect">DATA</label>
 												</div>
-												<input class="form-control" type="date" name="dataRelatorio" id="dataRelatorio">
+												<input class="form-control mr-3" type="date" name="dataRelatorio" id="dataRelatorio">
+												<div class="input-group-prepend">
+													<label class="input-group-text" for="inputGroupSelect">TURNO</label>
+												</div>
+												<select class="custom-select" style="height:45px" name="selectTurno" id="selectTurno">
+													<option value="" selected>TODOS</option>
+													<option value="Matutino">Matutino</option>												
+													<option value="Vespertino">Vespertino</option>
+													<option value="Noturno">Noturno</option>											
+												</select>
 												<input hidden name="funcao" id="funcao" value="txt">
-												<button class="btn btn-dark" id="btn-res-equip">Gerar Relatório</button>						
-											</div>	
+												<div class="input-group-append">
+													<button class="btn btn-outline-dark mr-5" type="button" id="pesquisa-equip-reservados" title="Pesquisar"><i class="fas fa-search"></i></button>
+												</div>
+												<div class="input-group-append">
+													<button class="btn btn-outline-dark" id="btn-res-equip" title="Relatório"><i class="fas fa-file-pdf"></i>&nbsp;Relatório</button>
+												</div>	
+											</div>
+
+											<table class="table table-bordered table-sm bg-white text-center text-secondary table-responsive-sm">
+												<thead class="thead-light">
+													<tr>
+														<th scope="col">ID</th>
+														<th scope="col">PROFESSOR</th>
+														<th scope="col">PATRIMÔNIO/EQUIP.</th>
+														<th scope="col">PERÍODO</th>
+														<th scope="col">SALA</th>
+														<th scope="col">DATA</th>														
+														<th scope="col">BAIXA</th>														
+													</tr>
+												</thead>	
+											
+												<tbody class="dadosReservados">
+													
+												</tbody>														
+											</table>
+											<div class="dadosReservadosMsg"></div>		
 										</form>										
 									</div>
 
@@ -154,7 +194,7 @@ if (!isset($_SESSION['nome_usuario']) OR ($_SESSION['nivel_acesso'] != 3)) {
 							</div>    
                             <!-- FIM CADASTRO DE EQUIPAMENTOS -->
 
-                            <!-- CADASTRO DE USUÁRIOS -->
+                            <!-- ÁREA USUÁRIOS -->
 							<div class="tab-pane fade" id="v-pills-professores" role="tabpanel" aria-labelledby="v-pills-professores-tab">
 								<nav>
 									<div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -164,63 +204,64 @@ if (!isset($_SESSION['nome_usuario']) OR ($_SESSION['nivel_acesso'] != 3)) {
 
 								<div class="tab-content" id="nav-tabContent-professor">
 								<h5 class="mt-2">Relação de Usuarios</h5>
-									<div class="tab-pane fade show active table-responsive" id="nav-rel-professor" role="tabpanel" aria-labelledby="nav-rel-professor-tab">										
+									<div class="tab-pane fade show active" id="nav-rel-professor" role="tabpanel" aria-labelledby="nav-rel-professor-tab">										
 										<hr style="border-width: 5px; border-color:#006FA7">										
-										<table class="table table-bordered bg-white text-center" id="usuariosCadastrados">
+										<table class="table table-bordered table-sm bg-white text-center table-responsive-sm" id="usuariosCadastrados">
 											<thead class="thead-light">
 												<tr>
 													<th scope="col">Nome</th>
 													<th scope="col">Cargo</th>													
+													<th scope="col">Acesso</th>													
 													<th scope="col">Editar</th>
 												</tr>
 											</thead>		
 										</table>										
 									</div>
 							</div>
-                            <!-- FIM CADASTRO DE USUÁRIOS -->
+                            <!-- FIM ÁREA DE USUÁRIOS -->
 						</div>	
 						
 						<!-- Modal Usuários -->
 									<div class="modal fade" id="modalUsuarios" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 										<div class="modal-dialog" role="document">
 											<div class="modal-content">
-											<div class="modal-header">
-												<h5 class="modal-title" id="exampleModalLabel">Editar Usuário</h5>
-												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-												<span aria-hidden="true">&times;</span>
-												</button>
-											</div>
+												<div class="modal-header">
+													<h5 class="modal-title" id="exampleModalLabel">Editar Usuário</h5>
+													<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+													</button>
+												</div>
 
-											<div class="modal-body">
-												<form class="" id="formUsuario" onsubmit="return false;">                         
-													<div class="form-group">
-														<label for="nome">Nome:</label>
-														<input class="form-control" type="text" name="atualizarNomeUsuario" id="atualizarNomeUsuario"/>
-													</div>
-													<div class="form-group">
-														<label for="nome">E-mail:</label>
-														<input class="form-control" type="email" name="atualizaEmailUsuario" id="atualizaEmailUsuario"/>
-													</div>													
-													<div class="form-group">
-														<label for="nome">Cargo:</label>
-														<input class="form-control" type="text" name="atualizarCargoUsuario" id="atualizarCargoUsuario"/>
-													</div>
-													<div class="form-group mb-5">
-														<label for="tipoUsuario">Acesso:</label>
-														<select class="form-control" name="atualizarAcessoUsuario" id="atualizarAcessoUsuario">
-															<option value="">Selecione</option>
-															<option value="Bloqueado">Bloqueado</option>
-															<option value="Professor">Professor</option>
-															<option value="Administrador">Administrador</option>
-														</select>
-													</div>    											      
-												</form>		
-											</div>
-											
-											<div class="modal-footer">
-												<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-												<button type="button" class="btn btn-primary" id="btnAtualizarUsuario">Atualizar</button>
-											</div>
+												<div class="modal-body">
+													<form class="" id="formUsuario" onsubmit="return false;">                         
+														<div class="form-group">
+															<label for="nome">Nome:</label>
+															<input class="form-control" type="text" name="atualizarNomeUsuario" id="atualizarNomeUsuario"/>
+														</div>
+														<div class="form-group">
+															<label for="nome">E-mail:</label>
+															<input class="form-control" type="email" name="atualizaEmailUsuario" id="atualizaEmailUsuario"/>
+														</div>													
+														<div class="form-group">
+															<label for="nome">Cargo:</label>
+															<input class="form-control" type="text" name="atualizarCargoUsuario" id="atualizarCargoUsuario"/>
+														</div>
+														<div class="form-group mb-5">
+															<label for="tipoUsuario">Acesso:</label>
+															<select class="form-control" name="atualizarAcessoUsuario" id="atualizarAcessoUsuario">
+																<option value="">Selecione</option>
+																<option value="Bloqueado">Inativo</option>
+																<option value="Professor">Professor</option>
+																<option value="Administrador">Administrador</option>
+															</select>
+														</div>    											      
+													</form>		
+												</div>
+												
+												<div class="modal-footer">
+													<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+													<button type="button" class="btn btn-primary" id="btnAtualizarUsuario">Atualizar</button>
+												</div>
 											</div>
 										</div>
 									</div>
@@ -231,30 +272,26 @@ if (!isset($_SESSION['nome_usuario']) OR ($_SESSION['nivel_acesso'] != 3)) {
 										<div class="modal-dialog" role="document">
 											<div class="modal-content">
 											<div class="modal-header">
-												<h5 class="modal-title" id="exampleModalLabel">Editar Equipamento</h5>
+												<h5 class="modal-title" id="exampleModalLabel">Editar Cadastro do Equipamento</h5>
 												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 												<span aria-hidden="true">&times;</span>
 												</button>
 											</div>
 
 											<div class="modal-body">
-												<form class="" id="formEquipamento" onsubmit="return false;">												
+												<form class="" id="formEquipamento" onsubmit="return false;">									
 													<div class="form-group">
-														<label for="nome">Nome do equipamento:</label>
+														<label for="fabricante">Patrimonio:</label>
+														<input class="form-control" type="number" name="atualizarPatrimonioEquipamento" id="atualizarPatrimonioEquipamento" required/>
+													</div>		
+													<div class="form-group">
+														<label for="nome">Equipamento:</label>
 														<input class="form-control" type="text" name="atualizarNomeEquipamento" id="atualizarNomeEquipamento" required/>
 													</div>
 													<div class="form-group">
-														<label for="modelo">Fabricante do equipamento:</label>
+														<label for="modelo">Fabricante:</label>
 														<input class="form-control" type="text" name="atualizarFabricanteEquipamento" id="atualizarFabricanteEquipamento" required/>
-													</div>
-													<div class="form-group">
-														<label for="fabricante">Quantidade de equipamento(s)</label>
-														<input class="form-control" type="number" name="atualizarQuantidadeEquipamento" id="atualizarQuantidadeEquipamento" required/>
-													</div>                                        
-													<div class="form-group">
-														<label for="fabricante">Patrimonio do equipamento:</label>
-														<input class="form-control" type="number" name="atualizarPatrimonioEquipamento" id="atualizarPatrimonioEquipamento" required/>
-													</div>       										
+													</div>											  										
 												</form>		
 											</div>
 

@@ -28,6 +28,8 @@
               <hr style="border-width: 5px; border-color:#006FA7">
               <h5 class="text-dark">Cadastro de Usuários</h5>
             </div>
+
+            <!-- Alertas -->
             <div class="alert alert-danger alertaLogin" id="alertaCad1" role="alert">
                 Existe outro Cadastro com Esse E-mail!
             </div>
@@ -41,6 +43,7 @@
                 Cadastro Realizado com Sucesso!
             </div>
             <br>
+
             <div class="form-group">
               <label for="Nome">Nome</label>
               <input class="form-control" type="text" id="nome" placeholder="Nome" required>

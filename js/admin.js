@@ -10,8 +10,13 @@ $(document).ready(function(){
 		success: function(retorno){							
 			
 			for(i=0;i<retorno.length;i++){
-
-				$('#usuariosCadastrados').append('<tr class="bg-light"><td class="text-secondary">'+ retorno[i].nome_usuario +'</td><td class="text-secondary">'+ retorno[i].cargo_usuario +'</td><td class="text-secondary"><button class="btn btn-secondary modal-edit-usuario" data-toggle="modal" data-target="#modalUsuarios" id="'+ retorno[i].nome_usuario +'"><i class="fas fa-ellipsis-v fa-1x"></i></button></td></tr>');
+				var nivel = retorno[i].nivel_acesso;
+				if(nivel == "Inativo"){
+					nivel = '<td class="text-danger align-middle">'+ retorno[i].nivel_acesso + '</td>';
+				} else{
+					nivel = '<td class="text-secondary align-middle">'+ retorno[i].nivel_acesso + '</td>';
+				}	
+				$('#usuariosCadastrados').append('<tr><td class="text-secondary align-middle">'+ retorno[i].nome_usuario +'</td><td class="text-secondary align-middle">'+ retorno[i].cargo_usuario +'</td>'+ nivel +'</td><td class="text-secondary align-middle"><button class="btn btn-outline-secondary modal-edit-usuario" title="Editar Cadastro" data-toggle="modal" data-target="#modalUsuarios" id="'+ retorno[i].id_usuario +'"><i class="fas fa-pencil-alt fa-1x"></i></button></td></tr>');		
 			}									
 		}	
 	});
@@ -25,12 +30,14 @@ $(document).ready(function(){
 		success: function(retorno){							
 			
 			for(i=0;i<retorno.length;i++){
-
-				$('#equipamentosCadastrados').append('<tr class="bg-light"><td class="text-secondary">'+ retorno[i].nome_equipamento +'</td><td class="text-secondary">'+ retorno[i].fabricante_equipamento +'</td><td class="text-secondary">'+ retorno[i].quantidade_equipamento +'</td><td class="text-secondary">'+ retorno[i].patrimonio_equipamento +'</td><td class="text-secondary"><button class="btn btn-secondary modal-edit-equipamento" data-toggle="modal" data-target="#modalEquipamentos" id="'+ retorno[i].nome_equipamento +'"><i class="fas fa-ellipsis-v fa-1x"></i></button></td></tr>');
+				var data = new Date(retorno[i].data_cadastro);
+				data = data.toLocaleDateString(); 
+				$('#equipamentosCadastrados').append('<tr><td class="text-secondary align-middle">'+ retorno[i].patrimonio_equipamento +'</td><td class="text-secondary align-middle">'+ retorno[i].nome_equipamento +'</td><td class="text-secondary align-middle">'+ retorno[i].fabricante_equipamento +'</td><td class="text-secondary align-middle">'+ data +'</td><td class="text-secondary align-middle">'+ retorno[i].nome_usuario +'</td><td class="text-secondary align-middle"><button class="btn btn-outline-secondary modal-edit-equipamento" title="Editar" data-toggle="modal" data-target="#modalEquipamentos" id="'+ retorno[i].nome_equipamento +'"><i class="fas fa-pencil-alt fa-1x"></i></button></td></tr>');
 			}									
 		}	
 	});
 	
+	// Preencher Modal Editar Usuários
 	$(document).on('click', '.modal-edit-usuario', function(){
 		var funcao = "editarUsuario";
 		editUsuario = this.id;
@@ -43,17 +50,19 @@ $(document).ready(function(){
 				$('#atualizarNomeUsuario').val(retorno.nome_usuario);
 				$('#atualizaEmailUsuario').val(retorno.email_usuario);
 				$('#atualizarCargoUsuario').val(retorno.cargo_usuario);
+				//$('#atualizarAcessoUsuario').append(retorno.nivel_acesso);
 			}										
 		});	
 	});
 	
-	$(document).on('click', '#btnAtualizarUsuario', function(){
+	// Salvar Dados da Modal Editar Usuário
+	$(document).on('click', '#btnAtualizarUsuario', function(){		
 		var funcao = "SalvarEdit";
 		var novoNome = $('#atualizarNomeUsuario').val();
 		var novoEmail = $('#atualizaEmailUsuario').val();
 		var novoCargo = $('#atualizarCargoUsuario').val();
 		var novoAcesso = $('#atualizarAcessoUsuario').val();
-
+		
 		if(novoAcesso == ""){
 			alert('Selecione o nivel de acesso'); return 0;
 		}
@@ -70,6 +79,7 @@ $(document).ready(function(){
 				} else if (retorno == "0"){
 					alert('Informações inseridas invalidas');
 				}
+				//console.log(retorno);
 			}										
 		});	
 	});

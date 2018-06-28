@@ -12,7 +12,8 @@ id_equipamento INT PRIMARY KEY AUTO_INCREMENT,
 nome_equipamento VARCHAR(255) NOT NULL,
 fabricante_equipamento VARCHAR(50) NOT NULL,
 quantidade_equipamento INT NOT NULL,
-patrimonio_equipamento INT NOT NULL
+patrimonio_equipamento INT NOT NULL,
+CONSTRAINT `fk_id_usuario1` FOREIGN KEY (`fk_usuario`) REFERENCES `usuario` (`id_usuario`),
 );
 
 CREATE TABLE reservar(
@@ -27,7 +28,7 @@ periodo VARCHAR(255) NOT NULL,
 ordem INT(2) NOT NULL,
 fk_usuario INT NOT NULL,
 fk_equipamento INT NOT NULL,
-CONSTRAINT `fk_id_usuario` FOREIGN KEY (`fk_usuario`) REFERENCES `usuario` (`id_usuario`),
+CONSTRAINT `fk_id_usuario2` FOREIGN KEY (`fk_usuario`) REFERENCES `usuario` (`id_usuario`),
 CONSTRAINT `fk_id_equipamento` FOREIGN KEY (`fk_equipamento`) REFERENCES `equipamento` (`id_equipamento`)
 );
 

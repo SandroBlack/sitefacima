@@ -1,20 +1,3 @@
-<?php
-	session_start();
-
-if (isset($_SESSION['nome_usuario'])) {
-
-if($_SESSION['nivel_acesso'] == "Professor")
-{
-	header("Location: pages/professor.php");
-} 
-else if($_SESSION['nivel_acesso'] == "Administrador"){
-	header("Location: pages/admin.php");
-}	
-
-}
-
-?>
-
 <html lang="pt-br">
   <head>
     <!-- Required meta tags -->

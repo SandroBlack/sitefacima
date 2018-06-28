@@ -1,17 +1,20 @@
-<?php    
+<?php	
     include_once("dbConexao.php"); 
-    $funcao = $_POST["funcao"];  
+    @$funcao = $_POST["funcao"];  
 	session_start();
     
     switch($funcao){
         case "logar":
-            logar();
+			logar();			
             break;            
         case "cadAluno":
             cadastrarAluno();
+            break;         
+		case "consultarEquipamento":
+			consultarEquipamento();                                      
             break;            
-        case "consultarEquipamento":
-            consultarEquipamento();                                      
+		case "consultarEquipamentoReservado":
+			consultarEquipamentoReservado();                                      
             break;            
         case "cadastrarUsuario":
             cadastrarUsuario();
@@ -46,8 +49,9 @@
 		case "salvarEditEquip":
             salvarEdicaoEquipamento();
             break;		
-        default:            
-            echo "<script>console.log('Função Não Encontrada')</script>";               
+		default:
+			header("Location:../index.php");            
+            //echo "Função Não Encontrada";               
     }		
 	
     /* FUNÇÃO DE LOGIN */ 
@@ -71,8 +75,7 @@
                 $response = '0';
                 echo $response;
                 return 0;
-            } else{
-				
+            } else{				
                 $_SESSION['id_usuario'] = $dados[0];                
                 $_SESSION['nome_usuario'] = $dados[1];                
                 $_SESSION['email_usuario'] = $dados[2];                
@@ -80,11 +83,11 @@
                 $_SESSION['nivel_acesso'] = $dados[5];
                 //header("location:../pages/aluno.php");
 				
-				if($dados[5] == 3)
+				if($dados[5] == "Administrador")
 				{
 					echo 'admin.php';
 				}
-				else if ($dados[5] == 1)
+				else if ($dados[5] == "Professor")
 				{
 					echo 'professor.php';
 				} else {
@@ -105,7 +108,7 @@
         $email_usuario = $_POST['email'];
         $senha_usuario = sha1(md5($_POST['senha']));
         $cargo_usuario = $_POST['cargo'];
-		$nivel_acesso = 1;	
+		$nivel_acesso = "Inativo";	
 		try{
 			$pdo = conectar();
             $sql = "SELECT `nome_usuario`, `email_usuario` FROM `usuario` WHERE `email_usuario` = :email_usuario";
@@ -149,7 +152,10 @@
 	function consultarReservaUsuario(){
 		try{
             $pdo = conectar();
-            $sql = "SELECT nome_equipamento, sala, data_reserva,id_reservar, hora_inicio, hora_fim FROM reservar r INNER JOIN equipamento e ON r.fk_equipamento = e.id_equipamento WHERE fk_usuario = :id_usuario;";
+            $sql = "SELECT nome_equipamento, patrimonio_equipamento, fabricante_equipamento, sala, data_reserva, id_reservar, hora_inicio, hora_fim 
+			FROM reservar r 
+			INNER JOIN equipamento e ON r.fk_equipamento = e.id_equipamento WHERE r.fk_usuario = :id_usuario
+			ORDER BY data_reserva DESC";
             $stm = $pdo->prepare($sql);
 			$stm->bindValue(":id_usuario",$_SESSION["id_usuario"]);	
             $stm->execute();
@@ -162,11 +168,12 @@
             echo "Linha: " . $erro->getLine();
         }
 	}
+
 	/* CONSULTAR USUARIOS CADASTRADOS */
 	function consultarUsuarioCadastrado(){
 		try{
             $pdo = conectar();
-            $sql = "SELECT `id_usuario`, `nome_usuario`, `email_usuario`,`cargo_usuario` FROM `usuario`";
+            $sql = "SELECT `id_usuario`, `nome_usuario`, `email_usuario`,`cargo_usuario`, `nivel_acesso` FROM `usuario`";
             $stm = $pdo->prepare($sql);
             $stm->execute();
             $dados = $stm->fetchAll(PDO::FETCH_ASSOC);                                    
@@ -180,12 +187,12 @@
 	}
 	/* SELECIONAR INFORMAÇÕES PARA PODER EDITAR O USUARIO */
 	function editarUsuario(){
-		$nome_usuario = $_POST['editUsuario'];
+		$id_usuario = $_POST['editUsuario'];		
 		try{
             $pdo = conectar();
-            $sql = "SELECT nome_usuario, email_usuario, cargo_usuario FROM usuario where nome_usuario = :nome_usuario";
+            $sql = "SELECT id_usuario, nome_usuario, email_usuario, cargo_usuario, nivel_acesso FROM usuario where id_usuario = :id_usuario";
             $stm = $pdo->prepare($sql);  
-			$stm->bindValue(":nome_usuario",$nome_usuario);				
+			$stm->bindValue(":id_usuario",$id_usuario);				
             $stm->execute();
             $dados = $stm->fetch(PDO::FETCH_ASSOC);                                    
             echo json_encode($dados);             
@@ -198,32 +205,20 @@
 	}
 	/* SALVAR EDIÇÃO USUARIO */
 	function salvarEdicaoUsuario(){
-		$usuarioAtual = $_POST['editUsuario'];
+		$idAtual = $_POST['editUsuario'];
 		$nome_usuario = $_POST['novoNome'];
 		$email_usuario = $_POST['novoEmail'];
 		$cargo_usuario = $_POST['novoCargo'];
-		$nivel_acesso = $_POST['novoAcesso'];
-		
-		if($nivel_acesso == "Bloqueado") {
-			$nivel_acesso = 0;
-		} else if ($nivel_acesso == "Professor"){
-			$nivel_acesso = 1;
-		} else if ($nivel_acesso == "Administrador"){
-			$nivel_acesso = 3;
-		} else {
-			$response = "0";
-			echo $response;
-			return 0;
-		}
+		$nivel_acesso = $_POST['novoAcesso'];		
+
 		try{
             $pdo = conectar();
-            $sql = "UPDATE usuario SET nome_usuario = :nome_usuario, email_usuario = :email_usuario, cargo_usuario = :cargo_usuario, nivel_acesso = :nivel_acesso where nome_usuario = :usuarioAtual";
+            $sql = "UPDATE usuario SET nome_usuario = :nome_usuario, email_usuario = :email_usuario, cargo_usuario = :cargo_usuario, nivel_acesso = :nivel_acesso where id_usuario = '{$idAtual}'";
             $stm = $pdo->prepare($sql);  				
 			$stm->bindValue(":nome_usuario",$nome_usuario);				
 			$stm->bindValue(":email_usuario",$email_usuario);				
 			$stm->bindValue(":cargo_usuario",$cargo_usuario);				
-			$stm->bindValue(":nivel_acesso",$nivel_acesso);				
-			$stm->bindValue(":usuarioAtual",$usuarioAtual);
+			$stm->bindValue(":nivel_acesso",$nivel_acesso);			
             $stm->execute();
             $dados = $stm->fetch(PDO::FETCH_ASSOC);                                    
             $response = "1";
@@ -239,7 +234,8 @@
     function consultarEquipamento(){
         try{
             $pdo = conectar();
-            $sql = "SELECT id_equipamento, nome_equipamento, quantidade_equipamento, fabricante_equipamento, patrimonio_equipamento FROM equipamento";
+			$sql = "SELECT id_equipamento, patrimonio_equipamento, nome_equipamento, fabricante_equipamento, data_cadastro, nome_usuario FROM 			equipamento e 
+					INNER JOIN usuario u ON e.fk_usuario = u.id_usuario";
             $stm = $pdo->prepare($sql);            
             $stm->execute();
             $dados = $stm->fetchAll(PDO::FETCH_ASSOC);                                    
@@ -251,22 +247,67 @@
             echo "Linha: " . $erro->getLine();
         } 
     }
+	
+	/* CONSULTAR EQUIPAMENTOS RESERVADOS */
+	function consultarEquipamentoReservado(){
+		$data = $_POST["data"];
+		$data = date('d/m/Y', strtotime($data));
+		$data == '01/01/1970' ? $data = "" : $data = $data;		
+		$turno = $_POST["turno"];		
+		
+		if(empty($data) && empty($turno)){
+			$sql = "SELECT * FROM reservar r
+					INNER JOIN usuario u ON r.fk_usuario = u.id_usuario
+					INNER JOIN equipamento e ON r.fk_equipamento = e.id_equipamento
+					ORDER BY ordem ASC, data_reserva DESC";
+		} else if(!empty($data) && empty($turno)){
+			$sql = "SELECT * FROM reservar r
+					INNER JOIN usuario u ON r.fk_usuario = u.id_usuario
+					INNER JOIN equipamento e ON r.fk_equipamento = e.id_equipamento
+					WHERE data_reserva = '{$data}'
+					ORDER BY ordem ASC, data_reserva DESC";
+		} else if(empty($data) && !empty($turno)){
+			$sql = "SELECT * FROM reservar r
+					INNER JOIN usuario u ON r.fk_usuario = u.id_usuario
+					INNER JOIN equipamento e ON r.fk_equipamento = e.id_equipamento
+					WHERE periodo = '{$turno}'
+					ORDER BY ordem ASC, data_reserva DESC";
+		} else if(!empty($data) && !empty($turno)){
+			$sql = "SELECT * FROM reservar r
+					INNER JOIN usuario u ON r.fk_usuario = u.id_usuario
+					INNER JOIN equipamento e ON r.fk_equipamento = e.id_equipamento
+					WHERE data_reserva = '{$data}' AND periodo = '{$turno}'
+					ORDER BY ordem ASC, data_reserva DESC";
+		}
+
+		try{			
+			$pdo = conectar();				
+			$stm = $pdo->prepare($sql);     
+			$stm->execute();						
+			$dados = $stm->fetchAll(PDO::FETCH_ASSOC);				
+			echo json_encode($dados);
+		} catch(PDOExeption $erro){
+			echo "Mensagem de Erro: " . $erro->getMessage() . "<br>";
+			echo "Nome do Arquivo: " . $erro->getFile() . "<br>";
+			echo "Linha: " . $erro->getLine();
+		}
+	}	
+	
     /* CADASTRO DE EQUIPAMENTOS */
     function cadastrarEquipamento(){
         $nome_equipamento = $_POST["nome"];;
-        $fabricante_equipamento = $_POST["fabricante"];
-		$quantidade_equipamento = $_POST["quantidade"];
+        $fabricante_equipamento = $_POST["fabricante"];		
         $patrimonio_equipamento = $_POST["patrimonio"];
-
+		$responsavel = $_SESSION["id_usuario"];
         try{
             $pdo = conectar();
-            $sql = "INSERT INTO `equipamento`(`id_equipamento`, `nome_equipamento`, `fabricante_equipamento`, `quantidade_equipamento`, `patrimonio_equipamento`) VALUES (:id_equipamento, :nome_equipamento, :fabricante_equipamento, :quantidade_equipamento, :patrimonio_equipamento)";
+            $sql = "INSERT INTO `equipamento`(`id_equipamento`, `nome_equipamento`, `fabricante_equipamento`, `patrimonio_equipamento`, `fk_usuario`) VALUES (:id_equipamento, :nome_equipamento, :fabricante_equipamento, :patrimonio_equipamento, :responsavel)";
             $stm = $pdo->prepare($sql);
             $stm->bindValue(":id_equipamento",0);
             $stm->bindValue(":nome_equipamento",$nome_equipamento);
-            $stm->bindValue(":fabricante_equipamento",$fabricante_equipamento);
-            $stm->bindValue(":quantidade_equipamento",$quantidade_equipamento);
+            $stm->bindValue(":fabricante_equipamento",$fabricante_equipamento);            
             $stm->bindValue(":patrimonio_equipamento",$patrimonio_equipamento);
+            $stm->bindValue(":responsavel",$responsavel);
             $stm->execute();
             $response = "1";
             echo $response;
@@ -276,7 +317,8 @@
             echo "Nome do Arquivo: " . $erro->getFile() . "<br>";
             echo "Linha: " . $erro->getLine();
         }
-    }	
+	}
+		
 	/* RESERVAR EQUIPAMENTO */
 	function reservarEquipamento(){
 		$data_reserva = inverteData($_POST['dataD']);
@@ -316,7 +358,7 @@
 					try{
 			
 						$pdo = conectar();
-						$sql = "INSERT INTO `reservar`(`id_reservar`, `data_reserva`, `hora_inicio`, `hora_fim`, `semestre`, `curso`, `sala`, `periodo`, `ordem`, `fk_usuario`, `fk_equipamento`) VALUES (:id_reservar, :data_reserva, :hora_inicio, :hora_fim, :semestre, :curso, :sala, :periodo, :fk_usuario, :fk_equipamento)";
+						$sql = "INSERT INTO `reservar`(`id_reservar`, `data_reserva`, `hora_inicio`, `hora_fim`, `semestre`, `curso`, `sala`, `periodo`, `ordem`, `fk_usuario`, `fk_equipamento`) VALUES (:id_reservar, :data_reserva, :hora_inicio, :hora_fim, :semestre, :curso, :sala, :periodo, :ordem, :fk_usuario, :fk_equipamento)";
 						$stm = $pdo->prepare($sql);
 						$stm->bindValue(":id_reservar",0);
 						$stm->bindValue(":data_reserva",$data_reserva);
